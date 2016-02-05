@@ -1,4 +1,4 @@
-package com.github.fhtw.tutorium.swp.singleton;
+package com.github.fhtw.swp.tutorium.singleton;
 
 /**
  * @author Thomas Eizinger, Senacor Technologies AG.

@@ -1,4 +1,4 @@
-package com.github.fhtw.tutorium.swp.singleton;
+package com.github.fhtw.swp.tutorium.singleton;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

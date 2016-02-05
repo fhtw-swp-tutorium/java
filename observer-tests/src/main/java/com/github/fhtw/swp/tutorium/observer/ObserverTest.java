@@ -1,4 +1,4 @@
-package com.github.fhtw.tutorium.swp.observer;
+package com.github.fhtw.swp.tutorium.observer;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -8,7 +8,6 @@ import java.util.Set;
 
 import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
 import com.github.fhtw.swp.tutorium.common.Matchers;
-import com.github.fhtw.swp.tutorium.observer.Subject;
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
@@ -54,7 +53,7 @@ public class ObserverTest {
     public void testSubjectsShouldHaveRegisterMethod() throws Exception {
 
         for (Class<?> subject : subjects) {
-            Assert.assertThat(subject, com.github.fhtw.tutorium.swp.observer.Matchers.hasMethodThatStartsWith(REGISTER_METHOD_PREFIXES));
+            Assert.assertThat(subject, com.github.fhtw.swp.tutorium.observer.Matchers.hasMethodThatStartsWith(REGISTER_METHOD_PREFIXES));
         }
     }
 
@@ -62,7 +61,7 @@ public class ObserverTest {
     public void testSubjectsShouldHaveUpdateMethod() throws Exception {
 
         for (Class<?> subject : subjects) {
-            Assert.assertThat(subject, com.github.fhtw.tutorium.swp.observer.Matchers.hasMethodThatStartsWith(UPDATE_METHOD_PREFIXES));
+            Assert.assertThat(subject, com.github.fhtw.swp.tutorium.observer.Matchers.hasMethodThatStartsWith(UPDATE_METHOD_PREFIXES));
         }
     }
 
@@ -70,7 +69,7 @@ public class ObserverTest {
     public void testSubjectsShouldHaveUnregisterMethod() throws Exception {
 
         for (Class<?> subject : subjects) {
-            Assert.assertThat(subject, com.github.fhtw.tutorium.swp.observer.Matchers.hasMethodThatStartsWith(UNREGISTER_METHOD_PREFIXES));
+            Assert.assertThat(subject, com.github.fhtw.swp.tutorium.observer.Matchers.hasMethodThatStartsWith(UNREGISTER_METHOD_PREFIXES));
         }
     }
 
@@ -110,7 +109,7 @@ public class ObserverTest {
             registerMethod.invoke(subjectInstance, observer);
             notifyMethod.invoke(subjectInstance);
 
-            Assert.assertThat(invocationHandler, com.github.fhtw.tutorium.swp.observer.Matchers.wasInvoked(2));
+            Assert.assertThat(invocationHandler, com.github.fhtw.swp.tutorium.observer.Matchers.wasInvoked(2));
         }
     }
 
@@ -142,7 +141,7 @@ public class ObserverTest {
 
             updateMethod.invoke(subjectInstance);
 
-            Assert.assertThat(invocationHandler, com.github.fhtw.tutorium.swp.observer.Matchers.wasInvoked(1));
+            Assert.assertThat(invocationHandler, com.github.fhtw.swp.tutorium.observer.Matchers.wasInvoked(1));
         }
     }
 

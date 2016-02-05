@@ -1,8 +1,7 @@
-package com.github.fhtw.tutorium.swp.singleton;
+package com.github.fhtw.swp.tutorium.singleton;
 
 import static com.github.fhtw.swp.tutorium.common.Matchers.exist;
 import static com.github.fhtw.swp.tutorium.common.Matchers.hasNoPublicConstructor;
-import static com.github.fhtw.tutorium.swp.singleton.Matchers.providesSingletonAccessor;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,7 +13,6 @@ import org.reflections.Configuration;
 import org.reflections.Reflections;
 
 import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
-import com.github.fhtw.swp.tutorium.singleton.Singleton;
 
 /**
  * @author Thomas Eizinger, Senacor Technologies AG.
@@ -44,7 +42,7 @@ public class SingletonTest {
     public void testSingletonShouldProvideInstanceFieldOrAccessorMethod() throws Exception {
 
         for (Class<?> singleton : singletons) {
-            assertThat(singleton, providesSingletonAccessor());
+            assertThat(singleton, Matchers.providesSingletonAccessor());
         }
     }
 

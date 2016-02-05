@@ -1,4 +1,4 @@
-package com.github.fhtw.tutorium.swp.singleton;
+package com.github.fhtw.swp.tutorium.singleton;
 
 import static java.lang.reflect.Modifier.PUBLIC;
 import static java.lang.reflect.Modifier.STATIC;

@@ -59,10 +59,16 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>verify</phase>
+                        <id>assembly</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/bin.xml</descriptor>
+                            </descriptors>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
