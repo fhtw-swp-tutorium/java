@@ -2,9 +2,6 @@ package com.github.fhtw.swp.tutorium.singleton;
 
 import java.lang.reflect.Field;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 class FieldSingletonAccessor implements SingletonAccessor {
 
     private final Class<?> singletonClass;
@@ -25,7 +22,7 @@ class FieldSingletonAccessor implements SingletonAccessor {
     }
 
     @Override
-    public boolean HasSingletonAccessor() {
+    public boolean hasSingletonAccessor() {
         return true;
     }
 }

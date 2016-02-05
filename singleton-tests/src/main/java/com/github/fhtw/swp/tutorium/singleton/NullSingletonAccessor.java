@@ -1,8 +1,5 @@
 package com.github.fhtw.swp.tutorium.singleton;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 class NullSingletonAccessor implements SingletonAccessor {
 
     @Override
@@ -11,7 +8,7 @@ class NullSingletonAccessor implements SingletonAccessor {
     }
 
     @Override
-    public boolean HasSingletonAccessor() {
+    public boolean hasSingletonAccessor() {
         return false;
     }
 }

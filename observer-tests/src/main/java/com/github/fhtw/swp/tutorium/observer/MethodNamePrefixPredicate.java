@@ -1,12 +1,9 @@
 package com.github.fhtw.swp.tutorium.observer;
 
-import java.lang.reflect.Method;
-
 import com.google.common.base.Predicate;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
+import java.lang.reflect.Method;
+
 class MethodNamePrefixPredicate implements Predicate<Method> {
 
     private final String name;

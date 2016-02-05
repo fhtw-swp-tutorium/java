@@ -6,9 +6,6 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ConfigurationBuilder;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class ConfigurationFactory {
 
     public Configuration create() {

@@ -1,21 +1,15 @@
 package com.github.fhtw.swp.tutorium.singleton;
 
-import static java.lang.reflect.Modifier.PUBLIC;
-import static java.lang.reflect.Modifier.STATIC;
-import static org.reflections.ReflectionUtils.withModifier;
-import static org.reflections.ReflectionUtils.withParametersCount;
-import static org.reflections.ReflectionUtils.withReturnType;
-import static org.reflections.ReflectionUtils.withType;
+import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import org.reflections.ReflectionUtils;
+import static java.lang.reflect.Modifier.PUBLIC;
+import static java.lang.reflect.Modifier.STATIC;
+import static org.reflections.ReflectionUtils.*;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class SingletonAccessorFactory {
 
     public SingletonAccessor create(Class<?> singletonClass) {

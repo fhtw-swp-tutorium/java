@@ -1,16 +1,13 @@
 package com.github.fhtw.swp.tutorium;
 
-import static java.util.stream.Collectors.toList;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 import java.io.PrintStream;
 import java.util.List;
 
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
+import static java.util.stream.Collectors.toList;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class TestResultPrinter {
 
     private final PrintStream printStream;

@@ -3,9 +3,6 @@ package com.github.fhtw.swp.tutorium;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class ExerciseTestRunner {
 
     private final TestResultPrinter testResultPrinter;

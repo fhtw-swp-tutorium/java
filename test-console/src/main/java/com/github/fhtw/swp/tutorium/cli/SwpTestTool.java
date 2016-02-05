@@ -1,20 +1,15 @@
 package com.github.fhtw.swp.tutorium.cli;
 
-import static java.lang.ClassLoader.getSystemClassLoader;
-
+import com.github.fhtw.swp.tutorium.ExerciseTestRunner;
 import com.github.fhtw.swp.tutorium.MutableClassLoader;
 import com.github.fhtw.swp.tutorium.TestResultPrinter;
-
+import com.github.fhtw.swp.tutorium.common.JarFileUrlHolder;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.OptionHandlerFilter;
 
-import com.github.fhtw.swp.tutorium.common.JarFileUrlHolder;
-import com.github.fhtw.swp.tutorium.ExerciseTestRunner;
+import static java.lang.ClassLoader.getSystemClassLoader;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class SwpTestTool {
 
     private static final Arguments arguments = new Arguments();

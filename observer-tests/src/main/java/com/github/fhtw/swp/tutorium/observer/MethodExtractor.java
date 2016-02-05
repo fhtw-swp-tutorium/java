@@ -1,19 +1,15 @@
 package com.github.fhtw.swp.tutorium.observer;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import org.reflections.ReflectionUtils;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Lists;
-
-import org.reflections.ReflectionUtils;
-
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class MethodExtractor {
 
     @SuppressWarnings("unchecked")

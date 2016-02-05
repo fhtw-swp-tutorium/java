@@ -1,9 +1,5 @@
 package com.github.fhtw.swp.tutorium.cli;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Paths;
-
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.OptionDef;
@@ -11,9 +7,10 @@ import org.kohsuke.args4j.spi.OptionHandler;
 import org.kohsuke.args4j.spi.Parameters;
 import org.kohsuke.args4j.spi.Setter;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Paths;
+
 public class UrlOptionHandler extends OptionHandler<URL> {
 
     public UrlOptionHandler(CmdLineParser parser, OptionDef option, Setter<? super URL> setter) {

@@ -1,16 +1,13 @@
 package com.github.fhtw.swp.tutorium.observer;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Set;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Set;
+
 public class Matchers {
 
     public static Matcher<Class<?>> hasMethodThatStartsWith(final String... prefixes) {

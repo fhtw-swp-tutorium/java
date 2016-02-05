@@ -5,9 +5,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class MutableClassLoader extends ClassLoader {
 
     private static final Method addUrlMethod;

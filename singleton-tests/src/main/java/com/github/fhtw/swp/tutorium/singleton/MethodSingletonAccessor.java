@@ -3,9 +3,6 @@ package com.github.fhtw.swp.tutorium.singleton;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 class MethodSingletonAccessor implements SingletonAccessor {
 
     private final Class<?> singletonClass;
@@ -26,7 +23,7 @@ class MethodSingletonAccessor implements SingletonAccessor {
     }
 
     @Override
-    public boolean HasSingletonAccessor() {
+    public boolean hasSingletonAccessor() {
         return true;
     }
 }

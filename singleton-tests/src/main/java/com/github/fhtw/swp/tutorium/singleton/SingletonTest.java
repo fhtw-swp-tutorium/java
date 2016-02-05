@@ -1,22 +1,18 @@
 package com.github.fhtw.swp.tutorium.singleton;
 
-import static com.github.fhtw.swp.tutorium.common.Matchers.exist;
-import static com.github.fhtw.swp.tutorium.common.Matchers.hasNoPublicConstructor;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
-import java.util.Set;
-
+import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 
-import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
+import java.util.Set;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
+import static com.github.fhtw.swp.tutorium.common.Matchers.exist;
+import static com.github.fhtw.swp.tutorium.common.Matchers.hasNoPublicConstructor;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 public class SingletonTest {
 
     private Set<Class<?>> singletons;

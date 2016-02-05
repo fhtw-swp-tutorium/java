@@ -1,14 +1,10 @@
 package com.github.fhtw.swp.tutorium.cli;
 
-import java.net.URL;
-
 import com.github.fhtw.swp.tutorium.Exercises;
-
 import org.kohsuke.args4j.Option;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
+import java.net.URL;
+
 public class Arguments {
 
     @Option(name = "-exercise", required = true, usage = "The exercise to test")

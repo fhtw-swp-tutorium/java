@@ -1,18 +1,10 @@
 package com.github.fhtw.swp.tutorium.observer;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Set;
-
 import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
 import com.github.fhtw.swp.tutorium.common.Matchers;
-
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.implementation.InvocationHandlerAdapter;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +12,12 @@ import org.reflections.Configuration;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Set;
+
 public class ObserverTest {
 
     private static final String[] REGISTER_METHOD_PREFIXES = new String[] {"register", "attach", "subscribe", "add"};

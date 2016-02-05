@@ -3,9 +3,6 @@ package com.github.fhtw.swp.tutorium.observer;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
 public class CountingInvocationHandler implements InvocationHandler {
 
     private int counter = 0;

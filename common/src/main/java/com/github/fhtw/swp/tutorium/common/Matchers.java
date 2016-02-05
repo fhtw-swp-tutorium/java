@@ -1,20 +1,15 @@
 package com.github.fhtw.swp.tutorium.common;
 
-import static java.lang.reflect.Modifier.PUBLIC;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Set;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.reflections.ReflectionUtils;
 
-/**
- * @author Thomas Eizinger, Senacor Technologies AG.
- */
+import java.lang.reflect.Constructor;
+import java.util.Set;
+
+import static java.lang.reflect.Modifier.PUBLIC;
+
 public class Matchers {
 
     public static Matcher<Set<Class<?>>> exist() {
