@@ -11,7 +11,7 @@ public class ConfigurationFactory {
     public Configuration create() {
 
         final Configuration configuration = new ConfigurationBuilder()
-                .setUrls(JarFileUrlHolder.getUrl())
+                .setUrls(SwpTestContext.getUrl())
                 .setScanners(
                         new MethodAnnotationsScanner(),
                         new TypeAnnotationsScanner(),
