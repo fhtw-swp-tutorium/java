@@ -2,3 +2,11 @@ language: java
 before_script:
 - chmod +x ./mvnw
 script: "./mvnw package --settings .mvn/settings.xml"
+deploy:
+  provider: releases
+  api_key:
+    secure: 14Hzjd5fTcuTs3jZAxEvspdwKzkgNh46h36ZQSBVb4xZFyGIcpaIKyNwrGcUdgdPsmBd3Nw7LklH6x510xZYw1tVsBraLCw1yszl5fpxH/4Ewo17KiU0hHihssh9kSTbMmQe/u+EroMko8Wb38GYJ9sm+ON+ahB2LaU+cbBieNS5AMUVxsDG38TIO4/9eMywiDCvEBqk4kDC/xHlNul/rfqo64Drvw7nJTnW33R+FNIeVPhju8pcvu6+VH+jyDeggzn9+pgPKEoYYhcUqm1hUyQdXVuUZwMOoqyXiwzr3jBWsLb8y4qNoG9QiunBqAq8ojcQ+4ija02+j1FBVzjb+ETJXZ8y0xkofbLCGlGc/J+o7sRi3pu/EPba4tJmbyotVGfKtRf1bgqLIaekX6z7tYndvRonmP1qSWOoBHhUuBWG0DmvK9PYVP2/ehrhG2t8NgmdcF3pRZ73Wcp8v6YcHKi5g+LSJvWVd3lywxwY0cnyQMiEqPxXeEz5ohSdC0ktJZn5LsHr+B5FGGqQIeCj2ncAi7yh1fdyfKP9WA6TEi9XVqrBFTH7MBC7P4bYZ65CAK/hGe3mSlkbAQeiJOKWpND8Q2szBzm0P14vvIwCFW6TSh401jP9oYU80mv7aLHv98Y+V4WG0DUaMhxEOZpA/QjP6DSCNgUcLfyV/GkV6AY=
+  file: test-console/target/SwpTestTool.jar
+  on:
+    tags: true
+    repo: fhtw-swp-tutorium/java-swp-test-tool
