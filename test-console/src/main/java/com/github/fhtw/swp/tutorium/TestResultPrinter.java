@@ -25,6 +25,12 @@ public class TestResultPrinter {
         printStream.println();
     }
 
+    private String extractPattern(Class<?> unitTestClass) {
+
+        final String unitTestName = unitTestClass.getSimpleName();
+        return unitTestName.substring(0, unitTestName.indexOf("Test"));
+    }
+
     public void printResult(Result result) {
 
         final String formatString = "%d/%d tests passed.";
@@ -35,7 +41,9 @@ public class TestResultPrinter {
 
         final List<String> failuresMessages = result.getFailures().stream().map(Failure::getMessage).collect(toList());
 
-        if (!failuresMessages.isEmpty()) {
+        final boolean anyFailures = !failuresMessages.isEmpty();
+
+        if (anyFailures) {
             printStream.println("Failures:");
             failuresMessages.forEach(printStream::println);
         }
@@ -43,11 +51,5 @@ public class TestResultPrinter {
 
     public void printResultFooter() {
         printStream.println();
-    }
-
-    private String extractPattern(Class<?> unitTestClass) {
-
-        final String unitTestName = unitTestClass.getSimpleName();
-        return unitTestName.substring(0, unitTestName.indexOf("Test"));
     }
 }

@@ -11,7 +11,7 @@ public class ExerciseTestRunner {
         this.testResultPrinter = testResultPrinter;
     }
 
-    public void runExerciseTests(Exercises exercise) {
+    public void runExerciseTests(Exercise exercise) {
         final Class<?>[] unitTestClasses = exercise.getUnitTestClasses();
 
         for (Class<?> unitTestClass : unitTestClasses) {
