@@ -6,13 +6,14 @@ import com.github.fhtw.swp.tutorium.TestResultPrinter;
 import com.github.fhtw.swp.tutorium.common.JarFileUrlHolder;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.OptionHandlerFilter;
 
 import static java.lang.ClassLoader.getSystemClassLoader;
 
 public class SwpTestTool {
 
     private static final Arguments arguments = new Arguments();
+
+    private static final VersionPrinter versionPrinter = new VersionPrinter();
     private static final CmdLineParser cmdLineParser = new CmdLineParser(arguments);
     private static final TestResultPrinter testResultPrinter = new TestResultPrinter(System.out);
     private static final ExerciseTestRunner exerciseTestRunner = new ExerciseTestRunner(testResultPrinter);
@@ -20,9 +21,7 @@ public class SwpTestTool {
 
     public static void main(String[] args) {
 
-        final String currentVersion = SwpTestTool.class.getPackage().getImplementationVersion();
-
-        System.out.println("Running version " + currentVersion);
+        versionPrinter.printCurrentVersion(System.out);
 
         try {
             cmdLineParser.parseArgument(args);
@@ -40,9 +39,7 @@ public class SwpTestTool {
     private static void printUsage(CmdLineException e) {
 
         System.err.println(e.getMessage());
-        System.err.println("Usage: ");
+        System.err.println("Help: ");
         e.getParser().printUsage(System.err);
-        System.err.println("Example: ");
-        System.err.println(e.getParser().printExample(OptionHandlerFilter.ALL));
     }
 }
