@@ -1,4 +1,6 @@
 language: java
+jdk:
+  - oraclejdk8
 before_script:
 - chmod +x ./mvnw
 script: "./mvnw package --settings .mvn/settings.xml"
