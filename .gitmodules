@@ -1,0 +1,3 @@
+[submodule "pattern-specifications"]
+	path = pattern-specifications
+	url = https://github.com/fhtw-swp-tutorium/pattern-specifications
