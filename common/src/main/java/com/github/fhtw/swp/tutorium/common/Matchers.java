@@ -10,8 +10,10 @@ import java.util.Set;
 
 import static java.lang.reflect.Modifier.PUBLIC;
 
+@Deprecated
 public class Matchers {
 
+    @Deprecated
     public static Matcher<Set<Class<?>>> exist() {
 
         return new TypeSafeDiagnosingMatcher<Set<Class<?>>>() {
@@ -30,25 +32,7 @@ public class Matchers {
         };
     }
 
-    public static TypeSafeDiagnosingMatcher<Class<?>> isInterface() {
-        return new TypeSafeDiagnosingMatcher<Class<?>>() {
-            @Override
-            protected boolean matchesSafely(Class<?> clazz, Description description) {
-
-                description.appendText("class ");
-                description.appendText(clazz.getSimpleName());
-                description.appendText(" is not an interface");
-
-                return clazz.isInterface();
-            }
-
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("the observer class to be an interface");
-            }
-        };
-    }
-
+    @Deprecated
     public static Matcher<Class<?>> hasNoPublicConstructor() {
         return new TypeSafeDiagnosingMatcher<Class<?>>() {
             @Override

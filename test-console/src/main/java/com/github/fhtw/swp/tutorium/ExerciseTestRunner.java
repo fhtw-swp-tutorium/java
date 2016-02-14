@@ -18,9 +18,11 @@ public class ExerciseTestRunner {
 
             final Result result = JUnitCore.runClasses(unitTestClass);
 
+            /*
             testResultPrinter.printResultHeader(unitTestClass);
             testResultPrinter.printResult(result);
             testResultPrinter.printResultFooter();
+            */
         }
     }
 }
