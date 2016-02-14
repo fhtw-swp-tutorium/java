@@ -31,7 +31,7 @@ public class ObserverDriver {
         return new AnnotatedElementExistsMatcher(Subject.class);
     }
 
-    public Object createObserverForSubject(Class<?> subjectClass, InvocationHandler invocationHandler) {
+    public Object getObserverInstance(Class<?> subjectClass, InvocationHandler invocationHandler) {
         return ObserverFactory.create(subjectClass, invocationHandler);
     }
 

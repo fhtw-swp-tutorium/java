@@ -82,7 +82,7 @@ public class ObserverSteps {
 
     private Object createObserver(Class<?> subject) {
         final InvocationHandler invocationHandler = invocationHandlers.get(subject);
-        return observerDriver.createObserverForSubject(subject, invocationHandler);
+        return observerDriver.getObserverInstance(subject, invocationHandler);
     }
 
     @Wenn("^sich dieser Beobachter registriert$")
