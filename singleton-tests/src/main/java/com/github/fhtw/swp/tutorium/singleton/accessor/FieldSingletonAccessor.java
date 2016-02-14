@@ -1,4 +1,4 @@
-package com.github.fhtw.swp.tutorium.singleton;
+package com.github.fhtw.swp.tutorium.singleton.accessor;
 
 import java.lang.reflect.Field;
 
@@ -21,8 +21,4 @@ class FieldSingletonAccessor implements SingletonAccessor {
         }
     }
 
-    @Override
-    public boolean hasSingletonAccessor() {
-        return true;
-    }
 }

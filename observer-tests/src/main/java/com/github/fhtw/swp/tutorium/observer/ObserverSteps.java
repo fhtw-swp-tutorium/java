@@ -49,21 +49,21 @@ public class ObserverSteps {
         assertThat(subjectClasses, observerDriver.getSizeMatcher());
     }
 
-    @Dann("^sollten alle Subjekte eine Methode zum Hinzufügen bieten$")
+    @Dann("^sollen alle Subjekte eine Methode zum Hinzufügen bieten$")
     public void solltenAlleSubjekteEineMethodeZumHinzufügenBieten() throws Throwable {
         for (Class<?> subjectClass : subjectClasses) {
             assertThat(allMethods(subjectClass), hasItem(observerDriver.getRegisterMethodMatcher()));
         }
     }
 
-    @Dann("^sollten alle Subjekte eine Methode zum Entfernen bieten$")
+    @Dann("^sollen alle Subjekte eine Methode zum Entfernen bieten$")
     public void solltenAlleSubjekteEineMethodeZumEntfernenBieten() throws Throwable {
         for (Class<?> subjectClass : subjectClasses) {
             assertThat(allMethods(subjectClass), hasItem(observerDriver.getUnregisterMethodMatcher()));
         }
     }
 
-    @Dann("^sollten alle Subjekte eine Methode zum Aktualisieren bieten$")
+    @Dann("^sollen alle Subjekte eine Methode zum Aktualisieren bieten$")
     public void solltenAlleSubjekteEineMethodeZumAktualisierenBieten() throws Throwable {
         for (Class<?> subjectClass : subjectClasses) {
             assertThat(allMethods(subjectClass), hasItem(observerDriver.getUpdateMethodMatcher()));

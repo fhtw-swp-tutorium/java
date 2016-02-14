@@ -1,5 +1,6 @@
-package com.github.fhtw.swp.tutorium.observer;
+package com.github.fhtw.swp.tutorium.observer.factory;
 
+import com.github.fhtw.swp.tutorium.observer.MethodPrefixes;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.implementation.InvocationHandlerAdapter;

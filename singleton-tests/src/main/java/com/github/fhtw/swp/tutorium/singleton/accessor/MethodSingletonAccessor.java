@@ -1,4 +1,4 @@
-package com.github.fhtw.swp.tutorium.singleton;
+package com.github.fhtw.swp.tutorium.singleton.accessor;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,8 +22,4 @@ class MethodSingletonAccessor implements SingletonAccessor {
         }
     }
 
-    @Override
-    public boolean hasSingletonAccessor() {
-        return true;
-    }
 }

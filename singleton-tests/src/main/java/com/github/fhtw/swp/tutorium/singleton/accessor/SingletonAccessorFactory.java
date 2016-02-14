@@ -1,4 +1,4 @@
-package com.github.fhtw.swp.tutorium.singleton;
+package com.github.fhtw.swp.tutorium.singleton.accessor;
 
 import org.reflections.ReflectionUtils;
 
@@ -22,7 +22,7 @@ public class SingletonAccessorFactory {
         } else if (!instanceMethods.isEmpty()) {
             return new MethodSingletonAccessor(singletonClass, instanceMethods.iterator().next());
         } else {
-            return new NullSingletonAccessor();
+            return new DummySingletonAccessor();
         }
     }
 

@@ -1,5 +1,6 @@
-package com.github.fhtw.swp.tutorium.observer;
+package com.github.fhtw.swp.tutorium.observer.factory;
 
+import com.github.fhtw.swp.tutorium.observer.Subject;
 import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Method;

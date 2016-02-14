@@ -2,6 +2,8 @@ package com.github.fhtw.swp.tutorium.observer;
 
 import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
 import com.github.fhtw.swp.tutorium.common.matcher.AnnotatedElementExistsMatcher;
+import com.github.fhtw.swp.tutorium.observer.factory.ObserverFactory;
+import com.github.fhtw.swp.tutorium.observer.factory.SubjectFactory;
 import org.hamcrest.Matcher;
 import org.reflections.Configuration;
 import org.reflections.Reflections;

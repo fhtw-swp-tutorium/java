@@ -15,7 +15,21 @@
         <dependency>
             <groupId>com.github.fhtw.swp.tutorium</groupId>
             <artifactId>common</artifactId>
-            <version>0.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
         </dependency>
     </dependencies>
 </project>
