@@ -1,6 +1,6 @@
 package com.github.fhtw.swp.tutorium.singleton.accessor;
 
-import com.github.fhtw.swp.tutorium.singleton.SingletonPredicates;
+import com.github.fhtw.swp.tutorium.singleton.Singletons;
 import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -26,14 +26,14 @@ public class SingletonAccessorFactory {
     @SuppressWarnings("unchecked")
     private Set<Field> getInstanceFields(Class<?> singletonClass) {
         return ReflectionUtils.getAllFields(singletonClass,
-                SingletonPredicates.FIELD.getPredicateFactory().apply(singletonClass)
+                Singletons.FIELD.getPredicateFor(singletonClass)
         );
     }
 
     @SuppressWarnings("unchecked")
     private Set<Method> getInstanceMethods(Class<?> singletonClass) {
         return ReflectionUtils.getAllMethods(singletonClass,
-                SingletonPredicates.METHOD.getPredicateFactory().apply(singletonClass)
+                Singletons.METHOD.getPredicateFor(singletonClass)
         );
     }
 }

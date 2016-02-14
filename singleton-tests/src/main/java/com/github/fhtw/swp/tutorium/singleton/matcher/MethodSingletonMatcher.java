@@ -1,6 +1,6 @@
 package com.github.fhtw.swp.tutorium.singleton.matcher;
 
-import com.github.fhtw.swp.tutorium.singleton.SingletonPredicates;
+import com.github.fhtw.swp.tutorium.singleton.Singletons;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.reflections.ReflectionUtils;
@@ -19,7 +19,7 @@ public class MethodSingletonMatcher extends TypeSafeDiagnosingMatcher<Class<?>> 
     protected boolean matchesSafely(Class<?> singletonClass, Description mismatchDescription) {
 
         final Set<Method> accessorMethods = ReflectionUtils.getAllMethods(singletonClass,
-                SingletonPredicates.METHOD.getPredicateFactory().apply(singletonClass)
+                Singletons.METHOD.getPredicateFor(singletonClass)
         );
 
         return !accessorMethods.isEmpty();
