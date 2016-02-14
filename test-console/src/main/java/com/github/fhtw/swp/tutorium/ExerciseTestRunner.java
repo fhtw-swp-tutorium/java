@@ -3,26 +3,22 @@ package com.github.fhtw.swp.tutorium;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
+import java.util.Arrays;
+
 public class ExerciseTestRunner {
 
-    private final TestResultPrinter testResultPrinter;
+    public int runExerciseTests(Exercise exercise) {
 
-    public ExerciseTestRunner(TestResultPrinter testResultPrinter) {
-        this.testResultPrinter = testResultPrinter;
-    }
-
-    public void runExerciseTests(Exercise exercise) {
         final Class<?>[] unitTestClasses = exercise.getUnitTestClasses();
 
-        for (Class<?> unitTestClass : unitTestClasses) {
+        return Arrays
+                .stream(unitTestClasses)
+                .map(JUnitCore::runClasses)
+                .map(Result::getFailureCount)
+                .reduce(0, this::sum);
+    }
 
-            final Result result = JUnitCore.runClasses(unitTestClass);
-
-            /*
-            testResultPrinter.printResultHeader(unitTestClass);
-            testResultPrinter.printResult(result);
-            testResultPrinter.printResultFooter();
-            */
-        }
+    private int sum(Integer first, Integer second) {
+        return first + second;
     }
 }
