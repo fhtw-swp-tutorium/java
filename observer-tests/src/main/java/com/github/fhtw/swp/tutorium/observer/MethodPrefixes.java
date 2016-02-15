@@ -49,7 +49,7 @@ public enum MethodPrefixes {
                 .stream()
                 .map(MethodNamePrefixMatcher::startsWith)
                 .map(this::applyAdditionalMatcher)
-                .reduce(nothing(), Matchers::allOf);
+                .reduce(nothing(), Matchers::anyOf);
     }
 
     private Matcher<Method> applyAdditionalMatcher(Matcher<Method> existingMethodMatcher) {
