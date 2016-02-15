@@ -16,7 +16,7 @@ public class SingletonAccessorFactory {
         final Optional<SingletonAccessor> fieldSingletonAccessor = getInstanceField(singletonClass).map(FieldSingletonAccessor::new);
         final Optional<SingletonAccessor> methodSingletonAccessor = getInstanceMethod(singletonClass).map(MethodSingletonAccessor::new);
 
-        return either(fieldSingletonAccessor, methodSingletonAccessor).orElse(DummySingletonAccessor::new);
+        return either(fieldSingletonAccessor, methodSingletonAccessor).orElseGet(DummySingletonAccessor::new);
     }
 
     @SuppressWarnings("unchecked")
