@@ -5,11 +5,9 @@ import java.lang.reflect.Method;
 
 class MethodSingletonAccessor implements SingletonAccessor {
 
-    private final Class<?> singletonClass;
     private final Method accessorMethod;
 
-    MethodSingletonAccessor(Class<?> singletonClass, Method accessorMethod) {
-        this.singletonClass = singletonClass;
+    MethodSingletonAccessor(Method accessorMethod) {
         this.accessorMethod = accessorMethod;
     }
 

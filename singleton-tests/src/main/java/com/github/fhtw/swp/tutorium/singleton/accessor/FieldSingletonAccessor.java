@@ -4,18 +4,16 @@ import java.lang.reflect.Field;
 
 class FieldSingletonAccessor implements SingletonAccessor {
 
-    private final Class<?> singletonClass;
     private final Field accessorField;
 
-    FieldSingletonAccessor(Class<?> singletonClass, Field accessorField) {
-        this.singletonClass = singletonClass;
+    FieldSingletonAccessor(Field accessorField) {
         this.accessorField = accessorField;
     }
 
     @Override
     public Object getInstance() {
         try {
-            return accessorField.get(singletonClass);
+            return accessorField.get(null);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Failed to access field in singleton class", e);
         }

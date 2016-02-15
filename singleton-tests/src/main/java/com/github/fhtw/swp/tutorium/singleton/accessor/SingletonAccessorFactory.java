@@ -5,35 +5,33 @@ import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Set;
+import java.util.Optional;
+
+import static com.github.fhtw.swp.tutorium.common.Optionals.either;
 
 public class SingletonAccessorFactory {
 
     public SingletonAccessor create(Class<?> singletonClass) {
 
-        final Set<Field> instanceFields = getInstanceFields(singletonClass);
-        final Set<Method> instanceMethods = getInstanceMethods(singletonClass);
+        final Optional<SingletonAccessor> fieldSingletonAccessor = getInstanceField(singletonClass).map(FieldSingletonAccessor::new);
+        final Optional<SingletonAccessor> methodSingletonAccessor = getInstanceMethod(singletonClass).map(MethodSingletonAccessor::new);
 
-        if (!instanceFields.isEmpty()) {
-            return new FieldSingletonAccessor(singletonClass, instanceFields.iterator().next());
-        } else if (!instanceMethods.isEmpty()) {
-            return new MethodSingletonAccessor(singletonClass, instanceMethods.iterator().next());
-        } else {
-            return new DummySingletonAccessor();
-        }
+        return either(fieldSingletonAccessor, methodSingletonAccessor).orElse(DummySingletonAccessor::new);
     }
 
     @SuppressWarnings("unchecked")
-    private Set<Field> getInstanceFields(Class<?> singletonClass) {
-        return ReflectionUtils.getAllFields(singletonClass,
-                Singletons.FIELD.getPredicateFor(singletonClass)
-        );
+    private Optional<Field> getInstanceField(Class<?> singletonClass) {
+        return ReflectionUtils
+                .getAllFields(singletonClass, Singletons.FIELD.getPredicateFor(singletonClass))
+                .stream()
+                .findFirst();
     }
 
     @SuppressWarnings("unchecked")
-    private Set<Method> getInstanceMethods(Class<?> singletonClass) {
-        return ReflectionUtils.getAllMethods(singletonClass,
-                Singletons.METHOD.getPredicateFor(singletonClass)
-        );
+    private Optional<Method> getInstanceMethod(Class<?> singletonClass) {
+        return ReflectionUtils
+                .getAllMethods(singletonClass, Singletons.METHOD.getPredicateFor(singletonClass))
+                .stream()
+                .findFirst();
     }
 }
