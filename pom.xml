@@ -24,6 +24,11 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <pattern.specifications.path>../pattern-specifications</pattern.specifications.path>
+        <base.package>${project.build.outputDirectory}/com/github/fhtw/swp/tutorium</base.package>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
