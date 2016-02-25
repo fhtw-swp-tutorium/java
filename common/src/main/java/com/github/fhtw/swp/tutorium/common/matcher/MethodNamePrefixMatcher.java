@@ -19,8 +19,8 @@ public class MethodNamePrefixMatcher extends TypeSafeDiagnosingMatcher<Method> {
     }
 
     @Override
-    protected boolean matchesSafely(Method item, Description mismatchDescription) {
-        return item.getName().startsWith(prefix);
+    protected boolean matchesSafely(Method method, Description mismatchDescription) {
+        return method.getName().startsWith(prefix);
     }
 
     @Override
