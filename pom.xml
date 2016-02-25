@@ -14,13 +14,14 @@
         <module>singleton-tests</module>
         <module>common</module>
         <module>test-console</module>
+        <module>command-tests</module>
     </modules>
 
     <dependencies>
         <dependency>
             <groupId>com.github.fhtw-swp-tutorium</groupId>
             <artifactId>annotations</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -29,6 +30,19 @@
         <pattern.specifications.path>../pattern-specifications</pattern.specifications.path>
         <base.package>${project.build.outputDirectory}/com/github/fhtw/swp/tutorium</base.package>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
