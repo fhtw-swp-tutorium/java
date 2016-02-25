@@ -6,7 +6,7 @@
 
     <groupId>com.github.fhtw.swp.tutorium</groupId>
     <artifactId>swp-test-tool</artifactId>
-    <version>0.0.1</version>
+    <version>${current.version}</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -25,6 +25,7 @@
     </dependencies>
 
     <properties>
+        <current.version>0.0.1-SNAPSHOT</current.version>
         <pattern.specifications.path>../pattern-specifications</pattern.specifications.path>
         <base.package>${project.build.outputDirectory}/com/github/fhtw/swp/tutorium</base.package>
     </properties>
@@ -34,19 +35,19 @@
             <dependency>
                 <groupId>com.github.fhtw.swp.tutorium</groupId>
                 <artifactId>common</artifactId>
-                <version>0.0.1</version>
+                <version>${current.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.fhtw.swp.tutorium</groupId>
                 <artifactId>observer-tests</artifactId>
-                <version>0.0.1</version>
+                <version>${current.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.fhtw.swp.tutorium</groupId>
                 <artifactId>singleton-tests</artifactId>
-                <version>0.0.1</version>
+                <version>${current.version}</version>
             </dependency>
 
             <dependency>
