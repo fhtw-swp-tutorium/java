@@ -16,7 +16,7 @@ public class MethodPrefixesTest {
     }
 
     @Test
-    public void testSholdMatchUnRegisterMethod() throws Exception {
+    public void testShouldMatchUnRegisterMethod() throws Exception {
         Assert.fail();
     }
 }
