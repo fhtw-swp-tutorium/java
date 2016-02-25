@@ -20,7 +20,7 @@ public class ParameterCountMethodMatcherTest {
 
     @Test
     public void testShouldMatchParameterCount() throws Exception {
-        final Method method = TestClass.class.getMethod("methodWithInterfaceParameter", TestInterface.class);
+        final Method method = Bar.class.getMethod("methodWithInterfaceParameter", Foo.class);
 
         final boolean result = sut.matches(method);
 

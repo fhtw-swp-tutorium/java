@@ -45,7 +45,7 @@ public class SingletonSteps {
     }
 
     @Dann("^sollen alle Singletons immer dieselbe Instanz zurückgeben$")
-    public void sollenAlleSingletonsImmerDieselbeInstanzZurückgeben() throws Throwable {
+    public void sollenAlleSingletonsImmerDieselbeInstanzZurueckgeben() throws Throwable {
         for (Class<?> singletonClass : singletonClasses) {
             final SingletonAccessor singletonAccessor = singletonDriver.getSingletonAccessor(singletonClass);
 

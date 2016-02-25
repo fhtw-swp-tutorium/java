@@ -50,7 +50,7 @@ public class ObserverSteps {
     }
 
     @Dann("^sollen alle Subjekte eine Methode zum Hinzufügen bieten$")
-    public void solltenAlleSubjekteEineMethodeZumHinzufügenBieten() throws Throwable {
+    public void solltenAlleSubjekteEineMethodeZumHinzufuegenBieten() throws Throwable {
         for (Class<?> subjectClass : subjectClasses) {
             assertThat(allMethods(subjectClass), hasItem(observerDriver.getRegisterMethodMatcher()));
         }

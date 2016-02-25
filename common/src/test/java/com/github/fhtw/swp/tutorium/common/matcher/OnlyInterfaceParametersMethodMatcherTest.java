@@ -20,7 +20,7 @@ public class OnlyInterfaceParametersMethodMatcherTest {
 
     @Test
     public void testShouldMatchIfNotParameters() throws Exception {
-        final Method method = TestClass.class.getMethod("methodWithNoParameter");
+        final Method method = Bar.class.getMethod("methodWithNoParameter");
 
         final boolean result = sut.matches(method);
 
@@ -29,7 +29,7 @@ public class OnlyInterfaceParametersMethodMatcherTest {
 
     @Test
     public void testShouldMatchIfAllParamtersAreInterfaces() throws Exception {
-        final Method method = TestClass.class.getMethod("methodWithInterfaceParameter", TestInterface.class);
+        final Method method = Bar.class.getMethod("methodWithInterfaceParameter", Foo.class);
 
         final boolean result = sut.matches(method);
 
@@ -38,7 +38,7 @@ public class OnlyInterfaceParametersMethodMatcherTest {
 
     @Test
     public void testShouldNotMatchIfAnyParameterIsClass() throws Exception {
-        final Method method = TestClass.class.getMethod("methodWithClass", TestClass.class);
+        final Method method = Bar.class.getMethod("methodWithClass", Bar.class);
 
         final boolean result = sut.matches(method);
 
