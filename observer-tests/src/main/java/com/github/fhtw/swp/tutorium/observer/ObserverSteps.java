@@ -108,7 +108,7 @@ public class ObserverSteps {
     @Dann("^soll der Beobachter aufgerufen werden$")
     public void sollDerBeobachterAufgerufenWerden() throws Throwable {
         for (CountingInvocationHandler handler : invocationHandlers.values()) {
-            Assert.assertThat(handler.getCounter(), is(1));
+            Assert.assertThat(handler.getInvocationCount(), is(1));
         }
     }
 
@@ -126,7 +126,7 @@ public class ObserverSteps {
     @Dann("^soll der Beobachter nicht aufgerufen worden sein$")
     public void sollDerBeobachterNichtAufgerufenWordenSein() throws Throwable {
         for (CountingInvocationHandler handler : invocationHandlers.values()) {
-            Assert.assertThat(handler.getCounter(), is(0));
+            Assert.assertThat(handler.getInvocationCount(), is(0));
         }
     }
 }

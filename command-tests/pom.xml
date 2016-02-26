@@ -36,11 +36,6 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

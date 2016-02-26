@@ -13,7 +13,7 @@ public class CountingInvocationHandler implements InvocationHandler {
         return null;
     }
 
-    public int getCounter() {
+    public int getInvocationCount() {
         return counter;
     }
 }
