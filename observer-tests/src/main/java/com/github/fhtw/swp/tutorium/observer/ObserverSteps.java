@@ -1,5 +1,6 @@
 package com.github.fhtw.swp.tutorium.observer;
 
+import com.github.fhtw.swp.tutorium.reflection.CountingInvocationHandler;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;
 import cucumber.api.java.de.Und;
@@ -12,12 +13,10 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
-import static com.github.fhtw.swp.tutorium.common.ReflectionUtils.invoke;
 import static com.github.fhtw.swp.tutorium.common.error.QuietMatcherAssert.assertThat;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class ObserverSteps {
@@ -46,27 +45,27 @@ public class ObserverSteps {
 
     @Dann("^darf diese Liste nicht leer sein$")
     public void darfDieseListeNichtLeerSein() throws Throwable {
-        assertThat(subjectClasses, observerDriver.getSizeMatcher());
+        assertThat(subjectClasses, is(not(empty())));
     }
 
     @Dann("^sollen alle Subjekte eine Methode zum Hinzufügen bieten$")
     public void solltenAlleSubjekteEineMethodeZumHinzufuegenBieten() throws Throwable {
         for (Class<?> subjectClass : subjectClasses) {
-            assertThat(allMethods(subjectClass), hasItem(observerDriver.getRegisterMethodMatcher()));
+            assertThat(allMethods(subjectClass), hasItem(MethodPrefixes.REGISTER.getMatcher()));
         }
     }
 
     @Dann("^sollen alle Subjekte eine Methode zum Entfernen bieten$")
     public void solltenAlleSubjekteEineMethodeZumEntfernenBieten() throws Throwable {
         for (Class<?> subjectClass : subjectClasses) {
-            assertThat(allMethods(subjectClass), hasItem(observerDriver.getUnregisterMethodMatcher()));
+            assertThat(allMethods(subjectClass), hasItem(MethodPrefixes.UNREGISTER.getMatcher()));
         }
     }
 
     @Dann("^sollen alle Subjekte eine Methode zum Aktualisieren bieten$")
     public void solltenAlleSubjekteEineMethodeZumAktualisierenBieten() throws Throwable {
         for (Class<?> subjectClass : subjectClasses) {
-            assertThat(allMethods(subjectClass), hasItem(observerDriver.getUpdateMethodMatcher()));
+            assertThat(allMethods(subjectClass), hasItem(MethodPrefixes.UPDATE.getMatcher()));
         }
     }
 
@@ -92,7 +91,7 @@ public class ObserverSteps {
             final Object subject = subjects.get(subjectClass);
             final Method registerMethod = MethodPrefixes.REGISTER.getMethodOn(subjectClass);
 
-            invoke(registerMethod, subject, observer);
+            //TODO invoke(registerMethod, subject, observer);
         }
     }
 
@@ -102,7 +101,7 @@ public class ObserverSteps {
             final Method updateMethod = MethodPrefixes.UPDATE.getMethodOn(subjectClass);
             final Object subject = subjects.get(subjectClass);
 
-            invoke(updateMethod, subject);
+            //TODO invoke(updateMethod, subject);
         }
     }
 
@@ -120,7 +119,7 @@ public class ObserverSteps {
             final Object subject = subjects.get(subjectClass);
             final Method unregisterMethod = MethodPrefixes.UNREGISTER.getMethodOn(subjectClass);
 
-            invoke(unregisterMethod, subject, observer);
+            //TODO invoke(unregisterMethod, subject, observer);
         }
     }
 

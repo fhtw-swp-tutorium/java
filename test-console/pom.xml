@@ -27,6 +27,11 @@
             <groupId>com.github.fhtw.swp.tutorium</groupId>
             <artifactId>observer-tests</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.fhtw.swp.tutorium</groupId>
+            <artifactId>reflection-facade</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

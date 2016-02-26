@@ -1,4 +1,6 @@
-package com.github.fhtw.swp.tutorium.observer;
+package com.github.fhtw.swp.tutorium.reflection;
+
+import com.github.fhtw.swp.tutorium.observer.Subject;
 
 @Subject
 public class SimpleTestSubject {

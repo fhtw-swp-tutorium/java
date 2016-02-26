@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
-import static com.github.fhtw.swp.tutorium.common.Optionals.either;
+import static com.github.fhtw.swp.tutorium.common.Optionals.any;
 
 public class SingletonAccessorFactory {
 
@@ -16,7 +16,7 @@ public class SingletonAccessorFactory {
         final Optional<SingletonAccessor> fieldSingletonAccessor = getInstanceField(singletonClass).map(FieldSingletonAccessor::new);
         final Optional<SingletonAccessor> methodSingletonAccessor = getInstanceMethod(singletonClass).map(MethodSingletonAccessor::new);
 
-        return either(fieldSingletonAccessor, methodSingletonAccessor).orElseGet(DummySingletonAccessor::new);
+        return any(fieldSingletonAccessor, methodSingletonAccessor, Optional.of(new DummySingletonAccessor()));
     }
 
     @SuppressWarnings("unchecked")

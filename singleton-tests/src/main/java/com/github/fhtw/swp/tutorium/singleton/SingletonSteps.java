@@ -8,7 +8,7 @@ import org.junit.Assert;
 import java.util.Set;
 
 import static com.github.fhtw.swp.tutorium.common.error.QuietMatcherAssert.assertThat;
-import static org.hamcrest.Matchers.sameInstance;
+import static org.hamcrest.Matchers.*;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class SingletonSteps {
@@ -27,7 +27,7 @@ public class SingletonSteps {
 
     @Dann("^darf diese Liste nicht leer sein$")
     public void darfDieseListeNichtLeerSein() throws Throwable {
-        assertThat(singletonClasses, singletonDriver.getSizeMatcher());
+        assertThat(singletonClasses, is(not(empty())));
     }
 
     @Dann("^sollen alle Singletons eine Methode zum Zugriff auf die Instanz haben$")

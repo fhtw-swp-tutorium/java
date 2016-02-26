@@ -15,6 +15,7 @@
         <module>common</module>
         <module>test-console</module>
         <module>command-tests</module>
+        <module>reflection-facade</module>
     </modules>
 
     <dependencies>
@@ -65,6 +66,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.github.fhtw.swp.tutorium</groupId>
+                <artifactId>reflection-facade</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
@@ -103,6 +110,12 @@
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-junit</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-picocontainer</artifactId>
                 <version>1.2.3</version>
             </dependency>
         </dependencies>

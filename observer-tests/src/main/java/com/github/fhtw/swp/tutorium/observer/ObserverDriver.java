@@ -1,16 +1,15 @@
 package com.github.fhtw.swp.tutorium.observer;
 
 import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
-import com.github.fhtw.swp.tutorium.common.matcher.AnnotatedElementExistsMatcher;
-import com.github.fhtw.swp.tutorium.observer.factory.ObserverFactory;
-import com.github.fhtw.swp.tutorium.observer.factory.SubjectFactory;
-import org.hamcrest.Matcher;
+import com.github.fhtw.swp.tutorium.reflection.ClassInstanceFactory;
+import com.github.fhtw.swp.tutorium.reflection.ProxyFactory;
+import com.github.fhtw.swp.tutorium.reflection.impl.AnnotatedClassInstanceFactory;
+import com.github.fhtw.swp.tutorium.reflection.impl.ByteBuddyProxyFactory;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.Set;
 
 @SuppressWarnings("unchecked")
@@ -29,27 +28,26 @@ public class ObserverDriver {
         return subjects;
     }
 
-    public Matcher<Collection<Class<?>>> getSizeMatcher() {
-        return new AnnotatedElementExistsMatcher(Subject.class);
+    public ProxyFactory getObserverFactory() {
+        return new ByteBuddyProxyFactory();
     }
 
+    @Deprecated
     public Object getObserverInstance(Class<?> subjectClass, InvocationHandler invocationHandler) {
-        return ObserverFactory.create(subjectClass, invocationHandler);
+
+        final Method registerMethod = MethodPrefixes.REGISTER.getMethodOn(subjectClass);
+        final Class<?> observerClass = registerMethod.getParameterTypes()[0];
+
+        return getObserverFactory().create(observerClass, invocationHandler);
     }
 
+    public ClassInstanceFactory getSubjectFactory() {
+        return new AnnotatedClassInstanceFactory<>(Subject.class, Subject::factory, Subject.None.class);
+    }
+
+    @Deprecated
     public Object getSubjectInstance(Class<?> subjectClass) {
-        return SubjectFactory.create(subjectClass);
+        return getSubjectFactory().create(subjectClass);
     }
 
-    public Matcher<Method> getRegisterMethodMatcher() {
-        return MethodPrefixes.REGISTER.getMatcher();
-    }
-
-    public Matcher<Method> getUnregisterMethodMatcher() {
-        return MethodPrefixes.UNREGISTER.getMatcher();
-    }
-
-    public Matcher<Method> getUpdateMethodMatcher() {
-        return MethodPrefixes.UPDATE.getMatcher();
-    }
 }

@@ -1,4 +1,4 @@
-package com.github.fhtw.swp.tutorium.observer;
+package com.github.fhtw.swp.tutorium.reflection;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

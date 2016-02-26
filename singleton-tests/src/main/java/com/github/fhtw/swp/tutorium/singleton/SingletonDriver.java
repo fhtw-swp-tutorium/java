@@ -1,7 +1,6 @@
 package com.github.fhtw.swp.tutorium.singleton;
 
 import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
-import com.github.fhtw.swp.tutorium.common.matcher.AnnotatedElementExistsMatcher;
 import com.github.fhtw.swp.tutorium.common.matcher.PrivateConstructorMatcher;
 import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonAccessor;
 import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonAccessorFactory;
@@ -9,7 +8,6 @@ import org.hamcrest.Matcher;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 
-import java.util.Collection;
 import java.util.Set;
 
 import static com.github.fhtw.swp.tutorium.singleton.matcher.FieldSingletonMatcher.isFieldSingleton;
@@ -33,10 +31,6 @@ public class SingletonDriver {
 
     public Set<Class<?>> getSingletonClasses() {
         return singletons;
-    }
-
-    public Matcher<Collection<Class<?>>> getSizeMatcher() {
-        return new AnnotatedElementExistsMatcher(Singleton.class);
     }
 
     public Matcher<Class<?>> getAccessorMatcher() {
