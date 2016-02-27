@@ -29,7 +29,7 @@ public class TypeContext {
         methodsPerType = getMethodsOfTypes(ReflectionUtils::getAllMethods);
     }
 
-    public void filterMethods(Predicate<Method>... predicates) {
+    public void reduceMethods(Predicate<Method>... predicates) {
         methodsPerType = getMethodsOfTypes(type -> ReflectionUtils.getAllMethods(type, predicates));
     }
 

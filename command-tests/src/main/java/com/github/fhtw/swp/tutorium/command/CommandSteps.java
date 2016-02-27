@@ -25,7 +25,7 @@ public class CommandSteps {
 
     public CommandSteps() {
         this.typeContext = new TypeContext();
-        this.commandDriver = new CommandDriver(typeContext);
+        this.commandDriver = new CommandDriver();
     }
 
     @Gegebensei("^eine Liste von Klassen mit dem Attribut \"([^\"]*)\"$")
@@ -40,7 +40,7 @@ public class CommandSteps {
 
     @Wenn("^ich in jeder Klasse nach einer Methode mit dem Attribut \"([^\"]*)\" suche$")
     public void ichInJederKlasseNachEinerMethodeMitDemAttributSuche(String annotationName) throws Throwable {
-        typeContext.filterMethods(withAnnotation(AnnotationResolver.INSTANCE.resolve(annotationName)));
+        typeContext.reduceMethods(withAnnotation(AnnotationResolver.INSTANCE.resolve(annotationName)));
     }
 
     @Dann("^erwarte ich mir jeweils eine Methode$")
@@ -59,7 +59,7 @@ public class CommandSteps {
         }
     }
 
-    @Und("^muss jeder Parameter ein Interface sein$")
+    @Und("^jeder Parameter muss ein Interface sein$")
     public void mussJederParameterEinInterfaceSein() throws Throwable {
         for (Class<?> type : typeContext.getTypes()) {
             final Method invokeCommandMethod = typeContext.getFirstMethodOfType(type);

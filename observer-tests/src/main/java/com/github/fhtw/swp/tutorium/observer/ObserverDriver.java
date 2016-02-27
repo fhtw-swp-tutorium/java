@@ -1,53 +1,39 @@
 package com.github.fhtw.swp.tutorium.observer;
 
-import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
-import com.github.fhtw.swp.tutorium.reflection.ClassInstanceFactory;
-import com.github.fhtw.swp.tutorium.reflection.ProxyFactory;
-import com.github.fhtw.swp.tutorium.reflection.impl.AnnotatedClassInstanceFactory;
-import com.github.fhtw.swp.tutorium.reflection.impl.ByteBuddyProxyFactory;
-import org.reflections.Configuration;
-import org.reflections.Reflections;
+import com.github.fhtw.swp.tutorium.observer.factory.ObserverProxyFactory;
+import com.github.fhtw.swp.tutorium.observer.factory.SubjectProxyFactory;
+import com.google.common.collect.Maps;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.util.Set;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class ObserverDriver {
 
-    private final Set<Class<?>> subjects;
+    private final Map<Class<?>, SubjectProxy> subjectProxies = Maps.newHashMap();
+    private final Map<Class<?>, ObserverProxy> observerProxies = Maps.newHashMap();
+    private final SubjectProxyFactory subjectProxyFactory;
+    private final ObserverProxyFactory observerProxyFactory;
 
     public ObserverDriver() {
-        final Configuration configuration = new ConfigurationFactory().create();
-
-        final Reflections reflections = new Reflections(configuration);
-        subjects = reflections.getTypesAnnotatedWith(Subject.class);
+        observerProxyFactory = new ObserverProxyFactory();
+        subjectProxyFactory = new SubjectProxyFactory();
     }
 
-    public Set<Class<?>> getSubjects() {
-        return subjects;
+    public void createSubjectProxyInstance(Class<?> subjectType) {
+        final SubjectProxy subject = subjectProxyFactory.create(subjectType);
+        subjectProxies.put(subjectType, subject);
     }
 
-    public ProxyFactory getObserverFactory() {
-        return new ByteBuddyProxyFactory();
+    public void createObserverProxyInstance(Class<?> subjectType) {
+        final ObserverProxy observer = observerProxyFactory.create(subjectType);
+        observerProxies.put(subjectType, observer);
     }
 
-    @Deprecated
-    public Object getObserverInstance(Class<?> subjectClass, InvocationHandler invocationHandler) {
-
-        final Method registerMethod = MethodPrefixes.REGISTER.getMethodOn(subjectClass);
-        final Class<?> observerClass = registerMethod.getParameterTypes()[0];
-
-        return getObserverFactory().create(observerClass, invocationHandler);
+    public SubjectProxy getSubjectProxyInstance(Class<?> subjectType) {
+        return subjectProxies.get(subjectType);
     }
 
-    public ClassInstanceFactory getSubjectFactory() {
-        return new AnnotatedClassInstanceFactory<>(Subject.class, Subject::factory, Subject.None.class);
+    public ObserverProxy getObserverProxyInstance(Class<?> subjectType) {
+        return observerProxies.get(subjectType);
     }
-
-    @Deprecated
-    public Object getSubjectInstance(Class<?> subjectClass) {
-        return getSubjectFactory().create(subjectClass);
-    }
-
 }
