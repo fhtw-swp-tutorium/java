@@ -49,6 +49,7 @@ public class SingletonSteps {
         for (Class<?> singletonClass : typeContext.getTypes()) {
             final SingletonAccessor singletonAccessor = singletonDriver.getSingletonAccessor(singletonClass);
 
+            Assert.assertThat(singletonAccessor.getInstance(), is(notNullValue()));
             Assert.assertThat(singletonAccessor.getInstance(), sameInstance(singletonAccessor.getInstance()));
         }
     }
