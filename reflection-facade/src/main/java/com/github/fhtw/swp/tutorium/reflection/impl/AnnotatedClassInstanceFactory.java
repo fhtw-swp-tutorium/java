@@ -1,5 +1,6 @@
 package com.github.fhtw.swp.tutorium.reflection.impl;
 
+import com.github.fhtw.swp.tutorium.NullFactory;
 import com.github.fhtw.swp.tutorium.reflection.ClassInstanceFactory;
 
 import java.lang.annotation.Annotation;
@@ -18,17 +19,29 @@ public class AnnotatedClassInstanceFactory<T extends Annotation> implements Clas
     @Override
     public Object create(Class<?> type) {
 
-        final Class<?> factoryClass = getFactoryClass(type);
+        final ClassInstanceFactory delegate = getFactory(type);
 
-        if (factoryClass == null) {
-            return new SimpleClassInstanceFactory().create(type);
+        return delegate.create(type);
+    }
+
+    private ClassInstanceFactory getFactory(Class<?> type) {
+
+        final Class<?> customFactoryClass = getCustomFactoryClass(type);
+
+        if (shouldUse(customFactoryClass)) {
+            return new ClassInstanceFactoryProxy(customFactoryClass);
         } else {
-            return new ClassInstanceFactoryProxy(factoryClass).create(type);
+            return new SimpleClassInstanceFactory();
         }
     }
 
-    private Class<?> getFactoryClass(Class<?> type) {
+    private Class<?> getCustomFactoryClass(Class<?> type) {
         final T annotation = type.getAnnotation(this.annotationType);
         return factoryMethod.apply(annotation);
+    }
+
+    private boolean shouldUse(Class<?> factoryClass) {
+        final boolean isNullFactory = NullFactory.class == factoryClass;
+        return !isNullFactory;
     }
 }
