@@ -9,12 +9,10 @@ public class AnnotatedClassInstanceFactory<T extends Annotation> implements Clas
 
     private final Class<T> annotationType;
     private final Function<T, Class<?>> factoryMethod;
-    private final Class<?> nullFactory;
 
-    public AnnotatedClassInstanceFactory(Class<T> annotationType, Function<T, Class<?>> factoryMethod, Class<?> nullFactory) {
+    public AnnotatedClassInstanceFactory(Class<T> annotationType, Function<T, Class<?>> factoryMethod) {
         this.annotationType = annotationType;
         this.factoryMethod = factoryMethod;
-        this.nullFactory = nullFactory;
     }
 
     @Override
@@ -22,19 +20,15 @@ public class AnnotatedClassInstanceFactory<T extends Annotation> implements Clas
 
         final Class<?> factoryClass = getFactoryClass(type);
 
-        if (isNullFactory(factoryClass)) {
+        if (factoryClass == null) {
             return new SimpleClassInstanceFactory().create(type);
         } else {
-            return new DelegatingClassInstanceFactory(factoryClass).create(type);
+            return new ClassInstanceFactoryProxy(factoryClass).create(type);
         }
     }
 
     private Class<?> getFactoryClass(Class<?> type) {
         final T annotation = type.getAnnotation(this.annotationType);
         return factoryMethod.apply(annotation);
-    }
-
-    private boolean isNullFactory(Class<?> factoryClass) {
-        return factoryClass.equals(nullFactory);
     }
 }

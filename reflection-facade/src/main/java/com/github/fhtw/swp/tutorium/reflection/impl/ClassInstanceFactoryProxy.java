@@ -11,13 +11,16 @@ import java.lang.reflect.Method;
 import static java.lang.reflect.Modifier.PUBLIC;
 import static org.reflections.ReflectionUtils.*;
 
+/**
+ * A {@link ClassInstanceFactory} that proxies a given factory class and delegates the creation to it.
+ */
 @SuppressWarnings("unchecked")
-public class DelegatingClassInstanceFactory implements ClassInstanceFactory {
+public class ClassInstanceFactoryProxy implements ClassInstanceFactory {
 
     private final Class<?> factoryClass;
     private final ClassInstanceFactory classInstanceFactory;
 
-    public DelegatingClassInstanceFactory(Class<?> factoryClass) {
+    public ClassInstanceFactoryProxy(Class<?> factoryClass) {
         this.factoryClass = factoryClass;
         this.classInstanceFactory = new SimpleClassInstanceFactory();
     }

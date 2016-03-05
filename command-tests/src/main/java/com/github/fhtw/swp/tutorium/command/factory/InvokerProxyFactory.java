@@ -14,7 +14,7 @@ public class InvokerProxyFactory {
     private final ClassInstanceFactory invokerFactory;
 
     public InvokerProxyFactory() {
-        this.invokerFactory = new AnnotatedClassInstanceFactory<>(Invoker.class, Invoker::factory, Invoker.None.class);
+        this.invokerFactory = new AnnotatedClassInstanceFactory<>(Invoker.class, Invoker::factory);
     }
 
     public InvokerProxy create(Class<?> invokerType) {

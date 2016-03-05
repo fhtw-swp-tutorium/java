@@ -12,7 +12,7 @@ public class SubjectProxyFactory {
     private final ClassInstanceFactory subjectFactory;
 
     public SubjectProxyFactory() {
-        subjectFactory = new AnnotatedClassInstanceFactory<>(Subject.class, Subject::factory, Subject.None.class);
+        subjectFactory = new AnnotatedClassInstanceFactory<>(Subject.class, Subject::factory);
     }
 
     public SubjectProxy create(Class<?> subjectType) {

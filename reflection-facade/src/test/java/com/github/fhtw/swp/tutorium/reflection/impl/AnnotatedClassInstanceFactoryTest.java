@@ -16,7 +16,7 @@ public class AnnotatedClassInstanceFactoryTest {
 
     @Before
     public void setUp() throws Exception {
-        sut = new AnnotatedClassInstanceFactory<>(Subject.class, Subject::factory, Subject.None.class);
+        sut = new AnnotatedClassInstanceFactory<>(Subject.class, Subject::factory);
     }
 
     @Test
