@@ -14,7 +14,7 @@ public class ScenarioStatsSummaryPrinter implements SummaryPrinter {
 
         for (String failedScenario : failedScenarios) {
             final String[] parts = failedScenario.split("# Szenario: ");
-            System.out.println(parts[1]);
+            System.out.println("- " + parts[1]);
         }
     }
 }
