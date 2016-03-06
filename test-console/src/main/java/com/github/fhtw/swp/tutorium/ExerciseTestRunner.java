@@ -8,7 +8,7 @@ public class ExerciseTestRunner {
 
         for (Class<?> testClass : exercise.getTestClasses()) {
 
-            System.out.printf("Testing %s pattern:\n", getPatternName(testClass));
+            System.out.printf("\n\nTesting %s pattern:\n", getPatternName(testClass));
 
             JUnitCore.runClasses(testClass);
         }
