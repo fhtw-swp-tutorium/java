@@ -3,7 +3,7 @@
     <Appenders>
         <RollingFile name="SwpTestTool"
                      fileName="logs/SwpTestTool.log"
-                     filePattern="SwpTestTool_%d{yyyy-MM-dd}_%i.log">
+                     filePattern="logs/SwpTestTool_%d{yyyy-MM-dd}_%i.log">
             <PatternLayout>
                 <pattern>%level\t%d{yyyy-MM-dd HH:mm:ss} %c: %m%n</pattern>
             </PatternLayout>
