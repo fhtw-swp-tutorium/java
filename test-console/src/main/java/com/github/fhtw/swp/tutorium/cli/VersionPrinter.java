@@ -9,13 +9,24 @@ public class VersionPrinter {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String currentVersion = VersionPrinter.class.getPackage().getImplementationVersion();
+    private static String currentVersion;
+    private static String requiredAnnotationVersion;
 
-    public void printCurrentVersion(PrintStream target) {
+    static {
+        currentVersion = VersionPrinter.class.getPackage().getImplementationVersion();
+        requiredAnnotationVersion = DependencyVersionResolver.getVersion("com.github.fhtw-swp-tutorium", "annotations");
+    }
 
-        final String versionText = "Running version: " + currentVersion;
+    public void printVersionInformation(PrintStream target) {
 
-        LOGGER.debug(versionText);
-        target.println(versionText);
+        final String runningVersionText = "Running version: " + currentVersion;
+
+        LOGGER.debug(runningVersionText);
+        target.println(runningVersionText);
+
+        final String requiredAnnotationVersionText = "Required annotation version: " + requiredAnnotationVersion;
+
+        LOGGER.debug(requiredAnnotationVersionText);
+        target.println(requiredAnnotationVersionText);
     }
 }

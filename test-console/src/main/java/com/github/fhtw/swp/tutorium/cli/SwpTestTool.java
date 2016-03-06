@@ -24,7 +24,7 @@ public class SwpTestTool {
 
         LOGGER.debug("Arguments: {}", args);
 
-        versionPrinter.printCurrentVersion(System.out);
+        versionPrinter.printVersionInformation(System.out);
 
         try {
             cmdLineParser.parseArgument(args);
