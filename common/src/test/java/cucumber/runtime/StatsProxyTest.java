@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringStartsWith.startsWith;
 
 public class StatsProxyTest {
 
@@ -50,7 +51,7 @@ public class StatsProxyTest {
 
         final String printedStats = byteArrayOutputStream.toString("UTF-8");
 
-        Assert.assertThat(printedStats, is("0 Scenarios ()\r\n"));
+        Assert.assertThat(printedStats, startsWith("0 Scenarios ()"));
     }
 
     @Test
