@@ -9,13 +9,13 @@ public enum Exercise {
     UE2(),
     UE3();
 
-    private final Class<?>[] unitTestClasses;
+    private final Class<?>[] testClasses;
 
-    Exercise(Class<?>... unitTestClasses) {
-        this.unitTestClasses = unitTestClasses;
+    Exercise(Class<?>... testClasses) {
+        this.testClasses = testClasses;
     }
 
-    public Class<?>[] getUnitTestClasses() {
-        return unitTestClasses;
+    public Class<?>[] getTestClasses() {
+        return testClasses;
     }
 }

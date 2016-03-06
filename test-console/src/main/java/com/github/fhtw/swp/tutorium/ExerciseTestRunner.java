@@ -6,13 +6,11 @@ public class ExerciseTestRunner {
 
     public void runExerciseTests(Exercise exercise) {
 
-        final Class<?>[] unitTestClasses = exercise.getUnitTestClasses();
+        for (Class<?> testClass : exercise.getTestClasses()) {
 
-        for (Class<?> unitTestClass : unitTestClasses) {
+            System.out.printf("Testing %s pattern:\n", getPatternName(testClass));
 
-            System.out.printf("Testing %s pattern:\n", getPatternName(unitTestClass));
-
-            JUnitCore.runClasses(unitTestClass);
+            JUnitCore.runClasses(testClass);
         }
     }
 
