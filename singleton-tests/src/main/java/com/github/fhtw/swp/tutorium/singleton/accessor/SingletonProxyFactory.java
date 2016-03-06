@@ -9,14 +9,14 @@ import java.util.Optional;
 
 import static com.github.fhtw.swp.tutorium.common.Optionals.any;
 
-public class SingletonAccessorFactory {
+public class SingletonProxyFactory {
 
-    public SingletonAccessor create(Class<?> singletonClass) {
+    public SingletonProxy create(Class<?> singletonClass) {
 
-        final Optional<SingletonAccessor> fieldSingletonAccessor = getInstanceField(singletonClass).map(FieldSingletonAccessor::new);
-        final Optional<SingletonAccessor> methodSingletonAccessor = getInstanceMethod(singletonClass).map(MethodSingletonAccessor::new);
+        final Optional<SingletonProxy> fieldSingletonAccessor = getInstanceField(singletonClass).map(FieldSingletonProxy::new);
+        final Optional<SingletonProxy> methodSingletonAccessor = getInstanceMethod(singletonClass).map(MethodSingletonProxy::new);
 
-        return any(fieldSingletonAccessor, methodSingletonAccessor, Optional.of(new DummySingletonAccessor()));
+        return any(fieldSingletonAccessor, methodSingletonAccessor, Optional.of(new DummySingletonProxy()));
     }
 
     @SuppressWarnings("unchecked")

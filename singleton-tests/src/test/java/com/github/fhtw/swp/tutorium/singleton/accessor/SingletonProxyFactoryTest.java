@@ -9,21 +9,21 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.sameInstance;
 
-public class SingletonAccessorFactoryTest {
+public class SingletonProxyFactoryTest {
 
-    private SingletonAccessorFactory singletonAccessorFactory;
+    private SingletonProxyFactory singletonProxyFactory;
 
     @Before
     public void setUp() throws Exception {
-        singletonAccessorFactory = new SingletonAccessorFactory();
+        singletonProxyFactory = new SingletonProxyFactory();
     }
 
     @Test
     public void testShouldCreateAccessorForFieldSingleton() throws Exception {
 
-        final SingletonAccessor singletonAccessor = singletonAccessorFactory.create(FieldSingleton.class);
+        final SingletonProxy singletonProxy = singletonProxyFactory.create(FieldSingleton.class);
 
-        final Object instance = singletonAccessor.getInstance();
+        final Object instance = singletonProxy.getInstance();
 
         Assert.assertThat(instance, sameInstance(FieldSingleton.INSTANCE));
     }
@@ -31,9 +31,9 @@ public class SingletonAccessorFactoryTest {
     @Test
     public void testShouldCreateAccessorForMethodSingleton() throws Exception {
 
-        final SingletonAccessor singletonAccessor = singletonAccessorFactory.create(MethodSingleton.class);
+        final SingletonProxy singletonProxy = singletonProxyFactory.create(MethodSingleton.class);
 
-        final Object instance = singletonAccessor.getInstance();
+        final Object instance = singletonProxy.getInstance();
 
         Assert.assertThat(instance, sameInstance(MethodSingleton.getInstance()));
     }
@@ -41,10 +41,10 @@ public class SingletonAccessorFactoryTest {
     @Test
     public void testShouldCreateDummyAccessorForNoSingleton() throws Exception {
 
-        final SingletonAccessor singletonAccessor = singletonAccessorFactory.create(Object.class);
+        final SingletonProxy singletonProxy = singletonProxyFactory.create(Object.class);
 
-        final Object firstInstance = singletonAccessor.getInstance();
-        final Object secondInstance = singletonAccessor.getInstance();
+        final Object firstInstance = singletonProxy.getInstance();
+        final Object secondInstance = singletonProxy.getInstance();
 
         Assert.assertThat(firstInstance, not(sameInstance(secondInstance)));
     }

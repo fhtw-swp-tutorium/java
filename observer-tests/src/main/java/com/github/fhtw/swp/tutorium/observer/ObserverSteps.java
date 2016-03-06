@@ -120,13 +120,23 @@ public class ObserverSteps {
         typeContext.getTypes().stream().map(observerDriver::getSubjectProxyInstance).forEach(SubjectProxy::update);
     }
 
-    @Dann("^soll der Beobachter \"([^\"]*)\" Mal aufgerufen werden$")
-    public void sollDerBeobachterMalAufgerufenWerden(Integer invocationCount) throws Throwable {
+    @Dann("^soll mindestens eine Methode des Beobachters aufgerufen werden$")
+    public void sollMindestensEineMethodeDesBeobachtersAufgerufenWerden() throws Throwable {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);
             final CountingInvocationHandler invocationHandler = observerProxy.getCountingInvocationHandler();
 
-            assertThat(invocationHandler.getInvocationCount(), is(invocationCount));
+            assertThat(invocationHandler.getInvocationCount(), is(greaterThan(0)));
+        }
+    }
+
+    @Dann("^soll keine Methode des Beobachters aufgerufen werden$")
+    public void sollKeineMethodeDesBeobachtersAufgerufenWerden() throws Throwable {
+        for (Class<?> subjectType : typeContext.getTypes()) {
+            final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);
+            final CountingInvocationHandler invocationHandler = observerProxy.getCountingInvocationHandler();
+
+            assertThat(invocationHandler.getInvocationCount(), is(0));
         }
     }
 }

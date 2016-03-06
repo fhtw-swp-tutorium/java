@@ -3,11 +3,11 @@ package com.github.fhtw.swp.tutorium.singleton.accessor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-class MethodSingletonAccessor implements SingletonAccessor {
+class MethodSingletonProxy implements SingletonProxy {
 
     private final Method accessorMethod;
 
-    MethodSingletonAccessor(Method accessorMethod) {
+    MethodSingletonProxy(Method accessorMethod) {
         this.accessorMethod = accessorMethod;
     }
 

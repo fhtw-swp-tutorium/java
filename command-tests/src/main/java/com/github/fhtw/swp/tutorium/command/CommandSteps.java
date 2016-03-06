@@ -43,8 +43,8 @@ public class CommandSteps {
         typeContext.reduceMethods(withAnnotation(AnnotationResolver.INSTANCE.resolve(annotationName)));
     }
 
-    @Dann("^erwarte ich mir jeweils eine Methode$")
-    public void erwarteIchMirJeweilsEineMethode() throws Throwable {
+    @Dann("^erwarte ich mir jeweils genau eine Methode$")
+    public void erwarteIchMirJeweilsGenauEineMethode() throws Throwable {
         for (Class<?> type : typeContext.getTypes()) {
             final Set<Method> methodsOfType = typeContext.getMethodsOfType(type);
             Assert.assertThat(methodsOfType.size(), is(1));

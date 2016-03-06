@@ -1,9 +1,11 @@
 package com.github.fhtw.swp.tutorium.singleton;
 
+import com.github.fhtw.swp.tutorium.common.AnnotationResolver;
 import com.github.fhtw.swp.tutorium.common.TypeContext;
-import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonAccessor;
+import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonProxy;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;
+import cucumber.api.java.de.Und;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -19,9 +21,9 @@ public class SingletonSteps {
         typeContext = new TypeContext();
     }
 
-    @Gegebensei("^eine Liste von Singletons$")
-    public void eineListeVonSingletons() throws Throwable {
-        typeContext.initializeWithTypesAnnotatedWith(Singleton.class);
+    @Gegebensei("^eine Liste von Klassen mit dem Attribut \"([^\"]*)\"$")
+    public void eineListeVonKlassenMitDemAttribut(String annotationName) throws Throwable {
+        typeContext.initializeWithTypesAnnotatedWith(AnnotationResolver.INSTANCE.resolve(annotationName));
     }
 
     @Dann("^darf diese Liste nicht leer sein$")
@@ -46,10 +48,16 @@ public class SingletonSteps {
     @Dann("^sollen alle Singletons immer dieselbe Instanz zurückgeben$")
     public void sollenAlleSingletonsImmerDieselbeInstanzZurueckgeben() throws Throwable {
         for (Class<?> singletonClass : typeContext.getTypes()) {
-            final SingletonAccessor singletonAccessor = singletonDriver.getSingletonAccessor(singletonClass);
+            final SingletonProxy singletonProxy = singletonDriver.getSingletonAccessor(singletonClass);
+            assertThat(singletonProxy.getInstance(), sameInstance(singletonProxy.getInstance()));
+        }
+    }
 
-            assertThat(singletonAccessor.getInstance(), is(notNullValue()));
-            assertThat(singletonAccessor.getInstance(), sameInstance(singletonAccessor.getInstance()));
+    @Und("^diese darf nicht null sein$")
+    public void undDieseDarfNichtNullSein() throws Throwable {
+        for (Class<?> singletonClass : typeContext.getTypes()) {
+            final SingletonProxy singletonProxy = singletonDriver.getSingletonAccessor(singletonClass);
+            assertThat(singletonProxy.getInstance(), is(notNullValue()));
         }
     }
 }

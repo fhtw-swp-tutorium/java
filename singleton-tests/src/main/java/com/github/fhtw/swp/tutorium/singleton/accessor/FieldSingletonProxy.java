@@ -2,11 +2,11 @@ package com.github.fhtw.swp.tutorium.singleton.accessor;
 
 import java.lang.reflect.Field;
 
-class FieldSingletonAccessor implements SingletonAccessor {
+class FieldSingletonProxy implements SingletonProxy {
 
     private final Field accessorField;
 
-    FieldSingletonAccessor(Field accessorField) {
+    FieldSingletonProxy(Field accessorField) {
         this.accessorField = accessorField;
     }
 

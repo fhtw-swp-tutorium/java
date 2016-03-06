@@ -1,6 +1,6 @@
 package com.github.fhtw.swp.tutorium.singleton.accessor;
 
-class DummySingletonAccessor implements SingletonAccessor {
+class DummySingletonProxy implements SingletonProxy {
 
     @Override
     public Object getInstance() {

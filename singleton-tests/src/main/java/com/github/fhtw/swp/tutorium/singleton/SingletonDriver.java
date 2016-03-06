@@ -1,8 +1,8 @@
 package com.github.fhtw.swp.tutorium.singleton;
 
 import com.github.fhtw.swp.tutorium.common.matcher.PrivateConstructorMatcher;
-import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonAccessor;
-import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonAccessorFactory;
+import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonProxy;
+import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonProxyFactory;
 import org.hamcrest.Matcher;
 
 import static com.github.fhtw.swp.tutorium.singleton.matcher.FieldSingletonMatcher.isFieldSingleton;
@@ -11,10 +11,10 @@ import static org.hamcrest.Matchers.anyOf;
 
 public class SingletonDriver {
 
-    private final SingletonAccessorFactory singletonAccessorFactory;
+    private final SingletonProxyFactory singletonProxyFactory;
 
     public SingletonDriver() {
-        singletonAccessorFactory = new SingletonAccessorFactory();
+        singletonProxyFactory = new SingletonProxyFactory();
     }
 
     public Matcher<Class<?>> getAccessorMatcher() {
@@ -28,7 +28,7 @@ public class SingletonDriver {
         return new PrivateConstructorMatcher();
     }
 
-    public SingletonAccessor getSingletonAccessor(Class<?> singletonClass) {
-        return singletonAccessorFactory.create(singletonClass);
+    public SingletonProxy getSingletonAccessor(Class<?> singletonClass) {
+        return singletonProxyFactory.create(singletonClass);
     }
 }
