@@ -29,7 +29,7 @@ public class DependencyVersionResolver {
 
         try {
             properties.load(DependencyVersionResolver.class.getResourceAsStream(resourceLocation));
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             LOGGER.error("Failed to load properties file", e);
         }
 
