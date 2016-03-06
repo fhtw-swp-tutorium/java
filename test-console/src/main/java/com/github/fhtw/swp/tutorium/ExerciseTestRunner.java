@@ -1,24 +1,23 @@
 package com.github.fhtw.swp.tutorium;
 
 import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
-import java.util.Arrays;
 
 public class ExerciseTestRunner {
 
-    public int runExerciseTests(Exercise exercise) {
+    public void runExerciseTests(Exercise exercise) {
 
         final Class<?>[] unitTestClasses = exercise.getUnitTestClasses();
 
-        return Arrays
-                .stream(unitTestClasses)
-                .map(JUnitCore::runClasses)
-                .map(Result::getFailureCount)
-                .reduce(0, this::sum);
+        for (Class<?> unitTestClass : unitTestClasses) {
+
+            System.out.printf("Testing %s pattern:\n", getPatternName(unitTestClass));
+
+            JUnitCore.runClasses(unitTestClass);
+        }
     }
 
-    private int sum(Integer first, Integer second) {
-        return first + second;
+    private String getPatternName(Class<?> unitTestClass) {
+        final String className = unitTestClass.getSimpleName();
+        return className.substring(0, className.length() - 4);
     }
 }

@@ -1,55 +1,39 @@
 package com.github.fhtw.swp.tutorium.observer;
 
-import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
-import com.github.fhtw.swp.tutorium.common.matcher.AnnotatedElementExistsMatcher;
-import com.github.fhtw.swp.tutorium.observer.factory.ObserverFactory;
-import com.github.fhtw.swp.tutorium.observer.factory.SubjectFactory;
-import org.hamcrest.Matcher;
-import org.reflections.Configuration;
-import org.reflections.Reflections;
+import com.github.fhtw.swp.tutorium.observer.factory.ObserverProxyFactory;
+import com.github.fhtw.swp.tutorium.observer.factory.SubjectProxyFactory;
+import com.google.common.collect.Maps;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Set;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class ObserverDriver {
 
-    private final Set<Class<?>> subjects;
+    private final Map<Class<?>, SubjectProxy> subjectProxies = Maps.newHashMap();
+    private final Map<Class<?>, ObserverProxy> observerProxies = Maps.newHashMap();
+    private final SubjectProxyFactory subjectProxyFactory;
+    private final ObserverProxyFactory observerProxyFactory;
 
     public ObserverDriver() {
-        final Configuration configuration = new ConfigurationFactory().create();
-
-        final Reflections reflections = new Reflections(configuration);
-        subjects = reflections.getTypesAnnotatedWith(Subject.class);
+        observerProxyFactory = new ObserverProxyFactory();
+        subjectProxyFactory = new SubjectProxyFactory();
     }
 
-    public Set<Class<?>> getSubjects() {
-        return subjects;
+    public void createSubjectProxyInstance(Class<?> subjectType) {
+        final SubjectProxy subject = subjectProxyFactory.create(subjectType);
+        subjectProxies.put(subjectType, subject);
     }
 
-    public Matcher<Collection<Class<?>>> getSizeMatcher() {
-        return new AnnotatedElementExistsMatcher(Subject.class);
+    public void createObserverProxyInstance(Class<?> subjectType) {
+        final ObserverProxy observer = observerProxyFactory.create(subjectType);
+        observerProxies.put(subjectType, observer);
     }
 
-    public Object getObserverInstance(Class<?> subjectClass, InvocationHandler invocationHandler) {
-        return ObserverFactory.create(subjectClass, invocationHandler);
+    public SubjectProxy getSubjectProxyInstance(Class<?> subjectType) {
+        return subjectProxies.get(subjectType);
     }
 
-    public Object getSubjectInstance(Class<?> subjectClass) {
-        return SubjectFactory.create(subjectClass);
-    }
-
-    public Matcher<Method> getRegisterMethodMatcher() {
-        return MethodPrefixes.REGISTER.getMatcher();
-    }
-
-    public Matcher<Method> getUnregisterMethodMatcher() {
-        return MethodPrefixes.UNREGISTER.getMatcher();
-    }
-
-    public Matcher<Method> getUpdateMethodMatcher() {
-        return MethodPrefixes.UPDATE.getMatcher();
+    public ObserverProxy getObserverProxyInstance(Class<?> subjectType) {
+        return observerProxies.get(subjectType);
     }
 }

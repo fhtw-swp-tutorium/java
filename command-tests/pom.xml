@@ -18,6 +18,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.fhtw.swp.tutorium</groupId>
+            <artifactId>reflection-facade</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
         </dependency>

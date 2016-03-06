@@ -18,6 +18,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.fhtw.swp.tutorium</groupId>
+            <artifactId>reflection-facade</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
         </dependency>
@@ -46,7 +51,7 @@
                 <version>2.6</version>
                 <executions>
                     <execution>
-                        <id>copy-singleton-feature</id>
+                        <id>copy-observer-feature</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>

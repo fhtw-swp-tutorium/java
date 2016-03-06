@@ -1,69 +1,44 @@
 package com.github.fhtw.swp.tutorium.command;
 
-import com.github.fhtw.swp.tutorium.common.ConfigurationFactory;
-import com.github.fhtw.swp.tutorium.common.matcher.AnnotatedElementExistsMatcher;
-import com.github.fhtw.swp.tutorium.common.matcher.ImplementationExistsMatcher;
-import com.github.fhtw.swp.tutorium.invoker.Invoker;
-import com.google.common.collect.Sets;
-import org.hamcrest.Matcher;
-import org.reflections.Configuration;
-import org.reflections.ReflectionUtils;
-import org.reflections.Reflections;
+import com.github.fhtw.swp.tutorium.command.factory.CommandProxyFactory;
+import com.github.fhtw.swp.tutorium.command.factory.InvokerProxyFactory;
+import com.github.fhtw.swp.tutorium.reflection.SingleAnnotatedMethodExtractor;
+import com.google.common.collect.Maps;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.Map;
 
-import static org.reflections.ReflectionUtils.withAnnotation;
-
-@SuppressWarnings("unchecked")
 public class CommandDriver {
 
-    private Set<Class<?>> invokers;
-    private Configuration configuration;
+    private final InvokerProxyFactory invokerProxyFactory;
+    private final CommandProxyFactory commandProxyFactory;
+    private final Map<Class<?>, InvokerProxy> invokerProxyMap = Maps.newHashMap();
+    private final Map<Class<?>, CommandProxy> commandProxyMap = Maps.newHashMap();
 
-    public Set<Class<?>> getInvokers() {
-
-        if (invokers == null) {
-            configuration = new ConfigurationFactory().create();
-            final Reflections reflections = new Reflections(configuration);
-            invokers = reflections.getTypesAnnotatedWith(Invoker.class);
-        }
-
-        return invokers;
+    public CommandDriver() {
+        invokerProxyFactory = new InvokerProxyFactory();
+        commandProxyFactory = new CommandProxyFactory();
     }
 
-    public Matcher<Collection<Class<?>>> getSizeMatcher() {
-        return new AnnotatedElementExistsMatcher(Invoker.class);
+    public Class<?> getCommandType(Class<?> invokerType) {
+        final SingleAnnotatedMethodExtractor extractor = new SingleAnnotatedMethodExtractor(invokerType);
+        return extractor.getFirstParameterOfSingleAnnotatedMethod(InvokeCommand.class);
     }
 
-    public Set<Method> findMethodsAnnotatedWith(Class<? extends Annotation> annotation) {
-
-        Set<Method> invokeCommandMethods = Sets.newHashSet();
-
-        for (Class<?> invoker : invokers) {
-            final Set<Method> annotatedMethods = ReflectionUtils.getAllMethods(invoker, withAnnotation(annotation));
-            final Iterator<Method> methodIterator = annotatedMethods.iterator();
-
-            if (methodIterator.hasNext()) {
-                invokeCommandMethods.add(methodIterator.next());
-            }
-        }
-
-        return invokeCommandMethods;
+    public void createInvokerProxyInstance(Class<?> invokerType) {
+        final InvokerProxy invokerProxy = invokerProxyFactory.create(invokerType);
+        invokerProxyMap.put(invokerType, invokerProxy);
     }
 
-    public Matcher<Class<?>> getImplementationExistsMatcher() {
-        return new ImplementationExistsMatcher(configuration);
+    public void createCommandProxyInstance(Class<?> invokerType) {
+        final CommandProxy commandProxy = commandProxyFactory.create(invokerType);
+        commandProxyMap.put(invokerType, commandProxy);
     }
 
-    public ClassFactory getInvokerFactory() {
-        return new FactoryAwareClassInstanceFactory(this::shouldUseFactory, (c) -> c.getAnnotation(Invoker.class).factory());
+    public InvokerProxy getInvokerProxyInstance(Class<?> invokerType) {
+        return invokerProxyMap.get(invokerType);
     }
 
-    private boolean shouldUseFactory(Class<?> invokerClass) {
-        return invokerClass.getAnnotation(Invoker.class).factory() != Invoker.None.class;
+    public CommandProxy getCommandProxyInstance(Class<?> invokerType) {
+        return commandProxyMap.get(invokerType);
     }
 }

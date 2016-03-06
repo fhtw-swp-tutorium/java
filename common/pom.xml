@@ -12,6 +12,17 @@
     <artifactId>common</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.github.fhtw.swp.tutorium</groupId>
+            <artifactId>reflection-facade</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

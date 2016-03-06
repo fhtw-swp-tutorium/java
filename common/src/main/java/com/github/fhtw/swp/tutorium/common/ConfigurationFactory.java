@@ -6,6 +6,7 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ConfigurationBuilder;
 
+//TODO: as soon as IoC container is available, replace with Provider
 public class ConfigurationFactory {
 
     public Configuration create() {
@@ -20,5 +21,4 @@ public class ConfigurationFactory {
 
         return configuration;
     }
-
 }
