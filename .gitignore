@@ -117,4 +117,4 @@ buildNumber.properties
 
 ### Junit Result Files
 
-*_results.xml
+/results
