@@ -30,9 +30,7 @@ public class SwpTestTool {
         SwpTestContext.setJarUrl(arguments.getJarUrl());
         mutableClassLoader.addUrl(arguments.getJarUrl());
 
-        final int numberOfFailedTests = exerciseTestRunner.runExerciseTests(arguments.getExercise());
-
-        System.exit(numberOfFailedTests);
+        exerciseTestRunner.runExerciseTests(arguments.getExercise());
     }
 
     private static void printUsage(CmdLineException e) {

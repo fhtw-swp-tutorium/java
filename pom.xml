@@ -67,6 +67,12 @@
 
             <dependency>
                 <groupId>com.github.fhtw.swp.tutorium</groupId>
+                <artifactId>command-tests</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.fhtw.swp.tutorium</groupId>
                 <artifactId>reflection-facade</artifactId>
                 <version>${current.version}</version>
             </dependency>

@@ -26,5 +26,4 @@ public class InvokerProxyFactory {
 
         return new InvokerProxy(invokerInstance, invokeCommandMethod);
     }
-
 }

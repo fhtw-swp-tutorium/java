@@ -4,10 +4,9 @@ import com.github.fhtw.swp.tutorium.common.TypeContext;
 import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonAccessor;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;
-import org.junit.Assert;
 
-import static com.github.fhtw.swp.tutorium.common.error.QuietMatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class SingletonSteps {
@@ -49,8 +48,8 @@ public class SingletonSteps {
         for (Class<?> singletonClass : typeContext.getTypes()) {
             final SingletonAccessor singletonAccessor = singletonDriver.getSingletonAccessor(singletonClass);
 
-            Assert.assertThat(singletonAccessor.getInstance(), is(notNullValue()));
-            Assert.assertThat(singletonAccessor.getInstance(), sameInstance(singletonAccessor.getInstance()));
+            assertThat(singletonAccessor.getInstance(), is(notNullValue()));
+            assertThat(singletonAccessor.getInstance(), sameInstance(singletonAccessor.getInstance()));
         }
     }
 }

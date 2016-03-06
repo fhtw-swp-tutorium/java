@@ -9,15 +9,14 @@ import cucumber.api.java.de.Gegebensei;
 import cucumber.api.java.de.Und;
 import cucumber.api.java.de.Wenn;
 import org.hamcrest.Matcher;
-import org.junit.Assert;
 
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import static com.github.fhtw.swp.tutorium.common.error.QuietMatcherAssert.assertThat;
 import static com.github.fhtw.swp.tutorium.common.matcher.OnlyInterfaceParametersMethodMatcher.onlyInterfaceParameters;
 import static com.github.fhtw.swp.tutorium.common.matcher.ParameterCountMethodMatcher.parameterCount;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import static org.reflections.ReflectionUtils.withAnnotation;
 
 @SuppressWarnings("SpellCheckingInspection")
@@ -52,7 +51,7 @@ public class ObserverSteps {
     public void erwarteIchMirGenauMethode() throws Throwable {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final Set<Method> subjectMethods = typeContext.getMethodsOfType(subjectType);
-            Assert.assertThat(subjectMethods.size(), is(1));
+            assertThat(subjectMethods.size(), is(1));
         }
     }
 
@@ -64,7 +63,7 @@ public class ObserverSteps {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final Method subjectMethod = typeContext.getFirstMethodOfType(subjectType);
 
-            Assert.assertThat(subjectMethod, hasGivenPrefixes);
+            assertThat(subjectMethod, hasGivenPrefixes);
         }
     }
 
@@ -73,7 +72,7 @@ public class ObserverSteps {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final Method subjectMethod = typeContext.getFirstMethodOfType(subjectType);
 
-            Assert.assertThat(subjectMethod, parameterCount(parameterCount));
+            assertThat(subjectMethod, parameterCount(parameterCount));
         }
     }
 
@@ -82,7 +81,7 @@ public class ObserverSteps {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final Method subjectMethod = typeContext.getFirstMethodOfType(subjectType);
 
-            Assert.assertThat(subjectMethod, onlyInterfaceParameters());
+            assertThat(subjectMethod, onlyInterfaceParameters());
         }
     }
 
@@ -127,7 +126,7 @@ public class ObserverSteps {
             final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);
             final CountingInvocationHandler invocationHandler = observerProxy.getCountingInvocationHandler();
 
-            Assert.assertThat(invocationHandler.getInvocationCount(), is(invocationCount));
+            assertThat(invocationHandler.getInvocationCount(), is(invocationCount));
         }
     }
 }

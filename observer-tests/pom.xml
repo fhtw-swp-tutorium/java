@@ -51,7 +51,7 @@
                 <version>2.6</version>
                 <executions>
                     <execution>
-                        <id>copy-singleton-feature</id>
+                        <id>copy-observer-feature</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
