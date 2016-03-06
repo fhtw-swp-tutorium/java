@@ -28,7 +28,7 @@
 
     <properties>
         <current.version>0.0.1-SNAPSHOT</current.version>
-        <annotations.version>0.0.2-SNAPSHOT</annotations.version>
+        <annotations.version>0.0.2</annotations.version>
 
         <!-- Pattern feature files -->
         <pattern.specifications.path>../pattern-specifications</pattern.specifications.path>
