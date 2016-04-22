@@ -7,6 +7,8 @@ import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;
 import cucumber.api.java.de.Und;
 
+import javax.inject.Inject;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -16,9 +18,10 @@ public class SingletonSteps {
     private final SingletonDriver singletonDriver;
     private final TypeContext typeContext;
 
-    public SingletonSteps() {
-        singletonDriver = new SingletonDriver();
-        typeContext = new TypeContext();
+    @Inject
+    public SingletonSteps(SingletonDriver singletonDriver, TypeContext typeContext) {
+        this.singletonDriver = singletonDriver;
+        this.typeContext = typeContext;
     }
 
     @Gegebensei("^eine Liste von Klassen mit dem Attribut \"([^\"]*)\"$")

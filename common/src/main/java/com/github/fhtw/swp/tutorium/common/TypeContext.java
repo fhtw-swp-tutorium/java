@@ -5,6 +5,7 @@ import com.google.common.base.Predicate;
 import org.reflections.Configuration;
 import org.reflections.ReflectionUtils;
 
+import javax.inject.Inject;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -20,12 +21,15 @@ public class TypeContext {
 
     private Set<Class<?>> types;
     private Map<Class<?>, Set<Method>> methodsPerType;
-    private Configuration configuration;
+    private final Configuration configuration;
+
+    @Inject
+    public TypeContext(Configuration configuration) {
+        this.configuration = configuration;
+    }
 
     public void initializeWithTypesAnnotatedWith(Class<? extends Annotation> annotation) {
-        configuration = new ConfigurationFactory().create();
-
-        types = new AnnotatedTypeFinder(configuration, annotation).getAnnotatedTypes();
+            types = new AnnotatedTypeFinder(configuration, annotation).getAnnotatedTypes();
         methodsPerType = getMethodsOfTypes(ReflectionUtils::getAllMethods);
     }
 

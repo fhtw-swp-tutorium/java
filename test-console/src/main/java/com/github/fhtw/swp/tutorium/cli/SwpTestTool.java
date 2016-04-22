@@ -8,19 +8,31 @@ import org.apache.logging.log4j.Logger;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+import javax.inject.Inject;
+
 import static java.lang.ClassLoader.getSystemClassLoader;
 
 public class SwpTestTool {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final Arguments arguments = new Arguments();
-    private static final VersionPrinter versionPrinter = new VersionPrinter();
-    private static final CmdLineParser cmdLineParser = new CmdLineParser(arguments);
-    private static final ExerciseTestRunner exerciseTestRunner = new ExerciseTestRunner();
-    private static final MutableClassLoader mutableClassLoader = new MutableClassLoader(getSystemClassLoader());
+    private final Arguments arguments = new Arguments();
+    private final CmdLineParser cmdLineParser = new CmdLineParser(arguments);
 
-    public static void main(String[] args) {
+    private final MutableClassLoader mutableClassLoader = new MutableClassLoader(getSystemClassLoader());
+
+    private final SwpTestContext context;
+    private final VersionPrinter versionPrinter;
+    private final ExerciseTestRunner exerciseTestRunner;
+
+    @Inject
+    public SwpTestTool(SwpTestContext context, VersionPrinter versionPrinter, ExerciseTestRunner exerciseTestRunner) {
+        this.context = context;
+        this.versionPrinter = versionPrinter;
+        this.exerciseTestRunner = exerciseTestRunner;
+    }
+
+    public void run(String[] args) {
 
         LOGGER.debug("Arguments: {}", args);
 
@@ -34,8 +46,8 @@ public class SwpTestTool {
             return;
         }
 
-        SwpTestContext.setJarUrl(arguments.getJarUrl());
         mutableClassLoader.addUrl(arguments.getJarUrl());
+        context.setJarUrl(arguments.getJarUrl());
 
         exerciseTestRunner.runExerciseTests(arguments.getExercise());
     }

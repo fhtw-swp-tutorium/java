@@ -12,6 +12,7 @@ import cucumber.api.java.de.Und;
 import cucumber.api.java.de.Wenn;
 import org.junit.Assert;
 
+import javax.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Set;
 
@@ -23,9 +24,10 @@ public class CommandSteps {
     private final TypeContext typeContext;
     private final CommandDriver commandDriver;
 
-    public CommandSteps() {
-        this.typeContext = new TypeContext();
-        this.commandDriver = new CommandDriver();
+    @Inject
+    public CommandSteps(TypeContext typeContext, CommandDriver commandDriver) {
+        this.typeContext = typeContext;
+        this.commandDriver = commandDriver;
     }
 
     @Gegebensei("^eine Liste von Klassen mit dem Attribut \"([^\"]*)\"$")

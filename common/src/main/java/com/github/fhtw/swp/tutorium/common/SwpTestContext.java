@@ -4,13 +4,13 @@ import java.net.URL;
 
 public class SwpTestContext {
 
-    private static URL url;
+    private URL url;
 
-    public static void setJarUrl(URL url) {
-        SwpTestContext.url = url;
+    public void setJarUrl(URL url) {
+        this.url = url;
     }
 
-    public static URL getUrl() {
+    public URL getUrl() {
         return url;
     }
 }
