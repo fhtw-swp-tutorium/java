@@ -29,7 +29,7 @@ public class TypeContext {
     }
 
     public void initializeWithTypesAnnotatedWith(Class<? extends Annotation> annotation) {
-            types = new AnnotatedTypeFinder(configuration, annotation).getAnnotatedTypes();
+        types = new AnnotatedTypeFinder(configuration, annotation).getAnnotatedTypes();
         methodsPerType = getMethodsOfTypes(ReflectionUtils::getAllMethods);
     }
 

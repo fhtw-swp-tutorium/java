@@ -53,5 +53,9 @@
             <artifactId>mockito-all</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>di-extensions</artifactId>
+        </dependency>
     </dependencies>
 </project>

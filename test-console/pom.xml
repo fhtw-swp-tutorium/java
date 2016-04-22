@@ -52,6 +52,11 @@
             <groupId>org.codejargon.feather</groupId>
             <artifactId>feather</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>di-extensions</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

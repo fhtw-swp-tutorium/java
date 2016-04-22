@@ -17,6 +17,7 @@
         <module>command-tests</module>
         <module>reflection-facade</module>
         <module>cucumber-feather</module>
+        <module>di-extensions</module>
     </modules>
 
     <dependencies>
@@ -65,6 +66,12 @@
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
                 <artifactId>common</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.fhtw-swp-tutorium</groupId>
+                <artifactId>di-extensions</artifactId>
                 <version>${current.version}</version>
             </dependency>
 

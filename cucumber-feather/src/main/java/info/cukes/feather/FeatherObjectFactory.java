@@ -3,12 +3,21 @@ package info.cukes.feather;
 import cucumber.api.java.ObjectFactory;
 import org.codejargon.feather.Feather;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@SuppressWarnings("unchecked")
 public class FeatherObjectFactory implements ObjectFactory {
 
-    private static Feather instance;
+    private static Feather feather;
+    private final Map<Class<?>, Object> instanceCache;
 
-    public static void setInstance(Feather instance) {
-        FeatherObjectFactory.instance = instance;
+    public FeatherObjectFactory() {
+        instanceCache = new HashMap<>();
+    }
+
+    public static void setFeather(Feather feather) {
+        FeatherObjectFactory.feather = feather;
     }
 
     @Override
@@ -18,7 +27,7 @@ public class FeatherObjectFactory implements ObjectFactory {
 
     @Override
     public void stop() {
-
+        instanceCache.clear();
     }
 
     @Override
@@ -28,6 +37,10 @@ public class FeatherObjectFactory implements ObjectFactory {
 
     @Override
     public <T> T getInstance(Class<T> glueClass) {
-        return instance.instance(glueClass);
+        return (T) instanceCache.computeIfAbsent(glueClass, this::createInstance);
+    }
+
+    private Object createInstance(Class<?> c) {
+        return feather.instance(c);
     }
 }
