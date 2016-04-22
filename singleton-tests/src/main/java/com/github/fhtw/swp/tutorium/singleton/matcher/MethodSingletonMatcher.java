@@ -22,11 +22,13 @@ public class MethodSingletonMatcher extends TypeSafeDiagnosingMatcher<Class<?>> 
                 Singletons.METHOD.getPredicateFor(singletonClass)
         );
 
+        mismatchDescription.appendText("no methods in ").appendValue(singletonClass).appendText(" qualify for accessing the instance of a singleton");
+
         return !accessorMethods.isEmpty();
     }
 
     @Override
     public void describeTo(Description description) {
-
+        description.appendText("a singleton that uses a method for accessing the instance");
     }
 }

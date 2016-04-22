@@ -20,11 +20,16 @@ public class ParameterCountMethodMatcher extends TypeSafeDiagnosingMatcher<Metho
 
     @Override
     protected boolean matchesSafely(Method item, Description mismatchDescription) {
-        return item.getParameterTypes().length == parameterCount;
+
+        final int actualParameterCount = item.getParameterTypes().length;
+
+        mismatchDescription.appendValue(item).appendText(" has ").appendValue(actualParameterCount).appendText(" parameters");
+
+        return actualParameterCount == parameterCount;
     }
 
     @Override
     public void describeTo(Description description) {
-
+        description.appendValue(parameterCount).appendText(" parameters");
     }
 }
