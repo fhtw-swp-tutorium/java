@@ -8,7 +8,8 @@ import org.apache.logging.log4j.Logger;
 
 public class LoggingReporter implements Reporter {
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(LoggingReporter.class);
+    private static final Logger ASSERTION_FAILURES = LogManager.getLogger("AssertionFailures");
 
     @Override
     public void before(Match match, Result result) {
@@ -16,6 +17,10 @@ public class LoggingReporter implements Reporter {
 
         if (error != null) {
             LOGGER.error("", error);
+        }
+
+        if (error instanceof AssertionError) {
+            ASSERTION_FAILURES.info(error.getMessage());
         }
     }
 
@@ -26,6 +31,10 @@ public class LoggingReporter implements Reporter {
         if (error != null) {
             LOGGER.error("", error);
         }
+
+        if (error instanceof AssertionError) {
+            ASSERTION_FAILURES.info(error.getMessage());
+        }
     }
 
     @Override
@@ -34,6 +43,10 @@ public class LoggingReporter implements Reporter {
 
         if (error != null) {
             LOGGER.error("", error);
+        }
+
+        if (error instanceof AssertionError) {
+            ASSERTION_FAILURES.info(error.getMessage());
         }
     }
 

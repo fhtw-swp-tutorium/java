@@ -11,10 +11,24 @@
                 <OnStartupTriggeringPolicy/>
             </Policies>
         </RollingFile>
+        <RollingFile name="assertion_failures"
+                     fileName="logs/assertion_failures.log"
+                     filePattern="logs/assertion_failures_%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout>
+                <pattern>%m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Root level="DEBUG">
             <AppenderRef ref="SwpTestTool"/>
         </Root>
+
+        <Logger name="AssertionFailures" level="INFO" additivity="false">
+            <AppenderRef ref="assertion_failures"/>
+        </Logger>
     </Loggers>
 </Configuration>
