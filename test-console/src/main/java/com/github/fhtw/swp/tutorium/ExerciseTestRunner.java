@@ -1,8 +1,13 @@
 package com.github.fhtw.swp.tutorium;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
 public class ExerciseTestRunner {
+
+    private static final Logger LOGGER = LogManager.getLogger(ExerciseTestRunner.class);
 
     public void runExerciseTests(Exercise exercise) {
 
@@ -10,7 +15,9 @@ public class ExerciseTestRunner {
 
             System.out.printf("\n\nTesting %s pattern:\n", getPatternName(testClass));
 
-            JUnitCore.runClasses(testClass);
+            final Result result = JUnitCore.runClasses(testClass);
+
+            result.getFailures().forEach(f -> LOGGER.error("Failed to run test class {}", testClass, f.getException()));
         }
     }
 
