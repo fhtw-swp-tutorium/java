@@ -22,11 +22,13 @@ public class FieldSingletonMatcher extends TypeSafeDiagnosingMatcher<Class<?>> {
                 Singletons.FIELD.getPredicateFor(singletonClass)
         );
 
+        mismatchDescription.appendText("no fields in ").appendValue(singletonClass).appendText(" qualify for accessing the instance of a singleton");
+
         return !accessorFields.isEmpty();
     }
 
     @Override
     public void describeTo(Description description) {
-
+        description.appendText("a singleton that uses a field for accessing the instance");
     }
 }
