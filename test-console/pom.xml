@@ -17,10 +17,6 @@
             <artifactId>args4j</artifactId>
             <version>2.32</version>
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -59,6 +55,11 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-guice</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
         </dependency>
     </dependencies>
 
