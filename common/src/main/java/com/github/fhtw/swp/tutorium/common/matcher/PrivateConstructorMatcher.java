@@ -16,6 +16,8 @@ public class PrivateConstructorMatcher extends TypeSafeDiagnosingMatcher<Class<?
 
         final Set<Constructor> allConstructors = ReflectionUtils.getAllConstructors(item);
 
+        mismatchDescription.appendValue(item).appendText(" has at least one non-private constructor");
+
         return allConstructors.stream().allMatch(this::isPrivate);
     }
 
@@ -25,6 +27,6 @@ public class PrivateConstructorMatcher extends TypeSafeDiagnosingMatcher<Class<?
 
     @Override
     public void describeTo(Description description) {
-
+        description.appendText("all constructors to be private");
     }
 }
