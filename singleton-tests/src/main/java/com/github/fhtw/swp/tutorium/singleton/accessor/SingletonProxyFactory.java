@@ -7,7 +7,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
-import static com.github.fhtw.swp.tutorium.common.Optionals.any;
+import static jdk.util.Optionals.any;
+
 
 public class SingletonProxyFactory {
 

@@ -14,12 +14,16 @@
     <dependencies>
         <dependency>
             <groupId>com.github.fhtw-swp-tutorium</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>reflection-facade</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.github.fhtw-swp-tutorium</groupId>
-            <artifactId>reflection-facade</artifactId>
+            <artifactId>reflection-matcher</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>shared-steps</artifactId>
         </dependency>
 
         <dependency>

@@ -1,7 +1,6 @@
 package com.github.fhtw.swp.tutorium.cli;
 
 import com.github.fhtw.swp.tutorium.SwpTestTool;
-import com.github.fhtw.swp.tutorium.common.ConfigurationProvider;
 import info.cukes.feather.FeatherObjectFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

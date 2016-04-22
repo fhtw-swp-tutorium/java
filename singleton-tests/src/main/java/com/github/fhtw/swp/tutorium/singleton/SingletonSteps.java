@@ -1,10 +1,8 @@
 package com.github.fhtw.swp.tutorium.singleton;
 
-import com.github.fhtw.swp.tutorium.common.AnnotationResolver;
-import com.github.fhtw.swp.tutorium.common.TypeContext;
+import com.github.fhtw.swp.tutorium.shared.TypeContext;
 import com.github.fhtw.swp.tutorium.singleton.accessor.SingletonProxy;
 import cucumber.api.java.de.Dann;
-import cucumber.api.java.de.Gegebensei;
 import cucumber.api.java.de.Und;
 
 import javax.inject.Inject;
@@ -22,11 +20,6 @@ public class SingletonSteps {
     public SingletonSteps(SingletonDriver singletonDriver, TypeContext typeContext) {
         this.singletonDriver = singletonDriver;
         this.typeContext = typeContext;
-    }
-
-    @Gegebensei("^eine Liste von Klassen mit dem Attribut \"([^\"]*)\"$")
-    public void eineListeVonKlassenMitDemAttribut(String annotationName) throws Throwable {
-        typeContext.initializeWithTypesAnnotatedWith(AnnotationResolver.INSTANCE.resolve(annotationName));
     }
 
     @Dann("^darf diese Liste nicht leer sein$")

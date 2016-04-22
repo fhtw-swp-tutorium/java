@@ -1,15 +1,13 @@
 package com.github.fhtw.swp.tutorium.command;
 
-import com.github.fhtw.swp.tutorium.common.AnnotationResolver;
-import com.github.fhtw.swp.tutorium.common.TypeContext;
-import com.github.fhtw.swp.tutorium.common.matcher.ImplementationExistsMatcher;
-import com.github.fhtw.swp.tutorium.common.matcher.OnlyInterfaceParametersMethodMatcher;
-import com.github.fhtw.swp.tutorium.common.matcher.ParameterCountMethodMatcher;
 import com.github.fhtw.swp.tutorium.reflection.CountingInvocationHandler;
+import com.github.fhtw.swp.tutorium.shared.TypeContext;
 import cucumber.api.java.de.Dann;
-import cucumber.api.java.de.Gegebensei;
 import cucumber.api.java.de.Und;
-import cucumber.api.java.de.Wenn;
+import org.hamcrest.reflection.ImplementationExistsMatcher;
+import org.hamcrest.reflection.OnlyInterfaceParametersMethodMatcher;
+import org.hamcrest.reflection.ParameterCountMethodMatcher;
+import org.hamcrest.reflection.SubTypeProvider;
 import org.junit.Assert;
 
 import javax.inject.Inject;
@@ -17,32 +15,23 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
-import static org.reflections.ReflectionUtils.withAnnotation;
 
 public class CommandSteps {
 
     private final TypeContext typeContext;
+    private final SubTypeProvider subTypeProvider;
     private final CommandDriver commandDriver;
 
     @Inject
-    public CommandSteps(TypeContext typeContext, CommandDriver commandDriver) {
+    public CommandSteps(TypeContext typeContext, SubTypeProvider subTypeProvider, CommandDriver commandDriver) {
         this.typeContext = typeContext;
+        this.subTypeProvider = subTypeProvider;
         this.commandDriver = commandDriver;
-    }
-
-    @Gegebensei("^eine Liste von Klassen mit dem Attribut \"([^\"]*)\"$")
-    public void eineListeVonKlassenMitDemAttribut(String annotationName) throws Throwable {
-        typeContext.initializeWithTypesAnnotatedWith(AnnotationResolver.INSTANCE.resolve(annotationName));
     }
 
     @Dann("^darf diese Liste nicht leer sein$")
     public void darfDieseListeNichtLeerSein() throws Throwable {
         Assert.assertThat(typeContext.getTypes(), is(not(empty())));
-    }
-
-    @Wenn("^ich in jeder Klasse nach einer Methode mit dem Attribut \"([^\"]*)\" suche$")
-    public void ichInJederKlasseNachEinerMethodeMitDemAttributSuche(String annotationName) throws Throwable {
-        typeContext.reduceMethods(withAnnotation(AnnotationResolver.INSTANCE.resolve(annotationName)));
     }
 
     @Dann("^erwarte ich mir jeweils genau eine Methode$")
@@ -73,7 +62,7 @@ public class CommandSteps {
     public void mussEsFuerJedenInterfaceParameterEineImplementierungGeben() throws Throwable {
         for (Class<?> invokerType : typeContext.getTypes()) {
             final Class<?> commandType = commandDriver.getCommandType(invokerType);
-            Assert.assertThat(commandType, new ImplementationExistsMatcher(typeContext.getConfiguration()));
+            Assert.assertThat(commandType, new ImplementationExistsMatcher(subTypeProvider));
         }
     }
 

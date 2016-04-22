@@ -1,9 +1,8 @@
 package com.github.fhtw.swp.tutorium.observer;
 
-import com.github.fhtw.swp.tutorium.common.AnnotationResolver;
-import com.github.fhtw.swp.tutorium.common.TypeContext;
 import com.github.fhtw.swp.tutorium.observer.factory.MethodPrefixMatcherFactory;
 import com.github.fhtw.swp.tutorium.reflection.CountingInvocationHandler;
+import com.github.fhtw.swp.tutorium.shared.TypeContext;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;
 import cucumber.api.java.de.Und;
@@ -14,11 +13,10 @@ import javax.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import static com.github.fhtw.swp.tutorium.common.matcher.OnlyInterfaceParametersMethodMatcher.onlyInterfaceParameters;
-import static com.github.fhtw.swp.tutorium.common.matcher.ParameterCountMethodMatcher.parameterCount;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.reflection.OnlyInterfaceParametersMethodMatcher.onlyInterfaceParameters;
+import static org.hamcrest.reflection.ParameterCountMethodMatcher.parameterCount;
 import static org.junit.Assert.assertThat;
-import static org.reflections.ReflectionUtils.withAnnotation;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class ObserverSteps {
@@ -34,20 +32,12 @@ public class ObserverSteps {
         this.methodPrefixMatcherFactory = methodPrefixMatcherFactory;
     }
 
-    @Gegebensei("^eine Liste von Klassen mit dem Attribut \"([^\"]*)\"$")
-    public void eineListeVonKlassenMitDemAttribut(String annotationName) throws Throwable {
-        typeContext.initializeWithTypesAnnotatedWith(AnnotationResolver.INSTANCE.resolve(annotationName));
-    }
 
     @Dann("^darf diese Liste nicht leer sein$")
     public void darfDieseListeNichtLeerSein() throws Throwable {
         assertThat(typeContext.getTypes(), is(not(empty())));
     }
 
-    @Wenn("^ich in jeder Klasse nach einer Methode mit dem Attribut \"([^\"]*)\" suche$")
-    public void ichInJederKlasseNachEinerMethodeMitDemAttributSuche(String annotationName) throws Throwable {
-        typeContext.reduceMethods(withAnnotation(AnnotationResolver.INSTANCE.resolve(annotationName)));
-    }
 
     @Dann("^erwarte ich mir jeweils genau eine Methode$")
     public void erwarteIchMirGenauMethode() throws Throwable {
@@ -98,7 +88,7 @@ public class ObserverSteps {
     }
 
     @Wenn("^ich diesen Beobachter hinzufügen$")
-    public void ichDiesenBeobachterHinzufügen() throws Throwable {
+    public void ichDiesenBeobachterHinzufuegen() throws Throwable {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final SubjectProxy subjectProxy = observerDriver.getSubjectProxyInstance(subjectType);
             final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);

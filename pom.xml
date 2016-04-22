@@ -12,12 +12,14 @@
     <modules>
         <module>observer-tests</module>
         <module>singleton-tests</module>
-        <module>common</module>
         <module>test-console</module>
         <module>command-tests</module>
         <module>reflection-facade</module>
         <module>cucumber-feather</module>
         <module>di-extensions</module>
+        <module>reflection-matcher</module>
+        <module>shared-steps</module>
+        <module>jdk-util</module>
     </modules>
 
     <dependencies>
@@ -39,7 +41,10 @@
         <!-- Dependency versions -->
         <cucumber-java.version>1.2.3</cucumber-java.version>
         <log4j.version>2.5</log4j.version>
+        
         <org-reflections.version>0.9.10</org-reflections.version>
+        <guava.version>15.0</guava.version>
+
         <byte-buddy.version>0.7.7</byte-buddy.version>
         <hamcrest.version>1.3</hamcrest.version>
         <junit.version>4.12</junit.version>
@@ -65,13 +70,25 @@
         <dependencies>
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>jdk-util</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.fhtw-swp-tutorium</groupId>
+                <artifactId>shared-steps</artifactId>
                 <version>${current.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
                 <artifactId>di-extensions</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.fhtw-swp-tutorium</groupId>
+                <artifactId>reflection-matcher</artifactId>
                 <version>${current.version}</version>
             </dependency>
 
@@ -139,6 +156,12 @@
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
                 <version>${org-reflections.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>

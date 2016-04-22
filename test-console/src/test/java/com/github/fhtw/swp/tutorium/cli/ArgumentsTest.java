@@ -1,13 +1,13 @@
 package com.github.fhtw.swp.tutorium.cli;
 
 import com.github.fhtw.swp.tutorium.Exercise;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.kohsuke.args4j.CmdLineParser;
 
-import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class ArgumentsTest {
 
@@ -31,7 +31,7 @@ public class ArgumentsTest {
         final String actualFileName = arguments.getJarUrl().getFile();
         final Exercise chosenExercise = arguments.getExercise();
 
-        Assert.assertThat(actualFileName, endsWith("exercise1.jar"));
-        Assert.assertThat(chosenExercise, is(Exercise.UE1));
+        assertThat(actualFileName, endsWith("exercise1.jar"));
+        assertThat(chosenExercise, is(Exercise.UE1));
     }
 }

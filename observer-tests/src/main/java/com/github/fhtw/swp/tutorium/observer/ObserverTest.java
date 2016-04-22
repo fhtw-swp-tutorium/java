@@ -5,7 +5,7 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"cucumber.runtime.ScenarioStatsSummaryPrinter", "junit:results/observer_results.xml", "com.github.fhtw.swp.tutorium.common.LoggingReporter"})
+@CucumberOptions(plugin = {"ScenarioStatsSummaryPrinter", "junit:results/observer_results.xml", "com.github.fhtw.swp.tutorium.reporting.LoggingReporter"})
 public class ObserverTest {
 
 }
