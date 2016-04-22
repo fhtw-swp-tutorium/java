@@ -30,6 +30,11 @@
 
         <dependency>
             <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>cucumber-feather</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
             <artifactId>command-tests</artifactId>
         </dependency>
 
@@ -42,6 +47,16 @@
             <groupId>com.github.fhtw-swp-tutorium</groupId>
             <artifactId>reflection-facade</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.codejargon.feather</groupId>
+            <artifactId>feather</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>di-extensions</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -51,7 +66,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.github.fhtw.swp.tutorium.cli.SwpTestTool</mainClass>
+                            <mainClass>com.github.fhtw.swp.tutorium.cli.Application</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
