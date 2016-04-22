@@ -6,7 +6,10 @@ import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
 
 @SuppressWarnings("unchecked")
 public class PrivateConstructorMatcher extends TypeSafeDiagnosingMatcher<Class<?>> {
@@ -16,13 +19,20 @@ public class PrivateConstructorMatcher extends TypeSafeDiagnosingMatcher<Class<?
 
         final Set<Constructor> allConstructors = ReflectionUtils.getAllConstructors(item);
 
-        mismatchDescription.appendValue(item).appendText(" has at least one non-private constructor");
+        final List<Constructor> nonPrivateConstructors = allConstructors.stream().filter(this::isNotPrivate).collect(toList());
 
-        return allConstructors.stream().allMatch(this::isPrivate);
+        mismatchDescription
+                .appendText("constructors ")
+                .appendValueList("(", ",", ")", nonPrivateConstructors)
+                .appendText(" in class ")
+                .appendValue(item)
+                .appendText(" are not private");
+
+        return nonPrivateConstructors.isEmpty();
     }
 
-    private boolean isPrivate(Constructor ctor) {
-        return Modifier.isPrivate(ctor.getModifiers());
+    private boolean isNotPrivate(Constructor ctor) {
+        return !Modifier.isPrivate(ctor.getModifiers());
     }
 
     @Override
