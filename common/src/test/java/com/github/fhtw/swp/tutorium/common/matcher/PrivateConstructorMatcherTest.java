@@ -1,7 +1,5 @@
 package com.github.fhtw.swp.tutorium.common.matcher;
 
-import com.github.fhtw.swp.tutorium.common.Optionals;
-import com.github.fhtw.swp.tutorium.common.SwpTestContext;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,15 +17,23 @@ public class PrivateConstructorMatcherTest {
 
     @Test
     public void testShouldNotMatchIfAnyConstructorIsNotPrivate() throws Exception {
-        final boolean result = privateConstructorMatcher.matches(SwpTestContext.class);
+        final boolean result = privateConstructorMatcher.matches(NoPrivateCtor.class);
 
         Assert.assertThat(result, is(false));
     }
 
     @Test
     public void testShouldMatchIfAllConstructorsArePrivate() throws Exception {
-        final boolean result = privateConstructorMatcher.matches(Optionals.class);
+        final boolean result = privateConstructorMatcher.matches(OnlyPrivateCtor.class);
 
         Assert.assertThat(result, is(true));
+    }
+
+    public static class NoPrivateCtor {
+
+    }
+
+    public static class OnlyPrivateCtor {
+        private OnlyPrivateCtor() { }
     }
 }

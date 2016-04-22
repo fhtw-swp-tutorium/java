@@ -1,18 +1,24 @@
 package com.github.fhtw.swp.tutorium.common;
 
+import com.github.fhtw.swp.tutorium.inject.CurrentSut;
+import org.codejargon.feather.Provides;
 import org.reflections.Configuration;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ConfigurationBuilder;
 
-//TODO: as soon as IoC container is available, replace with Provider
-public class ConfigurationFactory {
+import javax.inject.Singleton;
+import java.net.URL;
 
-    public Configuration create() {
+public class ConfigurationProvider {
+
+    @Provides
+    @Singleton
+    public Configuration get(@CurrentSut URL currentSut) {
 
         final Configuration configuration = new ConfigurationBuilder()
-                .setUrls(SwpTestContext.getUrl())
+                .setUrls(currentSut)
                 .setScanners(
                         new MethodAnnotationsScanner(),
                         new TypeAnnotationsScanner(),
