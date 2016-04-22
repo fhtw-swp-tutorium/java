@@ -4,23 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.github.fhtw-swp-tutorium</groupId>
-        <artifactId>swp-test-tool</artifactId>
+        <artifactId>tests</artifactId>
         <version>${current.version}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>reflection-facade</artifactId>
+    <artifactId>shared-steps</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -30,13 +29,28 @@
         </dependency>
 
         <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>reflection-facade</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>reflection-matcher</artifactId>
         </dependency>
     </dependencies>
 </project>
