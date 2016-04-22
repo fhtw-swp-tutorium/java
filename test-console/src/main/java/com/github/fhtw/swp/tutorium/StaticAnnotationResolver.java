@@ -25,7 +25,6 @@ public class StaticAnnotationResolver implements AnnotationResolver {
         put("NotifyObservers", NotifyObservers.class);
     }};
 
-
     @Override
     public Class<? extends Annotation> resolve(String name) {
         return annotationMap.get(name);

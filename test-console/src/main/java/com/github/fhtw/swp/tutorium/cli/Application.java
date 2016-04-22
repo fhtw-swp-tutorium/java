@@ -1,10 +1,13 @@
 package com.github.fhtw.swp.tutorium.cli;
 
 import com.github.fhtw.swp.tutorium.SwpTestTool;
-import info.cukes.feather.FeatherObjectFactory;
+import com.github.fhtw.swp.tutorium.guice.CucumberInjectorSource;
+import com.github.fhtw.swp.tutorium.guice.SwpTestToolModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import cucumber.api.guice.CucumberModules;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.codejargon.feather.Feather;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -29,17 +32,15 @@ public class Application {
             return;
         }
 
-        final Feather feather = Feather.with(
-                new ConfigurationProvider(),
-                new CurrentExerciseProvider(arguments.getExercise()),
-                new CurrentSutUrlProvider(arguments.getJarUrl())
+        final Injector injector = Guice.createInjector(
+                new SwpTestToolModule(arguments.getExercise(), arguments.getJarUrl()),
+                CucumberModules.SCENARIO
         );
 
-        FeatherObjectFactory.setFeather(feather);
+        CucumberInjectorSource.instance = injector;
 
-        feather.instance(SwpTestTool.class).run();
+        injector.getInstance(SwpTestTool.class).run();
     }
-
 
     private static void printUsage(CmdLineException e) {
 

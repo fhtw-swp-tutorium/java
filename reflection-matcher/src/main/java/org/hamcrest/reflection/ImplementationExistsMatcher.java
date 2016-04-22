@@ -7,16 +7,16 @@ import java.util.Set;
 
 public class ImplementationExistsMatcher extends TypeSafeDiagnosingMatcher<Class<?>> {
 
-    private final SubTypeProvider subTypeProvider;
+    private final SubTypeFinder subTypeFinder;
 
-    public ImplementationExistsMatcher(SubTypeProvider subTypeProvider) {
-        this.subTypeProvider = subTypeProvider;
+    public ImplementationExistsMatcher(SubTypeFinder subTypeFinder) {
+        this.subTypeFinder = subTypeFinder;
     }
 
     @Override
     protected boolean matchesSafely(Class type, Description mismatchDescription) {
 
-        final Set<Class<?>> subType = subTypeProvider.getSubTypesOf(type);
+        final Set<Class<?>> subType = subTypeFinder.getSubTypesOf(type);
 
         mismatchDescription.appendValue(type).appendText(" does not have any implementations");
 

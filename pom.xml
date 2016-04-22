@@ -10,16 +10,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>observer-tests</module>
-        <module>singleton-tests</module>
         <module>test-console</module>
-        <module>command-tests</module>
         <module>reflection-facade</module>
-        <module>cucumber-feather</module>
         <module>di-extensions</module>
         <module>reflection-matcher</module>
-        <module>shared-steps</module>
         <module>jdk-util</module>
+        <module>tests</module>
     </modules>
 
     <dependencies>
@@ -34,23 +30,23 @@
         <current.version>0.0.1</current.version>
         <annotations.version>0.0.2</annotations.version>
 
-        <!-- Pattern feature files -->
-        <pattern.specifications.path>../pattern-specifications</pattern.specifications.path>
-        <base.package>${project.build.outputDirectory}/com/github/fhtw/swp/tutorium</base.package>
-
         <!-- Dependency versions -->
-        <cucumber-java.version>1.2.3</cucumber-java.version>
+        <cucumber.version>1.2.3</cucumber.version>
         <log4j.version>2.5</log4j.version>
-        
+
         <org-reflections.version>0.9.10</org-reflections.version>
         <guava.version>15.0</guava.version>
 
         <byte-buddy.version>0.7.7</byte-buddy.version>
+
         <hamcrest.version>1.3</hamcrest.version>
+        <mockito.version>1.10.19</mockito.version>
         <junit.version>4.12</junit.version>
-        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
-        <feather.version>1.0</feather.version>
+
         <javax.inject.version>1</javax.inject.version>
+        <guice.version>4.0</guice.version>
+
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     </properties>
 
     <repositories>
@@ -68,30 +64,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>jdk-util</artifactId>
-                <version>${current.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>shared-steps</artifactId>
-                <version>${current.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>di-extensions</artifactId>
-                <version>${current.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>reflection-matcher</artifactId>
-                <version>${current.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
                 <artifactId>observer-tests</artifactId>
@@ -112,20 +84,32 @@
 
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>reflection-facade</artifactId>
+                <artifactId>shared-steps</artifactId>
                 <version>${current.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>cucumber-feather</artifactId>
+                <artifactId>jdk-util</artifactId>
                 <version>${current.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.codejargon.feather</groupId>
-                <artifactId>feather</artifactId>
-                <version>${feather.version}</version>
+                <groupId>com.github.fhtw-swp-tutorium</groupId>
+                <artifactId>di-extensions</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.fhtw-swp-tutorium</groupId>
+                <artifactId>reflection-matcher</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.fhtw-swp-tutorium</groupId>
+                <artifactId>reflection-facade</artifactId>
+                <version>${current.version}</version>
             </dependency>
 
             <dependency>
@@ -135,9 +119,9 @@
             </dependency>
 
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice.version}</version>
             </dependency>
 
             <dependency>
@@ -147,9 +131,15 @@
             </dependency>
 
             <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
+                <version>${mockito.version}</version>
             </dependency>
 
             <dependency>
@@ -173,13 +163,25 @@
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-java</artifactId>
-                <version>${cucumber-java.version}</version>
+                <version>${cucumber.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-junit</artifactId>
-                <version>${cucumber-java.version}</version>
+                <version>${cucumber.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-guice</artifactId>
+                <version>${cucumber.version}</version>
             </dependency>
 
             <dependency>
