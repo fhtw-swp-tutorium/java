@@ -7,6 +7,7 @@ public final class Optionals {
 
     private Optionals() { }
 
+    @SafeVarargs
     public static <T> T any(Optional<T>... optionals) {
         return Arrays
                 .stream(optionals)
