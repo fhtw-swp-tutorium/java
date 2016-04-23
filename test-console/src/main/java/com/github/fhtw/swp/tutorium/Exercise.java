@@ -1,21 +1,22 @@
 package com.github.fhtw.swp.tutorium;
 
-import com.github.fhtw.swp.tutorium.command.CommandTest;
-import com.github.fhtw.swp.tutorium.observer.ObserverTest;
-import com.github.fhtw.swp.tutorium.singleton.SingletonTest;
+import java.util.Arrays;
+import java.util.function.IntFunction;
+
+import static com.github.fhtw.swp.tutorium.Pattern.*;
 
 public enum Exercise {
-    UE1(ObserverTest.class, SingletonTest.class, CommandTest.class),
+    UE1(OBSERVER, SINGLETON, COMMAND),
     UE2(),
     UE3();
 
-    private final Class<?>[] testClasses;
+    private final Pattern[] patterns;
 
-    Exercise(Class<?>... testClasses) {
-        this.testClasses = testClasses;
+    Exercise(Pattern... patterns) {
+        this.patterns = patterns;
     }
 
     public Class<?>[] getTestClasses() {
-        return testClasses;
+        return Arrays.stream(patterns).map(Pattern::getTestClass).toArray((IntFunction<Class<?>[]>) Class[]::new);
     }
 }
