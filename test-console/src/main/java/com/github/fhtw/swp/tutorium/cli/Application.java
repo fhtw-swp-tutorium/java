@@ -41,13 +41,19 @@ public class Application {
         }
 
         final Injector injector = Guice.createInjector(
-                new SwpTestToolModule(arguments.getExercise(), arguments.getJarUrl()),
+                new SwpTestToolModule(arguments.getJarUrl()),
                 CucumberModules.SCENARIO
         );
 
         CucumberInjectorSource.instance = injector;
 
-        injector.getInstance(SwpTestTool.class).run();
+        if (arguments.getExercise() != null) {
+            injector.getInstance(SwpTestTool.class).testExercise(arguments.getExercise());
+        }
+
+        if (arguments.getPattern() != null) {
+            injector.getInstance(SwpTestTool.class).testPattern(arguments.getPattern());
+        }
     }
 
     private static void printUsage(CmdLineException e) {

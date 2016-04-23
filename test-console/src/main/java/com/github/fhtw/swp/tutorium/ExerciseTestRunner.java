@@ -9,9 +9,8 @@ public class ExerciseTestRunner {
 
     private static final Logger LOGGER = LogManager.getLogger(ExerciseTestRunner.class);
 
-    public void runExerciseTests(Exercise exercise) {
-
-        for (Class<?> testClass : exercise.getTestClasses()) {
+    public void runTests(Class... tests) {
+        for (Class<?> testClass : tests) {
 
             System.out.printf("\n\nTesting %s pattern:\n", getPatternName(testClass));
 

@@ -1,9 +1,7 @@
 package com.github.fhtw.swp.tutorium.guice;
 
-import com.github.fhtw.swp.tutorium.Exercise;
 import com.github.fhtw.swp.tutorium.ReflectionsSubTypeFinder;
 import com.github.fhtw.swp.tutorium.StaticAnnotationResolver;
-import com.github.fhtw.swp.tutorium.inject.CurrentExercise;
 import com.github.fhtw.swp.tutorium.inject.CurrentSut;
 import com.github.fhtw.swp.tutorium.shared.AnnotationResolver;
 import com.github.fhtw.swp.tutorium.shared.TypeContext;
@@ -17,11 +15,9 @@ import java.net.URL;
 
 public class SwpTestToolModule extends AbstractModule {
 
-    private final Exercise current;
     private final URL currentSut;
 
-    public SwpTestToolModule(Exercise current, URL currentSut) {
-        this.current = current;
+    public SwpTestToolModule(URL currentSut) {
         this.currentSut = currentSut;
     }
 
@@ -31,12 +27,6 @@ public class SwpTestToolModule extends AbstractModule {
         bind(AnnotationResolver.class).to(StaticAnnotationResolver.class);
         bind(Configuration.class).toProvider(ConfigurationProvider.class);
         bind(TypeContext.class).in(ScenarioScoped.class);
-    }
-
-    @Provides
-    @CurrentExercise
-    public Exercise getExercise() {
-        return current;
     }
 
     @Provides
