@@ -1,8 +1,8 @@
 package com.github.fhtw.swp.tutorium.guice;
 
+import com.github.fhtw.swp.tutorium.MutableClassLoader;
 import com.github.fhtw.swp.tutorium.ReflectionsSubTypeFinder;
 import com.github.fhtw.swp.tutorium.StaticAnnotationResolver;
-import com.github.fhtw.swp.tutorium.inject.CurrentSut;
 import com.github.fhtw.swp.tutorium.shared.AnnotationResolver;
 import com.github.fhtw.swp.tutorium.shared.TypeContext;
 import com.google.inject.AbstractModule;
@@ -12,6 +12,8 @@ import org.hamcrest.reflection.SubTypeFinder;
 import org.reflections.Configuration;
 
 import java.net.URL;
+
+import static java.lang.ClassLoader.getSystemClassLoader;
 
 public class SwpTestToolModule extends AbstractModule {
 
@@ -33,5 +35,10 @@ public class SwpTestToolModule extends AbstractModule {
     @CurrentSut
     public URL getUrl() {
         return currentSut;
+    }
+
+    @Provides
+    public MutableClassLoader getClassLoader() {
+        return new MutableClassLoader(getSystemClassLoader());
     }
 }

@@ -34,11 +34,6 @@
 
         <dependency>
             <groupId>com.github.fhtw-swp-tutorium</groupId>
-            <artifactId>di-extensions</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.fhtw-swp-tutorium</groupId>
             <artifactId>observer-tests</artifactId>
         </dependency>
 

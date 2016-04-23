@@ -1,6 +1,6 @@
 package com.github.fhtw.swp.tutorium.guice;
 
-import com.github.fhtw.swp.tutorium.inject.CurrentSut;
+import com.github.fhtw.swp.tutorium.MutableClassLoader;
 import com.google.inject.Provider;
 import org.reflections.Configuration;
 import org.reflections.scanners.MethodAnnotationsScanner;
@@ -14,14 +14,19 @@ import java.net.URL;
 public class ConfigurationProvider implements Provider<Configuration> {
 
     private final URL currentSut;
+    private final MutableClassLoader mutableClassLoader;
 
     @Inject
-    public ConfigurationProvider(@CurrentSut URL currentSut) {
+    public ConfigurationProvider(@CurrentSut URL currentSut, MutableClassLoader mutableClassLoader) {
         this.currentSut = currentSut;
+        this.mutableClassLoader = mutableClassLoader;
     }
 
     @Override
     public Configuration get() {
+
+        makeAccessibleSut();
+
         final Configuration configuration = new ConfigurationBuilder()
                 .setUrls(currentSut)
                 .setScanners(
@@ -31,5 +36,9 @@ public class ConfigurationProvider implements Provider<Configuration> {
                 );
 
         return configuration;
+    }
+
+    private void makeAccessibleSut() {
+        mutableClassLoader.addUrl(currentSut);
     }
 }
