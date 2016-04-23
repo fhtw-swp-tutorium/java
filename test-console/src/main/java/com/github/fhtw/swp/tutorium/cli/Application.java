@@ -11,11 +11,19 @@ import org.apache.logging.log4j.Logger;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Application {
+
+    public static String JUNIT_RESULTS_FOLDER = "junit-out";
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
+
+        clearResultsFolder();
 
         final Arguments arguments = new Arguments();
         final CmdLineParser cmdLineParser = new CmdLineParser(arguments);
@@ -47,5 +55,19 @@ public class Application {
         System.err.println(e.getMessage());
         System.err.println("Help: ");
         e.getParser().printUsage(System.err);
+    }
+
+    private static void clearResultsFolder() {
+
+        final Path pathToResultsFolder = Paths.get(".", JUNIT_RESULTS_FOLDER);
+        final File resultsFolder = pathToResultsFolder.toFile();
+
+        if (resultsFolder.exists()) {
+            final boolean successful = resultsFolder.delete();
+
+            if (!successful) {
+                LOGGER.warn("Unable to delete results folder at {}.", pathToResultsFolder.toAbsolutePath());
+            }
+        }
     }
 }
