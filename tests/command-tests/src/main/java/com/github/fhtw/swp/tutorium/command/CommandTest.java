@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {
                 "cucumber.runtime.ScenarioStatsSummaryPrinter",
-                "junit:results/command_results.xml",
+                "junit:junit-out/command_results.xml",
                 "com.github.fhtw.swp.tutorium.reporting.LoggingReporter"
         },
         glue = {
