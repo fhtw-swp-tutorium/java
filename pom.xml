@@ -6,7 +6,7 @@
 
     <groupId>com.github.fhtw-swp-tutorium</groupId>
     <artifactId>swp-test-tool</artifactId>
-    <version>${current.version}</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -27,7 +27,7 @@
     </dependencies>
 
     <properties>
-        <current.version>0.0.1</current.version>
+        <current.version>0.0.2-SNAPSHOT</current.version>
         <annotations.version>0.0.2</annotations.version>
 
         <!-- Dependency versions -->
