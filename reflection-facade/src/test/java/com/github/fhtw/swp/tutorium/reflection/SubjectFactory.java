@@ -1,8 +1,11 @@
 package com.github.fhtw.swp.tutorium.reflection;
 
-public class SubjectFactory {
+import com.github.fhtw.swp.tutorium.Factory;
 
-    public ComplexTestSubject create() {
+public class SubjectFactory implements Factory {
+
+    @Override
+    public Object getInstance() {
         return new ComplexTestSubject(new Object());
     }
 }
