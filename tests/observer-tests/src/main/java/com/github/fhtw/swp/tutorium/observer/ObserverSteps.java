@@ -11,7 +11,6 @@ import org.hamcrest.Matcher;
 
 import javax.inject.Inject;
 import java.lang.reflect.Method;
-import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.reflection.OnlyInterfaceParametersMethodMatcher.onlyInterfaceParameters;
@@ -36,15 +35,6 @@ public class ObserverSteps {
     @Dann("^darf diese Liste nicht leer sein$")
     public void darfDieseListeNichtLeerSein() throws Throwable {
         assertThat(typeContext.getTypes(), is(not(empty())));
-    }
-
-
-    @Dann("^erwarte ich mir jeweils genau eine Methode$")
-    public void erwarteIchMirGenauMethode() throws Throwable {
-        for (Class<?> subjectType : typeContext.getTypes()) {
-            final Set<Method> subjectMethods = typeContext.getMethodsOfType(subjectType);
-            assertThat(subjectMethods.size(), is(1));
-        }
     }
 
     @Dann("^erwarte ich mir eine Methode, die mit einem dieser Präfixe beginnt: \"([^\"]*)\"$")

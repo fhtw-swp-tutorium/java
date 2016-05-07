@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.lang.reflect.Method;
 
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ParameterCountMethodMatcherTest {
@@ -22,8 +21,6 @@ public class ParameterCountMethodMatcherTest {
     public void testShouldMatchParameterCount() throws Exception {
         final Method method = Bar.class.getMethod("methodWithInterfaceParameter", Foo.class);
 
-        final boolean result = sut.matches(method);
-
-        assertThat(result, is(true));
+        assertThat(method, sut);
     }
 }
