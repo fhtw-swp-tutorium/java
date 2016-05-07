@@ -1,5 +1,6 @@
 package com.github.fhtw.swp.tutorium.composite;
 
+import com.github.fhtw.swp.tutorium.composite.matcher.LeafsOfComponentExists;
 import com.github.fhtw.swp.tutorium.shared.SingleTypeContext;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;

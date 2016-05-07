@@ -1,5 +1,6 @@
-package com.github.fhtw.swp.tutorium.composite;
+package com.github.fhtw.swp.tutorium.composite.matcher;
 
+import com.github.fhtw.swp.tutorium.composite.Leaf;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
