@@ -32,8 +32,8 @@ Funktionalität: Kompositum
     Dann erwarte ich mir mindestens ein Leaf
 
   Szenario: Wenn ich die ComponentOperation aufrufe, soll die ComponentOperation aller hinzugefügten Components aufgerufen werden
-    Wenn ich eine Instanz des Composites erzeuge
-    Und ich eine dynamische Component-Instanz erzeuge
-    Und ich diese Instanz zu dem Composite hinzufüge
+    Gegeben sei eine Instanz des Composites
+    Und eine dynamische Component-Instanz
+    Wenn ich diese Instanz zu dem Composite hinzufüge
     Und ich die ComponentOperation des Composites aufrufe
     Dann soll die ComponentOperation der dynamischen Component-Instanz aufgerufen werden
