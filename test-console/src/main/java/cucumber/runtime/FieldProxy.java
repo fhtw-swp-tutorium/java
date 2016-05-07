@@ -1,8 +1,8 @@
-package com.github.fhtw.swp.tutorium.reflection;
+package cucumber.runtime;
 
 import java.lang.reflect.Field;
 
-public final class FieldProxy {
+final class FieldProxy {
 
     private final Field field;
 

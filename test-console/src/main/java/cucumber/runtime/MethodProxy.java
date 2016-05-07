@@ -1,9 +1,9 @@
-package com.github.fhtw.swp.tutorium.reflection;
+package cucumber.runtime;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public final class MethodProxy {
+final class MethodProxy {
 
     private final Method method;
 

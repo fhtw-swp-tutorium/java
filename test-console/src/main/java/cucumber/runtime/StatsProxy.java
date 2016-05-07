@@ -1,8 +1,5 @@
 package cucumber.runtime;
 
-import com.github.fhtw.swp.tutorium.reflection.FieldProxy;
-import com.github.fhtw.swp.tutorium.reflection.MethodProxy;
-
 import java.io.PrintStream;
 import java.util.List;
 
