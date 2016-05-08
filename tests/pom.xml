@@ -18,6 +18,7 @@
         <module>shared-steps</module>
         <module>composite-tests</module>
         <module>decorater-tests</module>
+        <module>strategy-tests</module>
     </modules>
 
     <properties>
