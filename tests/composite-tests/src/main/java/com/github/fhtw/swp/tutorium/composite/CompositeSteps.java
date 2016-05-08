@@ -32,8 +32,7 @@ public class CompositeSteps {
     private final CompositeDriver compositeDriver;
     private final CompositeProxyFactory compositeProxyFactory;
     private final ComponentFactory componentFactory;
-
-    private Set<Class<?>> leafTypes;
+    private final Set<Class<?>> leafTypes;
 
     @Inject
     public CompositeSteps(SingleTypeContext singleTypeContext, LeafTypeProvider leafTypeProvider, CompositeContext compositeContext, CompositeDriver compositeDriver, CompositeProxyFactory compositeProxyFactory, ComponentFactory componentFactory) {
@@ -45,6 +44,9 @@ public class CompositeSteps {
         this.leafTypes = leafTypeProvider.getLeafTypes();
     }
 
+    private Class<?> getCompositeType() {
+        return singleTypeContext.getTypeUnderTest();
+    }
 
     @Gegebensei("^der Composite-Typ$")
     public void derCompositeTyp() throws Throwable {
@@ -54,14 +56,12 @@ public class CompositeSteps {
     @Gegebensei("^die Methode zum Hinzufügen einer Komponente$")
     public void dieMethodeZumHinzufuegenEinerKomponente() throws Throwable {
 
-        assumeThat(getCompositeType(), hasSingleMethodWithAnnotation(AddComponent.class));
+        final Class<?> compositeType = getCompositeType();
 
-        final Method addComponentMethod = compositeDriver.getAddComponentMethod(getCompositeType());
+        assumeThat(compositeType, hasSingleMethodWithAnnotation(AddComponent.class));
+
+        final Method addComponentMethod = compositeDriver.getAddComponentMethod(compositeType);
         singleTypeContext.setMethodUnderTest(addComponentMethod);
-    }
-
-    private Class<?> getCompositeType() {
-        return singleTypeContext.getTypeUnderTest();
     }
 
     @Dann("^erwarte ich mir eine Methode deren Parameter dem Komponententyp entspricht$")
@@ -146,6 +146,6 @@ public class CompositeSteps {
         final GenericInvocationCountingProxy component = compositeContext.getComponentProxy();
         final CountingInvocationHandler invocationHandler = component.getCountingInvocationHandler();
 
-        Assert.assertThat(invocationHandler.getInvocationCount(), is(not(0)));
+        assertThat(invocationHandler.getInvocationCount(), is(not(0)));
     }
 }
