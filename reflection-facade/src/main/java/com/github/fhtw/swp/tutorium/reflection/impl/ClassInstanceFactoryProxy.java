@@ -16,10 +16,17 @@ public class ClassInstanceFactoryProxy implements ClassInstanceFactory {
     }
 
     @Override
-    public Object create(Class<?> type) {
-
+    public <T> T create(Class<T> type) {
         final Factory factory = instantiateFactory();
-        return factory.getInstance();
+
+        final Object constructedInstance = factory.getInstance();
+
+        if (!type.isInstance(constructedInstance)) {
+            final String errorMessage = String.format("%s does not create instances of %s", factoryClass.getSimpleName(), type);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        return (T) constructedInstance;
     }
 
     private Factory instantiateFactory() {

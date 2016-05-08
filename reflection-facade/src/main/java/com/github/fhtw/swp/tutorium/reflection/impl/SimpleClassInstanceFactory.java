@@ -4,7 +4,7 @@ import com.github.fhtw.swp.tutorium.reflection.ClassInstanceFactory;
 
 public class SimpleClassInstanceFactory implements ClassInstanceFactory {
     @Override
-    public Object create(Class<?> type) {
+    public <T> T create(Class<T> type) {
         try {
             return type.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
