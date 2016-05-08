@@ -17,6 +17,7 @@ public class CompositeProxyFactory {
     private final ClassInstanceFactory compositeFactory;
     private final ClassInstanceFactory simpleClassInstanceFactory;
 
+    // TODO replace this ctor with DI and qualifiers
     public CompositeProxyFactory() {
         this.compositeFactory = new AnnotatedClassInstanceFactory<>(Composite.class, Composite::factory);
         this.simpleClassInstanceFactory = new SimpleClassInstanceFactory();
