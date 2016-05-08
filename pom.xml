@@ -113,6 +113,12 @@
 
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
+                <artifactId>strategy-tests</artifactId>
+                <version>${current.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.fhtw-swp-tutorium</groupId>
                 <artifactId>shared-steps</artifactId>
                 <version>${current.version}</version>
             </dependency>

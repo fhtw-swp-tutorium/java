@@ -5,6 +5,7 @@ import com.github.fhtw.swp.tutorium.composite.CompositeTest;
 import com.github.fhtw.swp.tutorium.decorator.DecoratorTest;
 import com.github.fhtw.swp.tutorium.observer.ObserverTest;
 import com.github.fhtw.swp.tutorium.singleton.SingletonTest;
+import com.github.fhtw.swp.tutorium.strategy.StrategyTest;
 
 public enum Pattern {
 
@@ -12,7 +13,8 @@ public enum Pattern {
     OBSERVER(ObserverTest.class),
     COMMAND(CommandTest.class),
     COMPOSITE(CompositeTest.class),
-    DECORATOR(DecoratorTest.class);
+    DECORATOR(DecoratorTest.class),
+    STRATEGY(StrategyTest.class);
 
     private final Class<?> unitTestClass;
 

@@ -59,6 +59,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.fhtw-swp-tutorium</groupId>
+            <artifactId>strategy-tests</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-guice</artifactId>
         </dependency>
