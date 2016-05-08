@@ -7,7 +7,7 @@ public final class MethodProxy {
 
     private final Method method;
 
-    private MethodProxy(Method method) {
+    public MethodProxy(Method method) {
         this.method = method;
     }
 
