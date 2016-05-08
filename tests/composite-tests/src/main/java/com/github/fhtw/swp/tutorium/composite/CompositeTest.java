@@ -1,5 +1,6 @@
 package com.github.fhtw.swp.tutorium.composite;
 
+import com.github.fhtw.swp.tutorium.shared.PatternDefiningAnnotation;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
@@ -15,5 +16,7 @@ import org.junit.runner.RunWith;
                 "com.github.fhtw.swp.tutorium.shared"
         }
 )
+@PatternDefiningAnnotation(Composite.class)
 public class CompositeTest {
+
 }
