@@ -20,8 +20,7 @@ import javax.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.reflection.AnnotatedMethodMatcher.hasSingleMethodWithAnnotation;
 import static org.hamcrest.reflection.ParameterTypeMatcher.hasParameterTypes;
 import static org.junit.Assert.assertThat;
@@ -104,7 +103,6 @@ public class CompositeSteps {
     public void eineInstanzDesComposites() throws Throwable {
 
         final CompositeProxy composite = compositeProxyFactory.create(getCompositeType());
-
         compositeContext.setCompositeProxy(composite);
     }
 
@@ -127,15 +125,20 @@ public class CompositeSteps {
         final CompositeProxy composite = compositeContext.getCompositeProxy();
         final GenericInvocationCountingProxy component = compositeContext.getComponentProxy();
 
+        Assume.assumeThat(composite, is(notNullValue()));
+        Assume.assumeThat(component, is(notNullValue()));
+
         composite.addComponent(component);
     }
 
     @Und("^ich die ComponentOperation des Composites aufrufe$")
     public void ichDieComponentOperationDesCompositesAufrufe() throws Throwable {
 
-        final CompositeProxy component = compositeContext.getCompositeProxy();
+        final CompositeProxy composite = compositeContext.getCompositeProxy();
 
-        component.invokeComponentOperation();
+        Assume.assumeThat(composite, is(notNullValue()));
+
+        composite.invokeComponentOperation();
     }
 
     @Dann("^soll die ComponentOperation der dynamischen Component-Instanz aufgerufen werden$")
