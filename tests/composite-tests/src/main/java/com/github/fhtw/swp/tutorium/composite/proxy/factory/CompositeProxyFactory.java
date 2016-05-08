@@ -33,9 +33,7 @@ public class CompositeProxyFactory {
         final Method componentOperation = extractor.getSingleAnnotatedMethod(ComponentOperation.class);
 
         final Class<? extends ArgumentsProvider> argumentsProviderType = componentOperation.getAnnotation(ComponentOperation.class).argumentsProvider();
-
-        // TODO remove this cast by making ClassInstanceFactory typed
-        final ArgumentsProvider argumentsProvider = (ArgumentsProvider) simpleClassInstanceFactory.create(argumentsProviderType);
+        final ArgumentsProvider argumentsProvider = simpleClassInstanceFactory.create(argumentsProviderType);
 
         return new CompositeProxy(composite, addComponentMethod, componentOperation, argumentsProvider);
     }

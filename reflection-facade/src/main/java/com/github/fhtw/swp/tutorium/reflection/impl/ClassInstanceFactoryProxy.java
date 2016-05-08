@@ -16,10 +16,10 @@ public class ClassInstanceFactoryProxy implements ClassInstanceFactory {
     }
 
     @Override
-    public Object create(Class<?> type) {
-
+    public <T> T create(Class<T> type) {
         final Factory factory = instantiateFactory();
-        return factory.getInstance();
+
+        return (T) factory.getInstance();
     }
 
     private Factory instantiateFactory() {
