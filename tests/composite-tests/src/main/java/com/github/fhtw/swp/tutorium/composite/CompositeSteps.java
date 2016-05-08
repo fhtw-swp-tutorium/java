@@ -14,7 +14,6 @@ import cucumber.api.java.de.Wenn;
 import org.hamcrest.reflection.ImplementsInterface;
 import org.hamcrest.reflection.IsInterface;
 import org.junit.Assert;
-import org.junit.Assume;
 
 import javax.inject.Inject;
 import java.lang.reflect.Method;
@@ -112,7 +111,7 @@ public class CompositeSteps {
         final Class<?> compositeType = getCompositeType();
         final Class<?> definedComponentType = compositeDriver.getDefinedComponentType(compositeType);
 
-        Assume.assumeThat(definedComponentType, new IsInterface());
+        assumeThat(definedComponentType, new IsInterface());
 
         final GenericInvocationCountingProxy component = componentFactory.create(definedComponentType);
 
@@ -125,8 +124,8 @@ public class CompositeSteps {
         final CompositeProxy composite = compositeContext.getCompositeProxy();
         final GenericInvocationCountingProxy component = compositeContext.getComponentProxy();
 
-        Assume.assumeThat(composite, is(notNullValue()));
-        Assume.assumeThat(component, is(notNullValue()));
+        assumeThat(composite, is(notNullValue()));
+        assumeThat(component, is(notNullValue()));
 
         composite.addComponent(component);
     }
@@ -136,7 +135,7 @@ public class CompositeSteps {
 
         final CompositeProxy composite = compositeContext.getCompositeProxy();
 
-        Assume.assumeThat(composite, is(notNullValue()));
+        assumeThat(composite, is(notNullValue()));
 
         composite.invokeComponentOperation();
     }
