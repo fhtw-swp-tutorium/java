@@ -22,6 +22,10 @@ public class TypeContext {
 
     private Set<Class<?>> types;
     private Map<Class<?>, Set<Method>> methodsPerType;
+
+    private Set<Class<?>> helperTypes;
+    private Map<Class<?>, Set<Method>> methodsPerHelperType;
+
     private final Configuration configuration;
 
     @Inject
@@ -34,12 +38,26 @@ public class TypeContext {
         methodsPerType = getMethodsOfTypes(ReflectionUtils::getAllMethods);
     }
 
+
     public void reduceMethods(Predicate<Method>... predicates) {
         methodsPerType = getMethodsOfTypes(type -> ReflectionUtils.getAllMethods(type, predicates));
     }
 
+    public void reduceHelperTypeMethods(Predicate<Method>... predicates) {
+        methodsPerHelperType = getMethodsOfTypes(type -> ReflectionUtils.getAllMethods(type, predicates));
+    }
+
     private Map<Class<?>, Set<Method>> getMethodsOfTypes(Function<Class<?>, Set<Method>> methodsExtractor) {
         return types.stream().collect(toMap(identity(), methodsExtractor));
+    }
+
+    public void initializeHelperTypesAnnotatedWith(Class<? extends Annotation> annotation) {
+        helperTypes = new AnnotatedTypeFinder(configuration, annotation).getAnnotatedTypes();
+        methodsPerHelperType = getMethodsOfHelperTypes(ReflectionUtils::getAllMethods);
+    }
+
+    private Map<Class<?>, Set<Method>> getMethodsOfHelperTypes(Function<Class<?>, Set<Method>> methodsExtractor) {
+        return helperTypes.stream().collect(toMap(identity(), methodsExtractor));
     }
 
     public Configuration getConfiguration() {
@@ -56,5 +74,17 @@ public class TypeContext {
 
     public Method getFirstMethodOfType(Class<?> type) {
         return getMethodsOfType(type).iterator().next();
+    }
+
+    public Set<Class<?>> getHelperTypes() {
+        return helperTypes;
+    }
+
+    public Set<Method> getMethodsOfHelperType(Class<?> type) {
+        return methodsPerHelperType.getOrDefault(type, Collections.emptySet());
+    }
+
+    public Method getFirstMethodOfHelperType(Class<?> type) {
+        return getMethodsOfHelperType(type).iterator().next();
     }
 }

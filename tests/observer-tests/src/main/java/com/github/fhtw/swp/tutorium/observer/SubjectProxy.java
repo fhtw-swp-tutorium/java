@@ -1,5 +1,7 @@
 package com.github.fhtw.swp.tutorium.observer;
 
+import com.github.fhtw.swp.tutorium.reflection.GenericInvocationCountingProxy;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -17,12 +19,12 @@ public class SubjectProxy {
         this.updateMethod = updateMethod;
     }
 
-    public void register(ObserverProxy observerProxy) {
-        invoke(registerMethod, subjectInstance, observerProxy.getInstance());
+    public void register(GenericInvocationCountingProxy genericInvocationCountingProxy) {
+        invoke(registerMethod, subjectInstance, genericInvocationCountingProxy.getInstance());
     }
 
-    public void unregister(ObserverProxy observerProxy) {
-        invoke(unregisterMethod, subjectInstance, observerProxy.getInstance());
+    public void unregister(GenericInvocationCountingProxy genericInvocationCountingProxy) {
+        invoke(unregisterMethod, subjectInstance, genericInvocationCountingProxy.getInstance());
     }
 
     public void update() {

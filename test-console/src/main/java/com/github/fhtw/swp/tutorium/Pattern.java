@@ -1,6 +1,7 @@
 package com.github.fhtw.swp.tutorium;
 
 import com.github.fhtw.swp.tutorium.command.CommandTest;
+import com.github.fhtw.swp.tutorium.composite.CompositeTest;
 import com.github.fhtw.swp.tutorium.observer.ObserverTest;
 import com.github.fhtw.swp.tutorium.singleton.SingletonTest;
 
@@ -8,7 +9,8 @@ public enum Pattern {
 
     SINGLETON(SingletonTest.class),
     OBSERVER(ObserverTest.class),
-    COMMAND(CommandTest.class);
+    COMMAND(CommandTest.class),
+    COMPOSITE(CompositeTest.class);
 
     private final Class<?> unitTestClass;
 

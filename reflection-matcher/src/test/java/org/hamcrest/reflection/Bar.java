@@ -13,4 +13,9 @@ public class Bar {
     public void methodWithClass(Bar bar) {
 
     }
+
+    @Baz
+    public void methodWithAnnotation() {
+
+    }
 }

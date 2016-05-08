@@ -2,6 +2,7 @@ package com.github.fhtw.swp.tutorium.observer;
 
 import com.github.fhtw.swp.tutorium.observer.factory.MethodPrefixMatcherFactory;
 import com.github.fhtw.swp.tutorium.reflection.CountingInvocationHandler;
+import com.github.fhtw.swp.tutorium.reflection.GenericInvocationCountingProxy;
 import com.github.fhtw.swp.tutorium.shared.TypeContext;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;
@@ -11,7 +12,6 @@ import org.hamcrest.Matcher;
 
 import javax.inject.Inject;
 import java.lang.reflect.Method;
-import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.reflection.OnlyInterfaceParametersMethodMatcher.onlyInterfaceParameters;
@@ -36,15 +36,6 @@ public class ObserverSteps {
     @Dann("^darf diese Liste nicht leer sein$")
     public void darfDieseListeNichtLeerSein() throws Throwable {
         assertThat(typeContext.getTypes(), is(not(empty())));
-    }
-
-
-    @Dann("^erwarte ich mir jeweils genau eine Methode$")
-    public void erwarteIchMirGenauMethode() throws Throwable {
-        for (Class<?> subjectType : typeContext.getTypes()) {
-            final Set<Method> subjectMethods = typeContext.getMethodsOfType(subjectType);
-            assertThat(subjectMethods.size(), is(1));
-        }
     }
 
     @Dann("^erwarte ich mir eine Methode, die mit einem dieser Präfixe beginnt: \"([^\"]*)\"$")
@@ -91,9 +82,9 @@ public class ObserverSteps {
     public void ichDiesenBeobachterHinzufuegen() throws Throwable {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final SubjectProxy subjectProxy = observerDriver.getSubjectProxyInstance(subjectType);
-            final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);
+            final GenericInvocationCountingProxy genericInvocationCountingProxy = observerDriver.getObserverProxyInstance(subjectType);
 
-            subjectProxy.register(observerProxy);
+            subjectProxy.register(genericInvocationCountingProxy);
         }
     }
 
@@ -101,9 +92,9 @@ public class ObserverSteps {
     public void ichDiesenBeobachterEntferne() throws Throwable {
         for (Class<?> subjectType : typeContext.getTypes()) {
             final SubjectProxy subjectProxy = observerDriver.getSubjectProxyInstance(subjectType);
-            final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);
+            final GenericInvocationCountingProxy genericInvocationCountingProxy = observerDriver.getObserverProxyInstance(subjectType);
 
-            subjectProxy.unregister(observerProxy);
+            subjectProxy.unregister(genericInvocationCountingProxy);
         }
     }
 
@@ -115,8 +106,8 @@ public class ObserverSteps {
     @Dann("^soll mindestens eine Methode des Beobachters aufgerufen werden$")
     public void sollMindestensEineMethodeDesBeobachtersAufgerufenWerden() throws Throwable {
         for (Class<?> subjectType : typeContext.getTypes()) {
-            final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);
-            final CountingInvocationHandler invocationHandler = observerProxy.getCountingInvocationHandler();
+            final GenericInvocationCountingProxy genericInvocationCountingProxy = observerDriver.getObserverProxyInstance(subjectType);
+            final CountingInvocationHandler invocationHandler = genericInvocationCountingProxy.getCountingInvocationHandler();
 
             assertThat(invocationHandler.getInvocationCount(), is(greaterThan(0)));
         }
@@ -125,8 +116,8 @@ public class ObserverSteps {
     @Dann("^soll keine Methode des Beobachters aufgerufen werden$")
     public void sollKeineMethodeDesBeobachtersAufgerufenWerden() throws Throwable {
         for (Class<?> subjectType : typeContext.getTypes()) {
-            final ObserverProxy observerProxy = observerDriver.getObserverProxyInstance(subjectType);
-            final CountingInvocationHandler invocationHandler = observerProxy.getCountingInvocationHandler();
+            final GenericInvocationCountingProxy genericInvocationCountingProxy = observerDriver.getObserverProxyInstance(subjectType);
+            final CountingInvocationHandler invocationHandler = genericInvocationCountingProxy.getCountingInvocationHandler();
 
             assertThat(invocationHandler.getInvocationCount(), is(0));
         }

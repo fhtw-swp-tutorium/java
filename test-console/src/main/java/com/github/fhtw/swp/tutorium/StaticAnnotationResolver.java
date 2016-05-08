@@ -2,6 +2,9 @@ package com.github.fhtw.swp.tutorium;
 
 import com.github.fhtw.swp.tutorium.command.InvokeCommand;
 import com.github.fhtw.swp.tutorium.command.Invoker;
+import com.github.fhtw.swp.tutorium.composite.AddComponent;
+import com.github.fhtw.swp.tutorium.composite.ComponentOperation;
+import com.github.fhtw.swp.tutorium.composite.Composite;
 import com.github.fhtw.swp.tutorium.observer.NotifyObservers;
 import com.github.fhtw.swp.tutorium.observer.RegisterObserver;
 import com.github.fhtw.swp.tutorium.observer.Subject;
@@ -12,6 +15,7 @@ import com.github.fhtw.swp.tutorium.singleton.Singleton;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class StaticAnnotationResolver implements AnnotationResolver {
 
@@ -23,10 +27,16 @@ public class StaticAnnotationResolver implements AnnotationResolver {
         put("RegisterObserver", RegisterObserver.class);
         put("UnregisterObserver", UnregisterObserver.class);
         put("NotifyObservers", NotifyObservers.class);
+        put("Composite", Composite.class);
+        put("AddComponent", AddComponent.class);
+        put("ComponentOperation", ComponentOperation.class);
     }};
 
     @Override
     public Class<? extends Annotation> resolve(String name) {
-        return annotationMap.get(name);
+        return Optional.ofNullable(annotationMap.get(name)).orElseThrow(() -> {
+            final String errorMessage = String.format("Annotation '%s' is not registered", name);
+            return new IllegalArgumentException(errorMessage);
+        });
     }
 }

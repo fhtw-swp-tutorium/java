@@ -1,9 +1,9 @@
 package com.github.fhtw.swp.tutorium.reflection.impl;
 
-import com.github.fhtw.swp.tutorium.observer.Subject;
 import com.github.fhtw.swp.tutorium.reflection.ClassInstanceFactory;
-import com.github.fhtw.swp.tutorium.reflection.ComplexTestSubject;
-import com.github.fhtw.swp.tutorium.reflection.SimpleTestSubject;
+import com.github.fhtw.swp.tutorium.reflection.ComplexThing;
+import com.github.fhtw.swp.tutorium.reflection.SimpleThing;
+import com.github.fhtw.swp.tutorium.reflection.Thing;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,25 +16,25 @@ public class AnnotatedClassInstanceFactoryTest {
 
     @Before
     public void setUp() throws Exception {
-        sut = new AnnotatedClassInstanceFactory<>(Subject.class, Subject::factory);
+        sut = new AnnotatedClassInstanceFactory<>(Thing.class, Thing::factory);
     }
 
     @Test
     public void testShouldUseFactoryClassIfGiven() throws Exception {
 
-        final Object subject = sut.create(ComplexTestSubject.class);
+        final Object thing = sut.create(ComplexThing.class);
 
-        Assert.assertThat(subject, is(notNullValue()));
-        Assert.assertThat(subject, is(instanceOf(ComplexTestSubject.class)));
+        Assert.assertThat(thing, is(notNullValue()));
+        Assert.assertThat(thing, is(instanceOf(ComplexThing.class)));
     }
 
     @Test
     public void testShouldUseDefaultConstructorIfNoFactoryClassIsGiven() throws Exception {
 
-        final Object subject = sut.create(SimpleTestSubject.class);
+        final Object thing = sut.create(SimpleThing.class);
 
-        Assert.assertThat(subject, is(notNullValue()));
-        Assert.assertThat(subject, is(instanceOf(SimpleTestSubject.class)));
+        Assert.assertThat(thing, is(notNullValue()));
+        Assert.assertThat(thing, is(instanceOf(SimpleThing.class)));
     }
 
 }

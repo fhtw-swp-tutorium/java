@@ -6,7 +6,6 @@ import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Und;
 import org.hamcrest.reflection.ImplementationExistsMatcher;
 import org.hamcrest.reflection.OnlyInterfaceParametersMethodMatcher;
-import org.hamcrest.reflection.ParameterCountMethodMatcher;
 import org.hamcrest.reflection.SubTypeFinder;
 import org.junit.Assert;
 
@@ -14,7 +13,8 @@ import javax.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 public class CommandSteps {
 
@@ -29,24 +29,11 @@ public class CommandSteps {
         this.commandDriver = commandDriver;
     }
 
-    @Dann("^darf diese Liste nicht leer sein$")
-    public void darfDieseListeNichtLeerSein() throws Throwable {
-        Assert.assertThat(typeContext.getTypes(), is(not(empty())));
-    }
-
     @Dann("^erwarte ich mir jeweils genau eine Methode$")
     public void erwarteIchMirJeweilsGenauEineMethode() throws Throwable {
         for (Class<?> type : typeContext.getTypes()) {
             final Set<Method> methodsOfType = typeContext.getMethodsOfType(type);
             Assert.assertThat(methodsOfType.size(), is(1));
-        }
-    }
-
-    @Dann("^muss jede Methode genau einen Parameter haben$")
-    public void mussJedeMethodeGenauEinenParameterHaben() throws Throwable {
-        for (Class<?> type : typeContext.getTypes()) {
-            final Method invokeCommandMethod = typeContext.getFirstMethodOfType(type);
-            Assert.assertThat(invokeCommandMethod, new ParameterCountMethodMatcher(1));
         }
     }
 

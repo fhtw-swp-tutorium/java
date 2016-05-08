@@ -1,5 +1,6 @@
 package com.github.fhtw.swp.tutorium.reflection.impl;
 
+import com.github.fhtw.swp.tutorium.Factory;
 import com.github.fhtw.swp.tutorium.NullFactory;
 import com.github.fhtw.swp.tutorium.reflection.ClassInstanceFactory;
 
@@ -9,9 +10,9 @@ import java.util.function.Function;
 public class AnnotatedClassInstanceFactory<T extends Annotation> implements ClassInstanceFactory {
 
     private final Class<T> annotationType;
-    private final Function<T, Class<?>> factoryMethod;
+    private final Function<T, Class<? extends Factory>> factoryMethod;
 
-    public AnnotatedClassInstanceFactory(Class<T> annotationType, Function<T, Class<?>> factoryMethod) {
+    public AnnotatedClassInstanceFactory(Class<T> annotationType, Function<T, Class<? extends Factory>> factoryMethod) {
         this.annotationType = annotationType;
         this.factoryMethod = factoryMethod;
     }
@@ -26,7 +27,7 @@ public class AnnotatedClassInstanceFactory<T extends Annotation> implements Clas
 
     private ClassInstanceFactory getFactory(Class<?> type) {
 
-        final Class<?> customFactoryClass = getCustomFactoryClass(type);
+        final Class<? extends Factory> customFactoryClass = getCustomFactoryClass(type);
 
         if (shouldUse(customFactoryClass)) {
             return new ClassInstanceFactoryProxy(customFactoryClass);
@@ -35,7 +36,7 @@ public class AnnotatedClassInstanceFactory<T extends Annotation> implements Clas
         }
     }
 
-    private Class<?> getCustomFactoryClass(Class<?> type) {
+    private Class<? extends Factory> getCustomFactoryClass(Class<?> type) {
         final T annotation = type.getAnnotation(this.annotationType);
         return factoryMethod.apply(annotation);
     }
