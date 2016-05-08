@@ -12,6 +12,7 @@ import com.github.fhtw.swp.tutorium.singleton.Singleton;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class StaticAnnotationResolver implements AnnotationResolver {
 
@@ -27,6 +28,9 @@ public class StaticAnnotationResolver implements AnnotationResolver {
 
     @Override
     public Class<? extends Annotation> resolve(String name) {
-        return annotationMap.get(name);
+        return Optional.ofNullable(annotationMap.get(name)).orElseThrow(() -> {
+            final String errorMessage = String.format("Annotation '%s' is not registered", name);
+            return new IllegalArgumentException(errorMessage);
+        });
     }
 }
