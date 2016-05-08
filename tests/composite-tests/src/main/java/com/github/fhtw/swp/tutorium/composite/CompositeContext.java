@@ -1,17 +1,16 @@
 package com.github.fhtw.swp.tutorium.composite;
 
-import com.github.fhtw.swp.tutorium.shared.SingleTypeContext;
-
-import javax.inject.Inject;
+import com.github.fhtw.swp.tutorium.composite.proxy.CompositeProxy;
 
 public class CompositeContext {
 
-    private final SingleTypeContext typeContext;
+    private CompositeProxy compositeProxy;
 
-    @Inject
-    public CompositeContext(SingleTypeContext typeContext) {
-        this.typeContext = typeContext;
+    public CompositeProxy getCompositeProxy() {
+        return compositeProxy;
     }
 
-
+    public void setCompositeProxy(CompositeProxy compositeProxy) {
+        this.compositeProxy = compositeProxy;
+    }
 }
