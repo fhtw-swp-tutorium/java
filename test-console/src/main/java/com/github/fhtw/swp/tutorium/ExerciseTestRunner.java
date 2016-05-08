@@ -11,6 +11,7 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.reflections.Configuration;
 
+import java.lang.annotation.Annotation;
 import java.util.Set;
 
 public class ExerciseTestRunner {
@@ -33,9 +34,15 @@ public class ExerciseTestRunner {
 
             if (testClass.isAnnotationPresent(PatternDefiningAnnotation.class)) {
 
-                final Set<Class<?>> annotatedTypes = new AnnotatedTypeFinder(reflectionsConfiguration, testClass.getAnnotation(PatternDefiningAnnotation.class).value()).getAnnotatedTypes();
+                final Class<? extends Annotation> targetAnnotation = testClass.getAnnotation(PatternDefiningAnnotation.class).value();
+                final Set<Class<?>> annotatedTypes = new AnnotatedTypeFinder(reflectionsConfiguration, targetAnnotation).getAnnotatedTypes();
+
+                LOGGER.debug("Types annotated with {}: {}", targetAnnotation, annotatedTypes);
 
                 for (Class<?> annotatedType : annotatedTypes) {
+
+                    System.out.printf("Testing type %s%n", annotatedType.getSimpleName());
+
                     singleTypeContextProvider.setCurrentContext(new SingleTypeContext(annotatedType));
 
                     final Result result = JUnitCore.runClasses(testClass);
