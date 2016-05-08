@@ -6,44 +6,46 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.reflections.ReflectionUtils;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 import java.util.Set;
 
 import static org.reflections.ReflectionUtils.withAnnotation;
 
-public class AnnotatedMethodMatcher extends TypeSafeDiagnosingMatcher<Class<?>> {
+public class AnnotatedFieldMatcher extends TypeSafeDiagnosingMatcher<Class<?>> {
 
     private final Class<? extends Annotation> expectedAnnotation;
     private final int count;
 
-    public AnnotatedMethodMatcher(Class<? extends Annotation> expectedAnnotation, int count) {
+    public AnnotatedFieldMatcher(Class<? extends Annotation> expectedAnnotation, int count) {
         this.expectedAnnotation = expectedAnnotation;
         this.count = count;
     }
 
-    public static Matcher<Class<?>> hasSingleMethodWithAnnotation(Class<? extends Annotation> annotationType) {
-        return new AnnotatedMethodMatcher(annotationType, 1);
+    public static Matcher<Class<?>> hasSingleFieldWithAnnotation(Class<? extends Annotation> expectedAnnotation) {
+        return new AnnotatedFieldMatcher(expectedAnnotation, 1);
     }
 
     @Override
     protected boolean matchesSafely(Class<?> item, Description mismatchDescription) {
 
-        final Set<Method> allAnnotatedMethods = ReflectionUtils.getAllMethods(item, withAnnotation(expectedAnnotation));
+        final Set<Field> allAnnotatedFields = ReflectionUtils.getAllFields(item, withAnnotation(expectedAnnotation));
 
         // but
         mismatchDescription
                 .appendValue(item)
                 .appendText(" has ")
-                .appendValue(allAnnotatedMethods.size())
-                .appendText(" methods annotated with ")
+                .appendValue(allAnnotatedFields.size())
+                .appendText(" fields annotated with ")
                 .appendValue(expectedAnnotation);
 
-        return allAnnotatedMethods.size() == count;
+        return allAnnotatedFields.size() == count;
     }
 
     @Override
     public void describeTo(Description description) {
-        // FIXME this description is not correct
-        description.appendText("a single method that is annotated with ").appendValue(expectedAnnotation);
+        description
+                .appendValue(count)
+                .appendText(" fields that are annotated with ")
+                .appendValue(expectedAnnotation);
     }
 }

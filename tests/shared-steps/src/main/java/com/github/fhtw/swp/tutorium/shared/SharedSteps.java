@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.reflection.AnnotatedFieldMatcher.hasSingleFieldWithAnnotation;
 import static org.hamcrest.reflection.AnnotatedMethodMatcher.hasSingleMethodWithAnnotation;
 import static org.junit.Assert.assertThat;
 import static org.reflections.ReflectionUtils.withAnnotation;
@@ -81,7 +82,16 @@ public class SharedSteps {
         final Class<? extends Annotation> annotation = singleTypeContext.getAnnotation();
         final Class<?> typeUnderTest = singleTypeContext.getTypeUnderTest();
 
-        Assert.assertThat(typeUnderTest, hasSingleMethodWithAnnotation(annotation));
+        assertThat(typeUnderTest, hasSingleMethodWithAnnotation(annotation));
+    }
+
+    @Dann("^erwarte ich mir ein Feld welches mit diesem Attribut annotiert ist$")
+    public void erwarteIchMirEinFeldWelchesMitDiesemAttributAnnotiertIst() throws Throwable {
+
+        final Class<? extends Annotation> annotation = singleTypeContext.getAnnotation();
+        final Class<?> typeUnderTest = singleTypeContext.getTypeUnderTest();
+
+        assertThat(typeUnderTest, hasSingleFieldWithAnnotation(annotation));
     }
 
     @Dann("^erwarte ich mir eine Methode mit genau einem Parameter$")
@@ -89,6 +99,6 @@ public class SharedSteps {
 
         final Method methodUnderTest = singleTypeContext.getMethodUnderTest();
 
-        Assert.assertThat(methodUnderTest, new ParameterCountMethodMatcher(1));
+        assertThat(methodUnderTest, new ParameterCountMethodMatcher(1));
     }
 }

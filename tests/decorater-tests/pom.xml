@@ -3,20 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.github.fhtw-swp-tutorium</groupId>
         <artifactId>tests</artifactId>
+        <groupId>com.github.fhtw-swp-tutorium</groupId>
         <version>0.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>singleton-tests</artifactId>
+    <artifactId>decorater-tests</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.fhtw-swp-tutorium</groupId>
-            <artifactId>jdk-util</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.github.fhtw-swp-tutorium</groupId>
             <artifactId>shared-steps</artifactId>
@@ -30,17 +25,17 @@
                 <version>2.6</version>
                 <executions>
                     <execution>
-                        <id>copy-singleton-feature</id>
+                        <id>copy-decorator-feature</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${base.package}/singleton</outputDirectory>
+                            <outputDirectory>${base.package}/decorator</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${pattern.specifications.path}</directory>
-                                    <include>Singleton.feature</include>
+                                    <include>Decorator.feature</include>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>

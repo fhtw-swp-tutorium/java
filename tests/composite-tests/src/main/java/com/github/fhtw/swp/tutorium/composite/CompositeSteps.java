@@ -95,6 +95,8 @@ public class CompositeSteps {
 
         final Class<?> definedComponentType = compositeDriver.getDefinedComponentType(getCompositeType());
 
+        // TODO check for interface here even if it is not necessary from a technical POV?
+
         assertThat(leafTypes, new LeafsOfComponentExists(definedComponentType));
     }
 

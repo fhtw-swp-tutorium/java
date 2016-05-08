@@ -5,6 +5,8 @@ import com.github.fhtw.swp.tutorium.command.Invoker;
 import com.github.fhtw.swp.tutorium.composite.AddComponent;
 import com.github.fhtw.swp.tutorium.composite.ComponentOperation;
 import com.github.fhtw.swp.tutorium.composite.Composite;
+import com.github.fhtw.swp.tutorium.decorator.Component;
+import com.github.fhtw.swp.tutorium.decorator.Decorator;
 import com.github.fhtw.swp.tutorium.observer.NotifyObservers;
 import com.github.fhtw.swp.tutorium.observer.RegisterObserver;
 import com.github.fhtw.swp.tutorium.observer.Subject;
@@ -30,6 +32,8 @@ public class StaticAnnotationResolver implements AnnotationResolver {
         put("Composite", Composite.class);
         put("AddComponent", AddComponent.class);
         put("ComponentOperation", ComponentOperation.class);
+        put("Component", Component.class);
+        put("Decorator", Decorator.class);
     }};
 
     @Override

@@ -1,10 +1,8 @@
 package com.github.fhtw.swp.tutorium.composite;
 
-import org.reflections.ReflectionUtils;
+import com.github.fhtw.swp.tutorium.reflection.SingleAnnotatedMethodExtractor;
 
 import java.lang.reflect.Method;
-
-import static org.reflections.ReflectionUtils.withAnnotation;
 
 public class CompositeDriver {
 
@@ -13,6 +11,6 @@ public class CompositeDriver {
     }
 
     public Method getAddComponentMethod(Class<?> compositeType) {
-        return ReflectionUtils.getAllMethods(compositeType, withAnnotation(AddComponent.class)).stream().findFirst().get();
+        return new SingleAnnotatedMethodExtractor(compositeType).getSingleAnnotatedMethod(AddComponent.class);
     }
 }
