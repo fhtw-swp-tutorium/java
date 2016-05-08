@@ -2,6 +2,9 @@ package com.github.fhtw.swp.tutorium;
 
 import com.github.fhtw.swp.tutorium.command.InvokeCommand;
 import com.github.fhtw.swp.tutorium.command.Invoker;
+import com.github.fhtw.swp.tutorium.composite.AddComponent;
+import com.github.fhtw.swp.tutorium.composite.ComponentOperation;
+import com.github.fhtw.swp.tutorium.composite.Composite;
 import com.github.fhtw.swp.tutorium.observer.NotifyObservers;
 import com.github.fhtw.swp.tutorium.observer.RegisterObserver;
 import com.github.fhtw.swp.tutorium.observer.Subject;
@@ -24,6 +27,9 @@ public class StaticAnnotationResolver implements AnnotationResolver {
         put("RegisterObserver", RegisterObserver.class);
         put("UnregisterObserver", UnregisterObserver.class);
         put("NotifyObservers", NotifyObservers.class);
+        put("Composite", Composite.class);
+        put("AddComponent", AddComponent.class);
+        put("ComponentOperation", ComponentOperation.class);
     }};
 
     @Override
