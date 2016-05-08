@@ -11,8 +11,8 @@
 
     <modules>
         <module>test-console</module>
-        <module>reflection-facade</module>
-        <module>reflection-matcher</module>
+        <module>reflection-extensions</module>
+        <module>matcher-extensions</module>
         <module>jdk-util</module>
         <module>tests</module>
     </modules>
@@ -119,13 +119,13 @@
 
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>reflection-matcher</artifactId>
+                <artifactId>matcher-extensions</artifactId>
                 <version>${current.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.fhtw-swp-tutorium</groupId>
-                <artifactId>reflection-facade</artifactId>
+                <artifactId>reflection-extensions</artifactId>
                 <version>${current.version}</version>
             </dependency>
 
