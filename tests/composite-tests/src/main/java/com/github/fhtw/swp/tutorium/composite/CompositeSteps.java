@@ -14,6 +14,7 @@ import cucumber.api.java.de.Wenn;
 import org.hamcrest.reflection.ImplementsInterface;
 import org.hamcrest.reflection.IsInterface;
 import org.junit.Assert;
+import org.junit.Assume;
 
 import javax.inject.Inject;
 import java.lang.reflect.Method;
@@ -110,7 +111,12 @@ public class CompositeSteps {
     @Und("^eine dynamische Component-Instanz$")
     public void eineDynamischeComponentInstanz() throws Throwable {
 
-        final GenericInvocationCountingProxy component = componentFactory.create(getCompositeType());
+        final Class<?> compositeType = getCompositeType();
+        final Class<?> definedComponentType = compositeDriver.getDefinedComponentType(compositeType);
+
+        Assume.assumeThat(definedComponentType, new IsInterface());
+
+        final GenericInvocationCountingProxy component = componentFactory.create(definedComponentType);
 
         compositeContext.setComponentProxy(component);
     }
