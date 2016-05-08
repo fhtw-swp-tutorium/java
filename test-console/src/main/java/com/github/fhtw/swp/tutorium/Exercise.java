@@ -7,7 +7,7 @@ import static com.github.fhtw.swp.tutorium.Pattern.*;
 
 public enum Exercise {
     UE1(OBSERVER, SINGLETON, COMMAND),
-    UE2(),
+    UE2(COMPOSITE),
     UE3();
 
     private final Pattern[] patterns;
