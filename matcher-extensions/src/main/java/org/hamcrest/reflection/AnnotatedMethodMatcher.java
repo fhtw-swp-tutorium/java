@@ -43,6 +43,7 @@ public class AnnotatedMethodMatcher extends TypeSafeDiagnosingMatcher<Class<?>> 
 
     @Override
     public void describeTo(Description description) {
+        // FIXME this description is not correct
         description.appendText("a single method that is annotated with ").appendValue(expectedAnnotation);
     }
 }
