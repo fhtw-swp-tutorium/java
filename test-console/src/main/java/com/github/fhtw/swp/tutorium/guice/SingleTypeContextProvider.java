@@ -1,18 +1,18 @@
 package com.github.fhtw.swp.tutorium.guice;
 
 import com.github.fhtw.swp.tutorium.shared.SingleTypeContext;
-import com.google.inject.Provides;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import cucumber.runtime.java.guice.ScenarioScoped;
 
 @Singleton
-public class SingleTypeContextProvider {
+public class SingleTypeContextProvider implements Provider<SingleTypeContext> {
 
     private SingleTypeContext currentContext;
 
-    @Provides
     @ScenarioScoped
-    public SingleTypeContext getCurrentContext() {
+    @Override
+    public SingleTypeContext get() {
         return currentContext;
     }
 

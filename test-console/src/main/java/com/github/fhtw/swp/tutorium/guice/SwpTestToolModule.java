@@ -6,6 +6,7 @@ import com.github.fhtw.swp.tutorium.StaticAnnotationResolver;
 import com.github.fhtw.swp.tutorium.composite.CompositeContext;
 import com.github.fhtw.swp.tutorium.composite.LeafTypeProvider;
 import com.github.fhtw.swp.tutorium.shared.AnnotationResolver;
+import com.github.fhtw.swp.tutorium.shared.SingleTypeContext;
 import com.github.fhtw.swp.tutorium.shared.TypeContext;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -30,6 +31,7 @@ public class SwpTestToolModule extends AbstractModule {
         bind(SubTypeFinder.class).to(ReflectionsSubTypeFinder.class);
         bind(AnnotationResolver.class).to(StaticAnnotationResolver.class);
         bind(Configuration.class).toProvider(ConfigurationProvider.class);
+        bind(SingleTypeContext.class).toProvider(SingleTypeContextProvider.class);
         bind(TypeContext.class).in(ScenarioScoped.class);
         bind(CompositeContext.class).in(ScenarioScoped.class);
         bind(LeafTypeProvider.class).to(LeafTypeProviderImpl.class);
