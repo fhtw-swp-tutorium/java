@@ -17,6 +17,7 @@
         <module>observer-tests</module>
         <module>shared-steps</module>
         <module>composite-tests</module>
+        <module>decorater-tests</module>
     </modules>
 
     <properties>
