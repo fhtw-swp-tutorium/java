@@ -2,6 +2,7 @@ package com.github.fhtw.swp.tutorium.observer;
 
 import com.github.fhtw.swp.tutorium.observer.factory.ObserverProxyFactory;
 import com.github.fhtw.swp.tutorium.observer.factory.SubjectProxyFactory;
+import com.github.fhtw.swp.tutorium.reflection.GenericInvocationCountingProxy;
 import com.google.common.collect.Maps;
 
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class ObserverDriver {
 
     private final Map<Class<?>, SubjectProxy> subjectProxies = Maps.newHashMap();
-    private final Map<Class<?>, ObserverProxy> observerProxies = Maps.newHashMap();
+    private final Map<Class<?>, GenericInvocationCountingProxy> observerProxies = Maps.newHashMap();
     private final SubjectProxyFactory subjectProxyFactory;
     private final ObserverProxyFactory observerProxyFactory;
 
@@ -25,7 +26,7 @@ public class ObserverDriver {
     }
 
     public void createObserverProxyInstance(Class<?> subjectType) {
-        final ObserverProxy observer = observerProxyFactory.create(subjectType);
+        final GenericInvocationCountingProxy observer = observerProxyFactory.create(subjectType);
         observerProxies.put(subjectType, observer);
     }
 
@@ -33,7 +34,7 @@ public class ObserverDriver {
         return subjectProxies.get(subjectType);
     }
 
-    public ObserverProxy getObserverProxyInstance(Class<?> subjectType) {
+    public GenericInvocationCountingProxy getObserverProxyInstance(Class<?> subjectType) {
         return observerProxies.get(subjectType);
     }
 }
