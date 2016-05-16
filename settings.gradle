@@ -1,0 +1,29 @@
+rootProject.name = 'swp-test-tool'
+
+include ':test-console'
+include ':reflection-extensions'
+include ':matcher-extensions'
+include ':jdk-util'
+include ':tests:command-tests'
+include ':tests:singleton-tests'
+include ':tests:observer-tests'
+include ':tests:shared-steps'
+include ':tests:composite-tests'
+include ':tests:decorater-tests'
+include ':tests:strategy-tests'
+include ':tests'
+
+/*
+project(':test-console').projectDir = "$rootDir/test-console" as File
+project(':reflection-extensions').projectDir = "$rootDir/reflection-extensions" as File
+project(':matcher-extensions').projectDir = "$rootDir/matcher-extensions" as File
+project(':jdk-util').projectDir = "$rootDir/jdk-util" as File
+project(':tests:command-tests').projectDir = "$rootDir/tests/command-tests" as File
+project(':tests:singleton-tests').projectDir = "$rootDir/tests/singleton-tests" as File
+project(':tests:observer-tests').projectDir = "$rootDir/tests/observer-tests" as File
+project(':tests:shared-steps').projectDir = "$rootDir/tests/shared-steps" as File
+project(':tests:composite-tests').projectDir = "$rootDir/tests/composite-tests" as File
+project(':tests:decorater-tests').projectDir = "$rootDir/tests/decorater-tests" as File
+project(':tests:strategy-tests').projectDir = "$rootDir/tests/strategy-tests" as File
+project(':tests').projectDir = "$rootDir/tests" as File
+*/

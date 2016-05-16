@@ -121,7 +121,7 @@ public class CompositeSteps {
     }
 
     @Wenn("^ich diese Instanz zu dem Composite hinzufüge$")
-    public void ichDieseInstanzZuDemCompositeHinzufüge() throws Throwable {
+    public void ichDieseInstanzZuDemCompositeHinzufuege() throws Throwable {
 
         final CompositeProxy composite = compositeContext.getCompositeProxy();
         final GenericInvocationCountingProxy component = compositeContext.getComponentProxy();

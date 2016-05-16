@@ -1,0 +1,28 @@
+apply from: 'gradle/dependencyManagement.gradle'
+
+allprojects {
+	apply plugin: 'java'
+
+	/*
+	apply plugin: 'maven'
+
+	group = 'com.github.fhtw-swp-tutorium';
+	version = '0.0.4-SNAPSHOT;
+	*/
+
+	repositories {
+		mavenLocal()
+
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+		maven { url "http://repo.maven.apache.org/maven2" }
+	}
+}
+
+subprojects {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	dependencies {
+		compile libraries.annotations
+	}
+}
