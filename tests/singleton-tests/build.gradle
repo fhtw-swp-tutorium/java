@@ -2,5 +2,3 @@ dependencies {
   compile project(':jdk-util')
   compile project(':tests:shared-steps')
 }
-
-extensions.subPackage = 'singleton'
