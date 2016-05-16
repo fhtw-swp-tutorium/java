@@ -51,6 +51,9 @@ public class ExerciseTestRunner {
 
             } else {
 
+                // TEMPORARY WORKAROUND TO MAKE OLD TESTS RUN
+                singleTypeContextProvider.setCurrentContext(new SingleTypeContext(null));
+
                 final Result result = JUnitCore.runClasses(testClass);
                 result.getFailures().forEach(f -> LOGGER.error("Failed to run test class {}", testClass, f.getException()));
             }

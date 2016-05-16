@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
                 "cucumber.runtime.ScenarioStatsSummaryPrinter",
                 "com.github.fhtw.swp.tutorium.reporting.LoggingReporter"
         },
+        features = "classpath:Composite.feature",
         glue = {
                 "com.github.fhtw.swp.tutorium.composite",
                 "com.github.fhtw.swp.tutorium.shared"

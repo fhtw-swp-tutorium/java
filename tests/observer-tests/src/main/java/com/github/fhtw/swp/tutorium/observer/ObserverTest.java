@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
                 "junit:junit-out/observer_results.xml",
                 "com.github.fhtw.swp.tutorium.reporting.LoggingReporter"
         },
+        features = "classpath:Observer.feature",
         glue = {
                 "com.github.fhtw.swp.tutorium.observer",
                 "com.github.fhtw.swp.tutorium.shared"
