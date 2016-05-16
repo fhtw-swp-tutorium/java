@@ -1,19 +1,14 @@
+plugins {
+	id "us.kirchmeier.capsule" version "1.0.2"
+}
+
 apply from: 'gradle/dependencyManagement.gradle'
 
-allprojects {
+configure(allprojects) {
 	apply plugin: 'java'
-
-	/*
-	apply plugin: 'maven'
-
-	group = 'com.github.fhtw-swp-tutorium';
-	version = '0.0.4-SNAPSHOT;
-	*/
 
 	repositories {
 		mavenLocal()
-
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 		maven { url "http://repo.maven.apache.org/maven2" }
 	}
 }
@@ -25,4 +20,21 @@ subprojects {
 	dependencies {
 		compile libraries.annotations
 	}
+}
+
+dependencies {
+	compile libraries.args4j
+	compile libraries.guice
+	compile libraries.cucumberguice
+	testCompile libraries.mockito
+
+	compile project.rootProject.subprojects
+}
+
+task fatCapsule(type: Capsule){
+	applicationClass 'com.github.fhtw.swp.tutorium.cli.Application'
+	applicationSource jar
+	classifier ''
+	baseName 'SwpTestTool'
+	embedConfiguration = configurations.runtime
 }

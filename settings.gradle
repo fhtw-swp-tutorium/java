@@ -1,6 +1,5 @@
 rootProject.name = 'swp-test-tool'
 
-include ':test-console'
 include ':reflection-extensions'
 include ':matcher-extensions'
 include ':jdk-util'

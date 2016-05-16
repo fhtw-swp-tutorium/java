@@ -1,3 +1,3 @@
 dependencies {
-  compile project(':tests:shared-steps')
+	compile project(':tests:shared-steps')
 }
