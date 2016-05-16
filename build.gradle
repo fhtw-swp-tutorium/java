@@ -7,6 +7,9 @@ apply from: 'gradle/dependencyManagement.gradle'
 configure(allprojects) {
 	apply plugin: 'java'
 
+	group = 'com.github.fhtw-swp-tutorium'
+	version = '0.0.4-SNAPSHOT'
+
 	repositories {
 		mavenLocal()
 		maven { url "http://repo.maven.apache.org/maven2" }
@@ -24,6 +27,7 @@ subprojects {
 
 dependencies {
 	compile libraries.args4j
+	compile libraries.log4j2core
 	compile libraries.guice
 	compile libraries.cucumberguice
 	testCompile libraries.mockito
@@ -31,10 +35,18 @@ dependencies {
 	compile project.rootProject.subprojects
 }
 
-task fatCapsule(type: Capsule){
+task fatCapsule(type: Capsule) {
 	applicationClass 'com.github.fhtw.swp.tutorium.cli.Application'
 	applicationSource jar
 	classifier ''
 	baseName 'SwpTestTool'
 	embedConfiguration = configurations.runtime
+
+	// can not be read from code? :(
+	manifest {
+		attributes (
+				'Implementation-Title': project.name,
+				'Implementation-Version': project.version
+		)
+	}
 }

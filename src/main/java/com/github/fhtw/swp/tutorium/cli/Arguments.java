@@ -15,7 +15,7 @@ public class Arguments {
     @Option(name = "-pattern", forbids = "-exercise", usage = "The pattern to test")
     private Pattern pattern;
 
-    @Argument(required = true, usage = "The path to the .jar file of the exercise", handler = UrlOptionHandler.class)
+    @Argument(required = true, metaVar = "jarUrl", usage = "The path to the .jar file of the exercise", handler = UrlOptionHandler.class)
     private URL jarUrl;
 
     public Exercise getExercise() {

@@ -19,10 +19,12 @@ public class VersionPrinter {
 
     public void printVersionInformation(PrintStream target) {
 
+        /*
         final String runningVersionText = "Running version: " + currentVersion;
 
         LOGGER.debug(runningVersionText);
         target.println(runningVersionText);
+        */
 
         final String requiredAnnotationVersionText = "Required annotation version: " + requiredAnnotationVersion;
 
