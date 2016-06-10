@@ -9,7 +9,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {
                 "cucumber.runtime.ScenarioStatsSummaryPrinter",
-                "com.github.fhtw.swp.tutorium.reporting.LoggingReporter"
+                "com.github.fhtw.swp.tutorium.reporting.LoggingReporter",
+                "com.github.fhtw.swp.tutorium.reporting.JunitReporter"
         },
         features = "classpath:Composite.feature",
         glue = {

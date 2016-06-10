@@ -1,3 +1,5 @@
+import java.nio.file.Paths
+
 plugins {
 	id "us.kirchmeier.capsule" version "1.0.2"
 }
@@ -35,6 +37,7 @@ sourceSets {
 		}
 
 		compileClasspath += sourceSets.main.runtimeClasspath
+		runtimeClasspath += sourceSets.main.runtimeClasspath
 	}
 }
 
@@ -64,10 +67,26 @@ dependencies {
 	testCompile libraries.mockito
 
 	e2eTestCompile libraries.junit
+	e2eTestCompile libraries.hamcrest
 	e2eTestRuntime fatCapsule.outputs.files // add output of fatCapsule task to classpath
 }
 
-task e2eTest (type: Test, dependsOn: fatCapsule) {
+def e2eTestWorkingDir = Paths.get("$buildDir", "e2eTestWorkingDir").toFile()
+
+task cleanE2ETestWorkingDir {
+	clean {
+		delete e2eTestWorkingDir
+	}
+}
+
+task ensureE2ETestWorkingDir (dependsOn: cleanE2ETestWorkingDir) {
+	e2eTestWorkingDir.mkdir()
+}
+
+task e2eTest (type: Test, dependsOn: [fatCapsule, ensureE2ETestWorkingDir]) {
 	testClassesDir = sourceSets.e2eTest.output.classesDir
 	classpath = sourceSets.e2eTest.runtimeClasspath
+
+	// avoid spamming the root dir of the project with the output of the e2eTests
+	workingDir = e2eTestWorkingDir
 }
