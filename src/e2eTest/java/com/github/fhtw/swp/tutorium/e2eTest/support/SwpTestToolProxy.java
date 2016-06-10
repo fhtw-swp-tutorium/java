@@ -1,6 +1,8 @@
 package com.github.fhtw.swp.tutorium.e2eTest.support;
 
 import com.github.fhtw.swp.tutorium.Pattern;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -9,6 +11,8 @@ import java.net.URLClassLoader;
 import java.util.Arrays;
 
 public class SwpTestToolProxy {
+
+    private static final Logger LOGGER = LogManager.getLogger(SwpTestToolProxy.class);
 
     private final String pathToSwpTestTool;
 
@@ -25,14 +29,18 @@ public class SwpTestToolProxy {
                 .toString()
                 .replace("file:/", "");
 
+        LOGGER.info("Creating SwpTestToolProxy for {}", pathToSwpTestTool);
+
         return new SwpTestToolProxy(pathToSwpTestTool);
     }
 
-    public void run(Pattern exercise, URL patternImplementation) {
+    public void run(Pattern pattern, URL patternImplementation) {
 
         final String pathToPatternImplementationWithoutScheme = patternImplementation.toString().replace("file:/", "");
 
-        final Process swpTestToolProcess = runSwpTestTool(exercise, pathToPatternImplementationWithoutScheme);
+        LOGGER.info("Testing pattern {} against {}", pattern, patternImplementation);
+
+        final Process swpTestToolProcess = runSwpTestTool(pattern, pathToPatternImplementationWithoutScheme);
 
         waitForIt(swpTestToolProcess);
     }
@@ -46,7 +54,6 @@ public class SwpTestToolProxy {
     }
 
     private Process runSwpTestTool(Pattern exercise, String patternImplementation) {
-
         try {
             return new ProcessBuilder("java", "-jar", pathToSwpTestTool, "-pattern", exercise.toString(), patternImplementation).start();
 //            return new ProcessBuilder("java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,address=5005,server=y", "-jar", pathToSwpTestTool, "-pattern", exercise.toString(), patternImplementation).start();
