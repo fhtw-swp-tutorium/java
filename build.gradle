@@ -60,6 +60,12 @@ task fatCapsule(type: Capsule) {
 	}
 }
 
+test {
+	testLogging {
+		exceptionFormat = 'full'
+	}
+}
+
 dependencies {
 	compile libraries.args4j
 	compile libraries.log4j2core

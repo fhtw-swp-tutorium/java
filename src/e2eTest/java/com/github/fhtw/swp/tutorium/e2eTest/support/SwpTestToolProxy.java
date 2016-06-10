@@ -22,7 +22,7 @@ public class SwpTestToolProxy {
 
     public static SwpTestToolProxy createInstance() {
         final String pathToSwpTestTool = Arrays
-                .stream(((URLClassLoader) SwpTestToolProxy.class.getClassLoader()).getURLs())
+                .stream(classpathURLs())
                 .filter(url -> url.getFile().contains("SwpTestTool-"))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Cannot find SwpTestTool jar on classpath"))
@@ -34,15 +34,27 @@ public class SwpTestToolProxy {
         return new SwpTestToolProxy(pathToSwpTestTool);
     }
 
+    private static URL[] classpathURLs() {
+        return ((URLClassLoader) SwpTestToolProxy.class.getClassLoader()).getURLs();
+    }
+
     public void run(Pattern pattern, URL patternImplementation) {
 
         final String pathToPatternImplementationWithoutScheme = patternImplementation.toString().replace("file:/", "");
 
-        LOGGER.info("Testing pattern {} against {}", pattern, patternImplementation);
+        LOGGER.info("Testing pattern {} against {}", pattern, pathToPatternImplementationWithoutScheme);
 
         final Process swpTestToolProcess = runSwpTestTool(pattern, pathToPatternImplementationWithoutScheme);
-
         waitForIt(swpTestToolProcess);
+    }
+
+    private Process runSwpTestTool(Pattern pattern, String patternImplementation) {
+        try {
+            return new ProcessBuilder("java", "-jar", pathToSwpTestTool, "-pattern", pattern.toString(), patternImplementation).inheritIO().start();
+//            return new ProcessBuilder("java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,address=5005,server=y", "-jar", pathToSwpTestTool, "-pattern", pattern.toString(), patternImplementation).start();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     private void waitForIt(Process swpTestToolProcess) {
@@ -50,15 +62,6 @@ public class SwpTestToolProxy {
             swpTestToolProcess.waitFor();
         } catch (InterruptedException e) {
             throw new IllegalStateException(e);
-        }
-    }
-
-    private Process runSwpTestTool(Pattern exercise, String patternImplementation) {
-        try {
-            return new ProcessBuilder("java", "-jar", pathToSwpTestTool, "-pattern", exercise.toString(), patternImplementation).start();
-//            return new ProcessBuilder("java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,address=5005,server=y", "-jar", pathToSwpTestTool, "-pattern", exercise.toString(), patternImplementation).start();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
         }
     }
 }
