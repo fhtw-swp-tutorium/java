@@ -9,6 +9,8 @@ apply from: 'gradle/dependencyManagement.gradle'
 configure(allprojects) {
 	apply plugin: 'java'
 
+	compileJava.options.encoding = 'UTF-8'
+
 	group = 'com.github.fhtw-swp-tutorium'
 	version = '0.0.4-SNAPSHOT'
 

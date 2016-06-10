@@ -46,10 +46,10 @@ public class SwpTestToolProxy {
     }
 
     private Process runSwpTestTool(Pattern exercise, String patternImplementation) {
+
         try {
-            return new ProcessBuilder("java", "-jar", pathToSwpTestTool, "-pattern", exercise.toString(), patternImplementation)
-                    //.inheritIO()
-                    .start();
+            return new ProcessBuilder("java", "-jar", pathToSwpTestTool, "-pattern", exercise.toString(), patternImplementation).start();
+//            return new ProcessBuilder("java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,address=5005,server=y", "-jar", pathToSwpTestTool, "-pattern", exercise.toString(), patternImplementation).start();
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
