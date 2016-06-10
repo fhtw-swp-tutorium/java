@@ -76,17 +76,17 @@ dependencies {
 
 def e2eTestWorkingDir = Paths.get("$buildDir", "e2eTestWorkingDir").toFile()
 
-task cleanE2ETestWorkingDir {
+task cleanE2ETestWorkingDir << {
 	clean {
 		delete e2eTestWorkingDir
 	}
 }
 
-task ensureE2ETestWorkingDir (dependsOn: cleanE2ETestWorkingDir) {
+task ensureE2ETestWorkingDir (dependsOn: cleanE2ETestWorkingDir) << {
 	e2eTestWorkingDir.mkdir()
 }
 
-task e2eTest (type: Test, dependsOn: [fatCapsule, ensureE2ETestWorkingDir]) {
+task e2eTest (type: Test, dependsOn: [ensureE2ETestWorkingDir, fatCapsule]) {
 	testClassesDir = sourceSets.e2eTest.output.classesDir
 	classpath = sourceSets.e2eTest.runtimeClasspath
 
