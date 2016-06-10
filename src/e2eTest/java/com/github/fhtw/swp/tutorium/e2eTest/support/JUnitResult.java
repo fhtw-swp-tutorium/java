@@ -1,4 +1,4 @@
-package com.github.fhtw.swp.tutorium.e2eTest;
+package com.github.fhtw.swp.tutorium.e2eTest.support;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

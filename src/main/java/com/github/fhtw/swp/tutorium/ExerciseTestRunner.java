@@ -2,7 +2,7 @@ package com.github.fhtw.swp.tutorium;
 
 import com.github.fhtw.swp.tutorium.guice.SingleTypeContextProvider;
 import com.github.fhtw.swp.tutorium.reflection.AnnotatedTypeFinder;
-import com.github.fhtw.swp.tutorium.reporting.JunitReporter;
+import com.github.fhtw.swp.tutorium.reporting.JUnitReporter;
 import com.github.fhtw.swp.tutorium.shared.PatternDefiningAnnotation;
 import com.github.fhtw.swp.tutorium.shared.SingleTypeContext;
 import com.google.inject.Inject;
@@ -44,7 +44,7 @@ public class ExerciseTestRunner {
 
                     System.out.printf("Testing type %s%n", annotatedType.getSimpleName());
 
-                    System.setProperty(JunitReporter.JUNIT_RESULT_FILE_NAME_PROPERTY, String.format("%s.xml", annotatedType.getSimpleName()));
+                    System.setProperty(JUnitReporter.JUNIT_RESULT_FILE_NAME_PROPERTY, String.format("%s.xml", annotatedType.getSimpleName()));
                     singleTypeContextProvider.setCurrentContext(new SingleTypeContext(annotatedType));
 
                     final Result result = JUnitCore.runClasses(testClass);

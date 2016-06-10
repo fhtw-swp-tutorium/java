@@ -1,4 +1,4 @@
-package com.github.fhtw.swp.tutorium.e2eTest;
+package com.github.fhtw.swp.tutorium.e2eTest.support;
 
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
