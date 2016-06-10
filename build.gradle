@@ -25,14 +25,17 @@ subprojects {
 	}
 }
 
-dependencies {
-	compile libraries.args4j
-	compile libraries.log4j2core
-	compile libraries.guice
-	compile libraries.cucumberguice
-	testCompile libraries.mockito
+sourceSets {
+	e2eTest {
+		java {
+			srcDir file('src/e2eTest/java')
+		}
+		resources {
+			srcDir file('src/e2eTest/resources')
+		}
 
-	compile project.rootProject.subprojects
+		compileClasspath += sourceSets.main.runtimeClasspath
+	}
 }
 
 task fatCapsule(type: Capsule) {
@@ -49,4 +52,22 @@ task fatCapsule(type: Capsule) {
 				'Implementation-Version': project.version
 		)
 	}
+}
+
+dependencies {
+	compile libraries.args4j
+	compile libraries.log4j2core
+	compile libraries.guice
+	compile libraries.cucumberguice
+	compile project.rootProject.subprojects
+
+	testCompile libraries.mockito
+
+	e2eTestCompile libraries.junit
+	e2eTestRuntime fatCapsule.outputs.files // add output of fatCapsule task to classpath
+}
+
+task e2eTest (type: Test, dependsOn: fatCapsule) {
+	testClassesDir = sourceSets.e2eTest.output.classesDir
+	classpath = sourceSets.e2eTest.runtimeClasspath
 }
