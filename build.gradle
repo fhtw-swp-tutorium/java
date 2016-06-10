@@ -9,6 +9,7 @@ apply from: 'gradle/dependencyManagement.gradle'
 configure(allprojects) {
 	apply plugin: 'java'
 
+	// we must compile all sources as UTF-8, otherwise some step definitions don't work because we have got umlauts in our step definitions
 	compileJava.options.encoding = 'UTF-8'
 
 	group = 'com.github.fhtw-swp-tutorium'
