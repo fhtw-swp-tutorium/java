@@ -30,7 +30,7 @@ import java.util.Locale;
 
 import static com.github.fhtw.swp.tutorium.cli.Application.JUNIT_RESULTS_FOLDER;
 
-public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
+public class JUnitReporter implements Formatter, Reporter, StrictAware {
 
     public static final String JUNIT_RESULT_FILE_NAME_PROPERTY = "pattern.junit.result.filename";
 
@@ -38,10 +38,10 @@ public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
     private final Document doc;
     private final Element rootElement;
 
-    private JUnitReporterOld.TestCase testCase;
+    private JUnitReporter.TestCase testCase;
     private Element root;
 
-    public JUnitReporterOld() throws IOException {
+    public JUnitReporter() throws IOException {
 
         final String junitResultFileName = System.getProperty(JUNIT_RESULT_FILE_NAME_PROPERTY);
 
@@ -60,7 +60,7 @@ public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
         final File junitResultsFile = pathToJunitResultsFolder.resolve(junitResultFileName).toFile();
 
         this.out = new UTF8OutputStreamWriter(new FileOutputStream(junitResultsFile));
-        JUnitReporterOld.TestCase.treatSkippedAsFailure = false;
+        JUnitReporter.TestCase.treatSkippedAsFailure = false;
         try {
             doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             rootElement = doc.createElement("testsuite");
@@ -72,15 +72,15 @@ public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
 
     @Override
     public void feature(Feature feature) {
-        JUnitReporterOld.TestCase.feature = feature;
-        JUnitReporterOld.TestCase.previousScenarioOutlineName = "";
-        JUnitReporterOld.TestCase.exampleNumber = 1;
+        JUnitReporter.TestCase.feature = feature;
+        JUnitReporter.TestCase.previousScenarioOutlineName = "";
+        JUnitReporter.TestCase.exampleNumber = 1;
     }
 
     @Override
     public void background(Background background) {
         if (!isCurrentTestCaseCreatedNameless()) {
-            testCase = new JUnitReporterOld.TestCase();
+            testCase = new JUnitReporter.TestCase();
             root = testCase.createElement(doc);
         }
     }
@@ -90,7 +90,7 @@ public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
         if (isCurrentTestCaseCreatedNameless()) {
             testCase.scenario = scenario;
         } else {
-            testCase = new JUnitReporterOld.TestCase(scenario);
+            testCase = new JUnitReporter.TestCase(scenario);
             root = testCase.createElement(doc);
         }
         testCase.writeElement(doc, root);
@@ -112,7 +112,7 @@ public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
     public void done() {
         try {
             // set up a transformer
-            rootElement.setAttribute("name", JUnitReporterOld.class.getName());
+            rootElement.setAttribute("name", JUnitReporter.class.getName());
             rootElement.setAttribute("failures", String.valueOf(rootElement.getElementsByTagName("failure").getLength()));
             rootElement.setAttribute("skipped", String.valueOf(rootElement.getElementsByTagName("skipped").getLength()));
             rootElement.setAttribute("time", sumTimes(rootElement.getElementsByTagName("testcase")));
@@ -161,7 +161,7 @@ public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
     @Override
     public void before(Match match, Result result) {
         if (!isCurrentTestCaseCreatedNameless()) {
-            testCase = new JUnitReporterOld.TestCase();
+            testCase = new JUnitReporter.TestCase();
             root = testCase.createElement(doc);
         }
         handleHook(result);
@@ -240,7 +240,7 @@ public class JUnitReporterOld implements Formatter, Reporter, StrictAware {
 
     @Override
     public void setStrict(boolean strict) {
-        JUnitReporterOld.TestCase.treatSkippedAsFailure = strict;
+        JUnitReporter.TestCase.treatSkippedAsFailure = strict;
     }
 
     private static class TestCase {
