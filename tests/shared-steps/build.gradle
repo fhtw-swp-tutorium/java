@@ -1,0 +1,8 @@
+dependencies {
+	compile group: 'javax.inject', name: 'javax.inject', version: '1'
+
+	compile libraries.cucumber
+	compile project(':reflection-extensions')
+	compile project(':matcher-extensions')
+	testCompile libraries.mockito
+}

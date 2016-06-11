@@ -5,13 +5,10 @@ import com.github.fhtw.swp.tutorium.shared.TypeContext;
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Und;
 import org.hamcrest.reflection.ImplementationExistsMatcher;
-import org.hamcrest.reflection.OnlyInterfaceParametersMethodMatcher;
 import org.hamcrest.reflection.SubTypeFinder;
 import org.junit.Assert;
 
 import javax.inject.Inject;
-import java.lang.reflect.Method;
-import java.util.Set;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -27,22 +24,6 @@ public class CommandSteps {
         this.typeContext = typeContext;
         this.subTypeFinder = subTypeFinder;
         this.commandDriver = commandDriver;
-    }
-
-    @Dann("^erwarte ich mir jeweils genau eine Methode$")
-    public void erwarteIchMirJeweilsGenauEineMethode() throws Throwable {
-        for (Class<?> type : typeContext.getTypes()) {
-            final Set<Method> methodsOfType = typeContext.getMethodsOfType(type);
-            Assert.assertThat(methodsOfType.size(), is(1));
-        }
-    }
-
-    @Und("^jeder Parameter muss ein Interface sein$")
-    public void mussJederParameterEinInterfaceSein() throws Throwable {
-        for (Class<?> type : typeContext.getTypes()) {
-            final Method invokeCommandMethod = typeContext.getFirstMethodOfType(type);
-            Assert.assertThat(invokeCommandMethod, new OnlyInterfaceParametersMethodMatcher());
-        }
     }
 
     @Dann("^muss es für jeden Interface Parameter eine Implementierung geben$")

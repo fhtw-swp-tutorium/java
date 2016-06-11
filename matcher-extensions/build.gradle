@@ -1,0 +1,6 @@
+dependencies {
+	compile libraries.reflections
+	compile libraries.hamcrest
+	testCompile libraries.junit
+	testCompile libraries.mockito
+}

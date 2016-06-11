@@ -1,0 +1,13 @@
+rootProject.name = 'swp-test-tool'
+
+include ':reflection-extensions'
+include ':matcher-extensions'
+include ':jdk-util'
+include ':tests:command-tests'
+include ':tests:singleton-tests'
+include ':tests:observer-tests'
+include ':tests:shared-steps'
+include ':tests:composite-tests'
+include ':tests:decorater-tests'
+include ':tests:strategy-tests'
+include ':tests'

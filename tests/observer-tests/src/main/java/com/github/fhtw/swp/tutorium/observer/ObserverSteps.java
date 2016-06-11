@@ -32,12 +32,6 @@ public class ObserverSteps {
         this.methodPrefixMatcherFactory = methodPrefixMatcherFactory;
     }
 
-
-    @Dann("^darf diese Liste nicht leer sein$")
-    public void darfDieseListeNichtLeerSein() throws Throwable {
-        assertThat(typeContext.getTypes(), is(not(empty())));
-    }
-
     @Dann("^erwarte ich mir eine Methode, die mit einem dieser Präfixe beginnt: \"([^\"]*)\"$")
     public void erwarteIchMirEineMethodeDieMitEinemDieserPräfixeBeginnt(String delimitedPrefixes) throws Throwable {
 

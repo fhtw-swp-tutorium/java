@@ -1,0 +1,7 @@
+dependencies {
+    compile libraries.reflections
+    compile libraries.bytebuddy
+    compile libraries.log4j2api
+    testCompile libraries.hamcrest
+    testCompile libraries.junit
+}

@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
                 "junit:junit-out/singleton_results.xml",
                 "com.github.fhtw.swp.tutorium.reporting.LoggingReporter"
         },
+        features = "classpath:Singleton.feature",
         glue = {
                 "com.github.fhtw.swp.tutorium.singleton",
                 "com.github.fhtw.swp.tutorium.shared"

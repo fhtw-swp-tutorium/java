@@ -22,11 +22,6 @@ public class SingletonSteps {
         this.typeContext = typeContext;
     }
 
-    @Dann("^darf diese Liste nicht leer sein$")
-    public void darfDieseListeNichtLeerSein() throws Throwable {
-        assertThat(typeContext.getTypes(), is(not(empty())));
-    }
-
     @Dann("^sollen alle Singletons eine Methode zum Zugriff auf die Instanz haben$")
     public void sollenAlleSingletonsEineMethodeZumZugriffAufDieInstanzHaben() throws Throwable {
         for (Class<?> singletonClass : typeContext.getTypes()) {

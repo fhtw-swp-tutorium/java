@@ -1,0 +1,9 @@
+subprojects {
+	sourceSets {
+		main {
+			resources {
+				srcDir project.rootDir.path + '/pattern-specifications'
+			}
+		}
+	}
+}

@@ -9,8 +9,10 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {
                 "cucumber.runtime.ScenarioStatsSummaryPrinter",
-                "com.github.fhtw.swp.tutorium.reporting.LoggingReporter"
+                "com.github.fhtw.swp.tutorium.reporting.LoggingReporter",
+                "com.github.fhtw.swp.tutorium.reporting.JUnitReporter"
         },
+        features = "classpath:Decorator.feature",
         glue = {
                 "com.github.fhtw.swp.tutorium.decorator",
                 "com.github.fhtw.swp.tutorium.shared"

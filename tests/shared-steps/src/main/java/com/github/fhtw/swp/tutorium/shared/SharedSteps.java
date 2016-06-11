@@ -2,7 +2,9 @@ package com.github.fhtw.swp.tutorium.shared;
 
 import cucumber.api.java.de.Dann;
 import cucumber.api.java.de.Gegebensei;
+import cucumber.api.java.de.Und;
 import cucumber.api.java.de.Wenn;
+import org.hamcrest.reflection.OnlyInterfaceParametersMethodMatcher;
 import org.hamcrest.reflection.ParameterCountMethodMatcher;
 import org.junit.Assert;
 
@@ -66,6 +68,13 @@ public class SharedSteps {
         typeContext.reduceMethods(withAnnotation(annotationResolver.resolve(annotationName)));
     }
 
+    @Und("^jeder Parameter muss ein Interface sein$")
+    public void mussJederParameterEinInterfaceSein() throws Throwable {
+        for (Class<?> type : typeContext.getTypes()) {
+            final Method firstMethodOfType = typeContext.getFirstMethodOfType(type);
+            Assert.assertThat(firstMethodOfType, new OnlyInterfaceParametersMethodMatcher());
+        }
+    }
 
     /// NEW API ///
 

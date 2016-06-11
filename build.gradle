@@ -1,0 +1,101 @@
+import java.nio.file.Paths
+
+plugins {
+	id "us.kirchmeier.capsule" version "1.0.2"
+}
+
+apply from: 'gradle/dependencyManagement.gradle'
+
+configure(allprojects) {
+	apply plugin: 'java'
+
+	// we must compile all sources as UTF-8, otherwise some step definitions don't work because we have got umlauts in our step definitions
+	compileJava.options.encoding = 'UTF-8'
+
+	group = 'com.github.fhtw-swp-tutorium'
+	version = '0.0.4-SNAPSHOT'
+
+	repositories {
+		mavenLocal()
+		maven { url "http://repo.maven.apache.org/maven2" }
+	}
+}
+
+subprojects {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	dependencies {
+		compile libraries.annotations
+	}
+}
+
+sourceSets {
+	e2eTest {
+		java {
+			srcDir file('src/e2eTest/java')
+		}
+		resources {
+			srcDir file('src/e2eTest/resources')
+		}
+
+		compileClasspath += sourceSets.main.runtimeClasspath
+		runtimeClasspath += sourceSets.main.runtimeClasspath
+	}
+}
+
+task fatCapsule(type: Capsule) {
+	applicationClass 'com.github.fhtw.swp.tutorium.cli.Application'
+	applicationSource jar
+	classifier ''
+	baseName 'SwpTestTool'
+	embedConfiguration = configurations.runtime
+
+	// can not be read from code? :(
+	manifest {
+		attributes (
+				'Implementation-Title': project.name,
+				'Implementation-Version': project.version
+		)
+	}
+}
+
+test {
+	testLogging {
+		exceptionFormat = 'full'
+	}
+}
+
+dependencies {
+	compile libraries.args4j
+	compile libraries.log4j2core
+	compile libraries.guice
+	compile libraries.cucumberguice
+	compile project.rootProject.subprojects
+
+	testCompile libraries.mockito
+
+	e2eTestCompile libraries.junit
+	e2eTestCompile libraries.hamcrest
+	e2eTestRuntime fatCapsule.outputs.files // add output of fatCapsule task to classpath
+}
+
+def e2eTestWorkingDir = Paths.get("$buildDir", "e2eTestWorkingDir").toFile()
+
+task cleanE2ETestWorkingDir << {
+	clean {
+		delete e2eTestWorkingDir
+	}
+}
+
+task ensureE2ETestWorkingDir (dependsOn: cleanE2ETestWorkingDir) << {
+	e2eTestWorkingDir.mkdir()
+}
+
+task e2eTest (type: Test, dependsOn: [ensureE2ETestWorkingDir, fatCapsule]) {
+	testClassesDir = sourceSets.e2eTest.output.classesDir
+	classpath = sourceSets.e2eTest.runtimeClasspath
+
+	// avoid spamming the root dir of the project with the output of the e2eTests
+	workingDir = e2eTestWorkingDir
+}
