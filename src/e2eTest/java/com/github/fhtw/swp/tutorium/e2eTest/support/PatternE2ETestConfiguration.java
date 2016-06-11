@@ -14,4 +14,5 @@ public @interface PatternE2ETestConfiguration {
     Pattern patternToTest();
     String jUnitResultFileName();
     String pathToImplementationJar();
+    Expectation expectation();
 }

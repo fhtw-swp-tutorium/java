@@ -1,15 +1,16 @@
 package com.github.fhtw.swp.tutorium.e2eTest;
 
 import com.github.fhtw.swp.tutorium.Pattern;
-import com.github.fhtw.swp.tutorium.e2eTest.support.JUnitResult;
-import com.github.fhtw.swp.tutorium.e2eTest.support.JUnitResultLocator;
-import com.github.fhtw.swp.tutorium.e2eTest.support.PatternE2ETestConfiguration;
-import com.github.fhtw.swp.tutorium.e2eTest.support.SwpTestToolProxy;
+import com.github.fhtw.swp.tutorium.e2eTest.support.*;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
 import java.net.URL;
+
+import static com.github.fhtw.swp.tutorium.e2eTest.support.JUnitResultMatcher.*;
+import static org.hamcrest.Matchers.is;
 
 public abstract class AbstractPatternE2ETest {
 
@@ -38,10 +39,12 @@ public abstract class AbstractPatternE2ETest {
 
         swpTestTool.run(pattern, urlToPatternImplementation);
 
-        final JUnitResult junitResult = jUnitResultLocator.get(junitResultFileName);
+        final JUnitResult result = jUnitResultLocator.get(junitResultFileName);
 
-        assertJUnitResult(junitResult);
+        final Expectation expectation = patternE2ETest.expectation();
+
+        Assert.assertThat(result, numberOfTests(is(expectation.numberOfTests())));
+        Assert.assertThat(result, numberOfSkippedTests(is(expectation.numberOfSkippedTests())));
+        Assert.assertThat(result, numberOfFailedTests(is(expectation.numberOfFailedTests())));
     }
-
-    protected abstract void assertJUnitResult(JUnitResult result);
 }
